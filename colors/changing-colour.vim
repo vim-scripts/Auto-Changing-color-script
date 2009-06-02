@@ -1,28 +1,38 @@
-" CHANGING COLOUR SCRIPT
-" -------------------------------------------------------------------------------
-" START
-" -------------------------------------------------------------------------------
-" REVISONS:
-"   WED 27TH MAY 2009: o VER 1.00
-"   MON 1ST JUN 2009:  o VER 1.1
-"                      . Put comment markers to ensure whole script include (oops)
-"                      . Corrected Question of element potential 
-"   TUE 2ND JUN 2009:  o VER 1.2
-"                      . Corrected Search element background was perm. yellow
-"                      . Considerably reduced clutter, shortened names, etc
-" -------------------------------------------------------------------------------
+" +-----------------------------------------------------------------------------+
+" | CHANGING COLOUR SCRIPT                                                      |
+" +-----------------------------------------------------------------------------+
+" | START                                                                       |
+" +-----------------------------------------------------------------------------+
+" | REVISONS:                                                                   |
+" | WED 27TH MAY 2009: o VER 1.00                                               |
+" | MON 1ST JUN 2009:  o VER 1.1                                                |
+" |                    . Put comment markers to ensure whole script include-oops|
+" |                    . Corrected Question of element potential                |
+" | TUE 2ND JUN 2009:  o VER 1.2                                                |
+" |                    . Corrected Search element background was perm. yellow   |
+" |                    . Considerably reduced clutter, shortened names, etc     |
+" | TUE 2ND JUN 2009:  o VER 1.3                                                |
+" |                    . added pretty frames around function descriptions       |
+" |                    . created new entry for Directory element in grassy green|
+" |                    . corrected bug: lo-lights not perfectly synch. wit. text|
+" | FUTURE:            o VER 1.4                                                |
+" |                    . sort out incorrect appearance high-light in bgr.colours|
+" +-----------------------------------------------------------------------------+
 
 let s:oldhA=""
 let s:oldactontime=-9999
 
 "debug
-"let g:mytime=86399
-"let g:mysensl=10000
-"let g:mysensh=17000
+"let g:mytime=63000
+"let g:mysensl=7000
+"let g:mysensh=27000
 "let g:myadjust=40
 
-" main RGBEl function, used to work out what if anything to offset the R,G,B
-" component of the foreground for the highlight element
+" +------------------------------------------------------------------------------+
+" | Main RGBEl function, used to work out amount to offset RGB value by to avoid |
+" | it clashing with the background colour.                                      |
+" | Return value is modified or otherwise value (not modified if no clash).      |
+" +------------------------------------------------------------------------------+
 :function RGBEl2(compvalue,actual,dangerpoint,sensl,sensh,adjust,debug)
 :	if a:debug==1
 :		return a:compvalue
@@ -79,8 +89,11 @@ let s:oldactontime=-9999
 :	return moddedvalue
 :endfunction
 
-" works out a suitable offset for the cursor's colour if it's too near
-" the 'danger' background colour
+" +------------------------------------------------------------------------------+
+" | RGBEl function for cursor to work out amount to offset RGB component to stop |
+" | it from clashing with the background colour.                                 |
+" | Return value is modified or otherwise value (not modified if no clash).      |
+" +------------------------------------------------------------------------------+
 :function RGBEl3(compvalue,actual,dangerpoint)
 :	let diff=a:actual-a:dangerpoint
 :	if diff<0
@@ -97,8 +110,26 @@ let s:oldactontime=-9999
 :	return moddedvalue
 :endfunction
 
-" does some offsetting on either the R,G, or B element of the background element 
-" so as to avoid foreground looking fuzzy
+" +------------------------------------------------------------------------------+
+" | RGBEl function used to work out offsetting for RGB components pertaining to  |
+" | a background, i.e. the bit that says guibg= of the vim highlight command.    |
+" | Obviously background is different to foreground, so it's handled differently.|
+" | In this case it shifs the background shade up or down a tad if its on the    |
+" | boundary between good visibility ending and poor visibility starting.        |
+" | The codes 99 for lolight and hilight arguments mean use default value for    |
+" | lo/hi-light 'power'. The low-lighting technique is used in case of fuzzy     |
+" | backgrounds. High-lighting is something different. It's used to pretty-up    |
+" | the mid-range by adding brightness (area close to the background-dangerous   |
+" | point.) Think of it like a circle, the centre is the danger point (area where|
+" | the clash with background is strongest), the inner circle is this area within|
+" | the danger 'boundary'- this  can be 'high' lighted. The outer 'ring' is the  |
+" | weird area in which the text will look great neither *with* danger-area      |
+" | compensation *nor* as it does normally. This function hence lets you specify |
+" | an amount to shift the background RGB component downward by.                 |
+" | Return value is a shifted-up RGB background value if RGB backgroud value     |
+" | falls inside inner circle, shifted-down RGB background value if value in     |
+" | outer 'ring', or same if RGB background value was outside both.              |
+" +------------------------------------------------------------------------------+
 :function RGBEl4(compvalue,actual,dangerpoint,sensl,sensh,lolight,hilight,debug)
 :	if a:debug==1
 :		return a:compvalue
@@ -129,10 +160,10 @@ let s:oldactontime=-9999
 :		let hilight=a:hilight
 :	endif
 :	let moddedvalue=a:compvalue
-:	if a:actual>=dangerpoint-sensl-7200 && a:actual<=dangerpoint-sensl
+:	if a:actual>=dangerpoint-sensl-7200 && a:actual<dangerpoint-sensl
 :		let moddedvalue=a:compvalue-lolight
 :	endif
-:	if a:actual>=dangerpoint+sensh && a:actual<=dangerpoint+sensh+7200
+:	if a:actual>dangerpoint+sensh && a:actual<=dangerpoint+sensh+7200
 :		let moddedvalue=a:compvalue-lolight
 :	endif
 :	if a:actual>=(dangerpoint-sensl) && a:actual<=(dangerpoint+sensh) && hilight
@@ -147,9 +178,12 @@ let s:oldactontime=-9999
 :	return moddedvalue
 :endfunction
 
-" offsets either the R,G or B for the foreground of a highlight if too near
-" the 'dangerpoint' background shade. This function is specific for the
-" 'Normal' highlight entry
+" +------------------------------------------------------------------------------+
+" | Special case of RGBEl function used particularly for the Normal highlight    |
+" | element which obviously needs to be stronger because it's background cannot  |
+" | be 'shifted' in bad visibility cases because Normal also happens to be the   |
+" | the general background vim uses.                                             |
+" +------------------------------------------------------------------------------+
 :function RGBEl5(compvalue,actual,dangerpoint,sensl,sensh,debug)
 :	if a:debug==1
 :		return a:compvalue
@@ -186,10 +220,15 @@ let s:oldactontime=-9999
 :	return moddedvalue
 :endfunction 
 
-" this variable allows highlight to be inverted, i.e higher time = darker
+" +------------------------------------------------------------------------------+
+" | This variable allows highlight to be inverted, i.e higher time = darker      |
+" +------------------------------------------------------------------------------+
 let highLowLightToggle=0
 
-" muscle function, calls vim highlight command for each element
+" +------------------------------------------------------------------------------+
+" | Muscle function, calls vim highlight command for each element based on the   |
+" | time into the current hour.                                                  |
+" +------------------------------------------------------------------------------+
 :function SetHighLight(nightorday)
 :	let todaysec=((localtime()%(60*60)))*24
 :	if exists("g:mytime")
@@ -208,7 +247,6 @@ let highLowLightToggle=0
 :	endif
 :	let adjBG1=(todaysec<43200)?todaysec/450:(todaysec-43200)/271+96
 :	let adjBG2=(todaysec<43200)?todaysec/338:(todaysec-43200)/676+127
-" start of backgrounds
 :	let adjBG3=(adjBG1-32>=32)?adjBG1-32:32
 :	let adjBG4=(adjBG1-32>=32)?adjBG1-32:32
 :       let hA=printf("highlight Normal guibg=#%02x%02x%02x",					adjBG1,adjBG1,adjBG2)
@@ -233,7 +271,6 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2(adjBG1,								todaysec,86399,4000,1,40,2)
 :	let adj3=	RGBEl2(adjBG2+30,							todaysec,86399,4000,1,40,2)
 :	let hA9=printf("highlight DiffText guibg=#%02x%02x%02x",				adj1,adj2,adj3)
-:" end of backgrounds
 :	let adj1	=RGBEl2((-todaysec+86400)/338/4+160,					todaysec,50000,10000,16000,54,2)
 :	let adj2	=RGBEl2((-todaysec+86400)/338/4+76,					todaysec,50000,10000,16000,54,2)
 :	let adj3	=RGBEl2((-todaysec+86400)/338/4+23,					todaysec,50000,10000,16000,54,2)
@@ -348,6 +385,13 @@ let highLowLightToggle=0
 :	let adj6=	RGBEl4(adjBG2,								todaysec,77000,10000,26000,99,99,2)
 :	let hS=printf("highlight Question guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let hS1=printf("highlight MoreMsg guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
+:	let adj1=	RGBEl2((-todaysec+86400)/338/2+100,					todaysec,63000,27000,7000,40,2)
+:	let adj2=	RGBEl2((-todaysec+86400)/338/2+160,					todaysec,63000,27000,7000,40,2)
+:	let adj3=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,63000,27000,7000,40,2)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,63000,27000,7000,99,0,2)
+:	let adj5=	RGBEl4(adjBG1,								todaysec,63000,27000,7000,99,0,2)
+:	let adj6=	RGBEl4(adjBG2,								todaysec,63000,27000,7000,99,0,2)
+:	let hT=printf("highlight Directory guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	if todaysec/450!=s:oldactontime/450 || exists("g:mytime")
 :		let s:oldactontime=todaysec
 :		execute hA
@@ -385,6 +429,7 @@ let highLowLightToggle=0
 :		execute hR1
 :		execute hS
 :		execute hS1
+:		execute hT
 :	endif
 :	redraw
 :	let s:oldhA=hA
@@ -393,8 +438,12 @@ let highLowLightToggle=0
 :	endif
 :endfunction       
 
-" wrapper function takes handles 'invert' variable, used when causing 'invert' effect
-" if you didn't like that effect you could modify this function to always use 0
+" +------------------------------------------------------------------------------+
+" | Wrapper function takes into account 'invert' global variable, used when      |
+" | doing 'invert' colours behave light-dark instead of dark-light.              |
+" | If you thought this effect was annoying you could you could modify this      |
+" | function so it always calls muscle function with 0.                          |
+" +------------------------------------------------------------------------------+
 :function ExtraSetHighLight()
 :	if g:highLowLightToggle==0
 :		call SetHighLight(0)
@@ -408,8 +457,10 @@ au CursorHoldI * call ExtraSetHighLight()
 au InsertEnter * let g:highLowLightToggle=1 | call ExtraSetHighLight()
 au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 
-" CHANGING COLOUR SCRIPT
-" ------------------------------------------------------------------------------
-" END
-" ------------------------------------------------------------------------------
+" +-----------------------------------------------------------------------------+
+" | END                                                                         |
+" +-----------------------------------------------------------------------------+
+" | CHANGING COLOUR SCRIPT                                                      |
+" +-----------------------------------------------------------------------------+
+
 

@@ -38,7 +38,9 @@ Please report any problems to pablo@ezrider.co.uk.
 
 Enjoy!
 
-Oh, please rate it!! :D
+Oh, please give it a rating.
+
+Thanks! :D
 Paul.
 
 --
