@@ -1,29 +1,11 @@
-HISTORY
-=======
-
-VERSION 1.1
-
-BUGFIXES - Oops!! forgot to include some key variables, without which the script wouldn't
-change colour as these helped it keep track of time. doh.
-
-VERSION 1.0
-
-INITIAL RELEASE.
-
-====
-
-
-NOTES
------
-
 Dear User,
 
 This script has six functions:-
 
-ModdedValue2()
-ModdedValue5()
-ModdedValue4()
-ModdedValue3()
+RGBEl2()
+RGBEl3()
+RGBEl4()
+RGBEl5()
 SetHighLight()
 ExtraSetHighLight()
 
@@ -33,28 +15,30 @@ The code is included in the file:-
 
 Basically these control the setting of various highlight elements. (*)
 
-Just copy what's in this file exactly as-is into your vimrc script.
+Just paste this in as-is into your vimrc script. Replace everything you
+had before between COLOUR SCRIPT START and COLOUR SCRIPT END if you had
+already put the script in.
 
-On ubuntu you use the command:
+You could use the following to do this in Ubuntu.
 
   sudo gedit /etc/vim/vimrc
 
-Just replace /etc/vim/vimrc with what you have on your system. To find out where your
-vimrc file is hiding is do:-
+Then just open changing-colour.vim in another tab, do copy and paste.
+That's it. This would work on my system. 
+
+In case your vimrc file is not in /etc/vim do:-
 
   sudo find / -name vimrc
 
-That's it. Once you save, next time you load GVIM and open a PHP or HTML file you
-will see it in gorgeous high-clarity colour changing based on the time you're 
-into the hour and then gradually back the next the hour.
+And use that instead.
+
+Now next time you start GVIM and open any PHP or HTML file you
+will see it in glorious gorgeous colours that visibly change over time.
+Please report any problems to pablo@ezrider.co.uk.
 
 Enjoy!
 
-Oh, if you like this script please rate it!! :D
-
-Also, if you have any problems please contact me on pablo@ezrider.co.uk. Thanks!! :D
-
-Regards,
+Oh, please rate it!! :D
 Paul.
 
 --
