@@ -1,24 +1,39 @@
+HISTORY
+=======
+
+VERSION 1.1
+
+BUGFIXES - Oops!! forgot to include some key variables, without which the script wouldn't
+change colour as these helped it keep track of time. doh.
+
+VERSION 1.0
+
+INITIAL RELEASE.
+
+====
+
+
+NOTES
+-----
+
 Dear User,
 
-This script is built of seven functions:-
+This script has six functions:-
 
 ModdedValue2()
 ModdedValue5()
 ModdedValue4()
 ModdedValue3()
-ModdedValue()
 SetHighLight()
 ExtraSetHighLight()
 
 The code is included in the file:-
 
-  paste-near-end-pref-near-other-lines-beginning-au.vim
+  changing-colour.vim
 
 Basically these control the setting of various highlight elements. (*)
 
-Just copy these lines *exactly* as they are written in the file to your vimrc script.
-It probably better if you do it near the beginning. Also if you need to remove them
-you know where they are. There's seven functions. Just delete them if anything screws up.
+Just copy what's in this file exactly as-is into your vimrc script.
 
 On ubuntu you use the command:
 
@@ -28,23 +43,6 @@ Just replace /etc/vim/vimrc with what you have on your system. To find out where
 vimrc file is hiding is do:-
 
   sudo find / -name vimrc
-
-Once you copied these lines to the vimrc file you will have the body of the colour
-changing behaviour there, but it's unlikely anything will happen (although I said
-above "if anything screws up"), because they are useless lines until you tell vim to
-start using them.
-
-This is the purpose of the lines in the file:-
-
-  paste-near-end-pref-near-other-lines-beginning-au
-
-Just put these lines where you have any lines that start:
-
-:au ......
-
-or if not just near the end. It's more for clarity. Au lines change the way vim
-behaves so later if you want to change this it's good to have a single reference
-point so you can easily see what's going on.
 
 That's it. Once you save, next time you load GVIM and open a PHP or HTML file you
 will see it in gorgeous high-clarity colour changing based on the time you're 
@@ -74,7 +72,4 @@ Notes:
    The script is based on the vim function localtime() with which it works out where it is in the hour.
 
    Additionally the time and date is output on the command line 12 minutes before and after each hour.
-
-   All these functions are in the file:-
-
 

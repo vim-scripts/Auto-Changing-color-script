@@ -1,3 +1,19 @@
+" CHANGING COLOUR SCRIPT
+" ------------------------------------------------------------------------------
+" START
+" ------------------------------------------------------------------------------
+
+let s:oldhighlargA=""
+let s:oldactontime=-9999
+
+"debug
+"let g:mytime=86399
+"let g:mysensl=10000
+"let g:mysensh=17000
+"let g:myadjust=40
+
+" main ModdedValue function, used to work out what if anything to offset the R,G,B
+" component of the foreground for the highlight element
 :function ModdedValue2(compvalue,actual,dangerpoint,sensl,sensh,adjust,debug)
 :	if a:debug==1
 :		return a:compvalue
@@ -54,42 +70,26 @@
 :	return moddedvalue
 :endfunction
 
-:function ModdedValue5(compvalue,actual,dangerpoint,sensl,sensh,debug)
-:	if a:debug==1
-:		return a:compvalue
+" works out a suitable offset for the cursor's colour if it's too near
+" the 'danger' background colour
+:function ModdedValue3(compvalue,actual,dangerpoint)
+:	let diff=a:actual-a:dangerpoint
+:	if diff<0
+:		let diff=-diff
 :	endif
-:	if exists("g:mysensl") && a:debug!=2
-:		let sensl=g:mysensl
-:	else
-:		let sensl=a:sensl
-:	endif
-:	if exists("g:mysensh") && a:debug!=2
-:		let sensh=g:mysensh
-:	else
-:		let sensh=a:sensh
-:	endif
-:	if exists("g:mydangerpoint") && a:debug!=2
-:		let dangerpoint=g:mydangerpoint
-:	else
-:		let dangerpoint=a:dangerpoint
-:	endif
-:	if a:actual>=dangerpoint-sensl && a:actual<=dangerpoint+sensh
-:		let moddedvalue=255
+:	if diff<8000
+:		let moddedvalue=a:compvalue-128
+:		if moddedvalue<0
+:			let moddedvalue=0
+:		endif
 :	else
 :		let moddedvalue=a:compvalue
 :	endif
-:	if a:actual>=(dangerpoint+sensh)-21000 && a:actual<=dangerpoint+sensh
-:		let moddedvalue=0
-:	endif
-:	if moddedvalue<0
-:		let moddedvalue=0
-:	endif
-:	if moddedvalue>255
-:		let moddedvalue=255
-:	endif
 :	return moddedvalue
-:endfunction 
+:endfunction
 
+" does some offsetting on either the R,G, or B element of the background element 
+" so as to avoid foreground looking fuzzy
 :function ModdedValue4(compvalue,actual,dangerpoint,sensl,sensh,lolight,hilight,debug)
 :	if a:debug==1
 :		return a:compvalue
@@ -138,41 +138,51 @@
 :	return moddedvalue
 :endfunction
 
-:function ModdedValue3(compvalue,actual,dangerpoint)
-:	let diff=a:actual-a:dangerpoint
-:	if diff<0
-:		let diff=-diff
+" offsets either the R,G or B for the foreground of a highlight if too near
+" the 'dangerpoint' background shade. This function is specific for the
+" 'Normal' highlight entry
+:function ModdedValue5(compvalue,actual,dangerpoint,sensl,sensh,debug)
+:	if a:debug==1
+:		return a:compvalue
 :	endif
-:	if diff<8000
-:		let moddedvalue=a:compvalue-128
-:		if moddedvalue<0
-:			let moddedvalue=0
-:		endif
+:	if exists("g:mysensl") && a:debug!=2
+:		let sensl=g:mysensl
+:	else
+:		let sensl=a:sensl
+:	endif
+:	if exists("g:mysensh") && a:debug!=2
+:		let sensh=g:mysensh
+:	else
+:		let sensh=a:sensh
+:	endif
+:	if exists("g:mydangerpoint") && a:debug!=2
+:		let dangerpoint=g:mydangerpoint
+:	else
+:		let dangerpoint=a:dangerpoint
+:	endif
+:	if a:actual>=dangerpoint-sensl && a:actual<=dangerpoint+sensh
+:		let moddedvalue=255
 :	else
 :		let moddedvalue=a:compvalue
 :	endif
+:	if a:actual>=(dangerpoint+sensh)-21000 && a:actual<=dangerpoint+sensh
+:		let moddedvalue=0
+:	endif
+:	if moddedvalue<0
+:		let moddedvalue=0
+:	endif
+:	if moddedvalue>255
+:		let moddedvalue=255
+:	endif
 :	return moddedvalue
-:endfunction
-
-:function ModdedValue(actual,dangerpoint)
-:	let diff=a:actual-a:dangerpoint
-:	if diff<0
-:		let diff=-diff
-:	endif
-:	let result=0
-:	if diff<4000
-:		let result=a:actual+43200
-:		if result>=86400
-:			let result=86399
-:		endif
-:	else
-:		let result=a:actual
-:	endif
-:	return result
-:endfunction
+:endfunction 
 
 " this variable controls whether custom highlight should be inverted
 let highLowLightToggle=0
+
+" main muscle function, calls highlight with values for each element
+" based on the number of minutes past the hour, uses ModdedValueX() functions
+" to offset the colour in case the background clashes
 :function SetHighLight(nightorday)
 :	let todaysec=((localtime()%(60*60)))*24
 :	if exists("g:mytime")
@@ -276,7 +286,6 @@ let highLowLightToggle=0
 :	let highlargI=printf("highlight Comment guifg=#%02x%02x%02x guibg=#%02x%02x%02x",adjustsec1,adjustsec2,adjustsec3,adjustsec4,adjustsec5,adjustsec6)
 :	let highlargI1=printf("highlight htmlComment guifg=#%02x%02x%02x",adjustsec1,adjustsec2,adjustsec3)
 :	let highlargI2=printf("highlight htmlCommentPart guifg=#%02x%02x%02x",adjustsec1,adjustsec2,adjustsec3)
-" i added this because the status lines looked daft in a dark background
 :	let adjustsec1=		ModdedValue2(todaysec/338+70,			todaysec,99999,0,0,0,2)
 :	let adjustsec2=		ModdedValue2(todaysec/338+30,			todaysec,99999,0,0,0,2)
 :	let adjustsec3=		ModdedValue2(todaysec/338-100,			todaysec,99999,0,0,0,2)
@@ -294,7 +303,6 @@ let highLowLightToggle=0
 :	let adjustsec1=		ModdedValue2((-todaysec+86400)/338/2,		todaysec,37000,27000,20000,40,2)
 :	let adjustsec2=		ModdedValue2((-todaysec+86400)/338/2+20,	todaysec,37000,27000,20000,40,2)
 :	let adjustsec3=		ModdedValue2((-todaysec+86400)/338/2+80,	todaysec,37000,27000,20000,40,2)
-" this was added for the menu commands
 :	let adjustsecBG6=(adjustsecBG5-32>=0)?adjustsecBG5-32:0
 :	let highlargM=printf("highlight PMenu guibg=#%02x%02x%02x",adjustsecBG6,adjustsecBG6,adjustsecBG6)
 :	let highlargN="highlight PMenuSel guibg=Yellow guifg=Blue"
@@ -328,9 +336,9 @@ let highLowLightToggle=0
 :	let adjustsec1=		ModdedValue2((-todaysec+86400)/338/2+220,	todaysec,77000,10000,26000,70,2)
 :	let adjustsec2=		ModdedValue2((-todaysec+86400)/338/2+220,	todaysec,77000,10000,26000,70,2)
 :	let adjustsec3=		ModdedValue2((-todaysec+86400)/338/2+0,		todaysec,77000,10000,26000,70,2)
-:	let adjustsec4=		ModdedValue4(adjustsecBG1,			todaysec,77000,10000,26000,0,99,2)
-:	let adjustsec5=		ModdedValue4(adjustsecBG1,			todaysec,77000,10000,26000,0,99,2)
-:	let adjustsec6=		ModdedValue4(adjustsecBG2,			todaysec,77000,10000,26000,0,99,2)
+:	let adjustsec4=		ModdedValue4(adjustsecBG1,			todaysec,77000,10000,26000,99,99,2)
+:	let adjustsec5=		ModdedValue4(adjustsecBG1,			todaysec,77000,10000,26000,99,99,2)
+:	let adjustsec6=		ModdedValue4(adjustsecBG2,			todaysec,77000,10000,26000,99,99,2)
 :	let highlargS=printf("highlight Question guifg=#%02x%02x%02x guibg=#%02x%02x%02x",adjustsec1,adjustsec2,adjustsec3,adjustsec4,adjustsec5,adjustsec6)
 :	let highlargS1=printf("highlight MoreMsg guifg=#%02x%02x%02x guibg=#%02x%02x%02x",adjustsec1,adjustsec2,adjustsec3,adjustsec4,adjustsec5,adjustsec6)
 :	if todaysec/450!=s:oldactontime/450 || exists("g:mytime")
@@ -384,5 +392,15 @@ let highLowLightToggle=0
 :		call SetHighLight(1)
 :	endif
 :endfunction
+
+au CursorHold * call ExtraSetHighLight()
+au CursorHoldI * call ExtraSetHighLight() 
+au InsertEnter * let g:highLowLightToggle=1 | call ExtraSetHighLight()
+au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
+
+" CHANGING COLOUR SCRIPT
+" ------------------------------------------------------------------------------
+" END
+" ------------------------------------------------------------------------------
 
 
