@@ -20,15 +20,17 @@
 " |         "          o VER 1.5                                                |
 " |                    . removed duplicate htmlComment* pair                    |
 " |                    . improved comment to a nice balanced-out grey           |
-" | THU 4TH JUN 2009L  o VER 1.6                                                |
+" | THU 4TH JUN 2009:  o VER 1.6                                                |
 " |                    . brightened Constant and Identifier bgr. a tiny amount  |
+" | THU 11TH JUN 2009: o VER 1.7                                                |
+" |		       . corrected slightly glary Identifier at low light       |
 " +-----------------------------------------------------------------------------+
 
 let s:oldhA=""
 let s:oldactontime=-9999
 
 "debug
-"let g:mytime=50000
+"let g:mytime=40000
 "let g:mysenDar=10000
 "let g:mysenLig=24000
 "let g:myadjust=64
@@ -317,9 +319,9 @@ let highLowLightToggle=0
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2+58,					todaysec,57000,10000,24000,64,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+127,					todaysec,57000,10000,24000,64,2)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2,						todaysec,57000,10000,24000,64,2)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,57000,10000,24000,-99,-99,3,2)
-:	let adj5=	RGBEl4(adjBG1,								todaysec,57000,10000,24000,-99,-99,3,2)
-:	let adj6=	RGBEl4(adjBG2,								todaysec,57000,10000,24000,-99,-99,3,2)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,57000,10000,24000,-3,-99,3,2)
+:	let adj5=	RGBEl4(adjBG1,								todaysec,57000,10000,24000,-3,-99,3,2)
+:	let adj6=	RGBEl4(adjBG2,								todaysec,57000,10000,24000,-3,-99,3,2)
 :	let hE=printf("highlight Identifier guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2+100,					todaysec,43000,5000,16000,39,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,43000,5000,16000,39,2)
@@ -464,7 +466,7 @@ let highLowLightToggle=0
 :endfunction
 
 au CursorHold * call ExtraSetHighLight()
-au CursorHoldI * call ExtraSetHighLight() 
+au CursorHoldI * call ExtraSetHighLight() | stopinsert
 au InsertEnter * let g:highLowLightToggle=1 | call ExtraSetHighLight()
 au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 
@@ -473,5 +475,4 @@ au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
-
 
