@@ -24,6 +24,10 @@
 " |                    . brightened Constant and Identifier bgr. a tiny amount  |
 " | THU 11TH JUN 2009: o VER 1.7                                                |
 " |		       . corrected slightly glary Identifier at low light       |
+" | FRI 12TH JUN 2009: o VER 1.8                                                |
+" |		       . removed 'stopinsert' from au CursorHoldI               |
+" |		         unintentionally left in                                |
+" |		       . added comment to show how to remove invert effect      |
 " +-----------------------------------------------------------------------------+
 
 let s:oldhA=""
@@ -466,7 +470,12 @@ let highLowLightToggle=0
 :endfunction
 
 au CursorHold * call ExtraSetHighLight()
-au CursorHoldI * call ExtraSetHighLight() | stopinsert
+au CursorHoldI * call ExtraSetHighLight()
+
+" +------------------------------------------------------------------------------+
+" | The following lines provide a invert when you go into and out of insert      |
+" | mode. If you don't like this effect, just comment these two lines out!       |
+" +------------------------------------------------------------------------------+
 au InsertEnter * let g:highLowLightToggle=1 | call ExtraSetHighLight()
 au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 
@@ -475,4 +484,5 @@ au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
+
 
