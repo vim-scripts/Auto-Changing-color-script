@@ -39,16 +39,29 @@ If you want to funk-it-up a little why not try:-
 
   :set updatetime=1000
 
-This is normally set to 4000 is the delay before VIM processes 'auto'
-commands. (It's in milliseconds.) That's quite long since the 'colour
-changing' occurs only after this delay, thus decreasing it makes the
-colour changes look a little more snappy.
+Or
 
-The "auto" command is a powerful feature in VIM that allows you to
-program many aspects of the way VIM operates. You simply tell VIM
-in the vimrc what you want to happen when certain pre-defined events
-happen, e.g. a buffer is saved to disk, a buffer is loaded, the cursor
-enters a window, and of course my favourite: the updatetime timeout.
+  :set updatetime=350
+
+If you really want it funky. This is normally set to 4000. 
+It is the delay before VIM processes the 'CursorHold' auto commands.
+In this script it's how long vim waits before it changes the colours,
+if they are due to change. Normally 4 seconds feels quite sluggish
+but setting it too low might create unwanted side-effects, i.g. it
+is also how long vim wait before it updates the .swp file (scratch
+file vim uses to recover the file you were editing in case your
+computer crashes or there is a software fault.) If the file you are
+editing is very large setting this too low might not be a good idea!
+
+Note:-
+The "auto" command is a powerful VIM feature that allows you to
+programtically control the way VIM behaves. Using the powerful
+vim scripting language you can hook-up all sorts of events to tell
+VIM what happens when they happen, e.g. when a buffer is saved to
+disk, a buffer is loaded, the cursor moves to another window,
+the user hasn't moved the cursor for X number of milliseconds,...
+simply type :help auto [RETURN] in vim and scroll down to section 5,
+where you can see all of them.
 
 Please report any problems to pablo@ezrider.co.uk.
 
