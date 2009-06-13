@@ -28,6 +28,9 @@
 " |		       . removed 'stopinsert' from au CursorHoldI               |
 " |		         unintentionally left in                                |
 " |		       . added comment to show how to remove invert effect      |
+" | SAT 13TH JUN 2009  o VER 1.9                                                |
+" |                    . made it very easy for you to set your own preferred    |
+" |                      frequency for the script to change the colour          |
 " +-----------------------------------------------------------------------------+
 
 let s:oldhA=""
@@ -253,6 +256,25 @@ let s:oldactontime=-9999
 let highLowLightToggle=0
 
 " +------------------------------------------------------------------------------+
+" | This variable is used to control how often the script deems it's time to     |
+" | 'progress' the colour. The higher the less often it will do so, the lower    |
+" | the more.  A value of 480 is equivalent to every 20 seconds. (86400, the     |
+" | total number of seconds in a day, squeezed down to one hours for this        |
+" | script, divided by 60 and then by 3 .. so it's like one hour divided by 60   |
+" | and then by 3 = 20 seconds. Obviously if you wanted the colour to change     |
+" | every minute then you'd do 86400 divided by 60. Remember the 86400 is the    |
+" | number of seconds in a day mapped down to one hour. I know this is weird but |
+" | it's because the script originally was designed to change colours over the   |
+" | whole day but this seemed to take too long to be interesting so I 'secretly' |
+" | started using the progress through only the hour but then multiplied-up this |
+" | number so it behaved to the rest of the script like it was still working in  |
+" | 'the day') Obviously you could play with this number until you find one that |
+" | works for you. E.g. every thirty seconds=720 (86400/60/2). Every two minutes=|
+" | 2880 (86400/30). Every 2.5 minutes=3600 (86400/24).                          |
+" +------------------------------------------------------------------------------+
+let g:changefreq=480
+
+" +------------------------------------------------------------------------------+
 " | Muscle function, calls vim highlight command for each element based on the   |
 " | time into the current hour.                                                  |
 " +------------------------------------------------------------------------------+
@@ -411,7 +433,7 @@ let highLowLightToggle=0
 :	let adj5=	RGBEl4(adjBG1,								todaysec,63000,27000,7000,-99,-99,0,2)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,63000,27000,7000,-99,-99,0,2)
 :	let hS=printf("highlight Directory guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
-:	if todaysec/450!=s:oldactontime/450 || exists("g:mytime")
+:	if todaysec/g:changefreq!=s:oldactontime/g:changefreq || exists("g:mytime")
 :		let s:oldactontime=todaysec
 :		execute hA
 :		execute hA1
