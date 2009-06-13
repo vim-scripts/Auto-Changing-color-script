@@ -31,6 +31,9 @@
 " | SAT 13TH JUN 2009  o VER 1.9                                                |
 " |                    . made it very easy for you to set your own preferred    |
 " |                      frequency for the script to change the colour          |
+" |                    o VER 2.0                                                |
+" |                    . made standard change freq. 1 min, not too often to     |
+" |                      annoy but often enough to remind you of time is passing|
 " +-----------------------------------------------------------------------------+
 
 let s:oldhA=""
@@ -270,9 +273,10 @@ let highLowLightToggle=0
 " | number so it behaved to the rest of the script like it was still working in  |
 " | 'the day') Obviously you could play with this number until you find one that |
 " | works for you. E.g. every thirty seconds=720 (86400/60/2). Every two minutes=|
-" | 2880 (86400/30). Every 2.5 minutes=3600 (86400/24).                          |
+" | 2880 (86400/30). Every 2.5 minutes=3600 (86400/24). Every 1 minute=1440      |
+" | (86400/60).                                                                  |
 " +------------------------------------------------------------------------------+
-let g:changefreq=480
+let g:changefreq=1440
 
 " +------------------------------------------------------------------------------+
 " | Muscle function, calls vim highlight command for each element based on the   |
@@ -506,5 +510,4 @@ au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
-
 
