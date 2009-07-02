@@ -52,6 +52,17 @@
 " |                      *too* weak (oops!), and adjusted the 'dangerzone'      |
 " |                      background lighting of the same element to be not quite|
 " |                      as bright, so that it looks more tastefully done       |
+" |                    o VER 2.3                                                |
+" |                    . made the Constant text colour more gradual change as it|
+" |                      goes over the 'danger' area. Previously it went to jet |
+" |                      black suddenly as the background went from dark to     |
+" |                      light. It looked really silly. Now the colour is a     |
+" |                      more nice dark-brown colour, not jet-black.  Tuned-in  |
+" |                      the background 'down'-lighting of Constant at the dark |
+" |                      boundary of the danger zone so it is exactly as        |
+" |                      dark as it needs to be no more, and tuned-in the       |
+" |                      actually in-the-danger-zone' background adjustment as  |
+" |                      well so it brings out the new non-jet-black text colour|
 " +-----------------------------------------------------------------------------+
 
 " +------------------------------------------------------------------------------+
@@ -79,7 +90,7 @@ let s:oldactontime=-9999
 let g:changefreq=1440
 
 "debug
-let g:mytime=40000
+"let g:mytime=40000
 "let g:mysenDar=10000
 "let g:mysenLig=24000
 "let g:myadjust=64
@@ -362,10 +373,10 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+64,					todaysec,56000,10000,22000,40,2)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2,						todaysec,56000,10000,22000,40,2)
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
-:	let adj1=	RGBEl2((-todaysec+86400)/338/2+76,					todaysec,46500,14000,25000,40,2)
-:	let adj2=	RGBEl2((-todaysec+86400)/338/2+20,					todaysec,46500,14000,25000,40,2)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,46500,14000,25000,-99,6,9,2)
-:	let adj5=	RGBEl4(adjBG2,								todaysec,46500,14000,25000,-99,6,9,2)
+:	let adj1=	RGBEl2((-todaysec+86400)/338/2+76,					todaysec,46500,13000,25000,12,2)
+:	let adj2=	RGBEl2((-todaysec+86400)/338/2+20,					todaysec,46500,13000,25000,12,2)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,46500,13000,25000,-9,6,11,2)
+:	let adj5=	RGBEl4(adjBG2,								todaysec,46500,13000,25000,-9,6,11,2)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj2,adj4,adj4,adj5)
 :	let adj1=	RGBEl5((-todaysec+86400)/338/2+110,					todaysec,50000,27000,29000,2)
 :	let adj2=	RGBEl5((-todaysec+86400)/338/2+64,					todaysec,50000,27000,29000,2)
