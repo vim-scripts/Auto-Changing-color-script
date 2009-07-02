@@ -28,10 +28,49 @@
 " |		       . removed 'stopinsert' from au CursorHoldI               |
 " |		         unintentionally left in                                |
 " |		       . added comment to show how to remove invert effect      |
+" | SAT 13TH JUN 2009  o VER 1.9                                                |
+" |                    . made it very easy for you to set your own preferred    |
+" |                      frequency for the script to change the colour          |
+" |                    o VER 2.0                                                |
+" |                    . made standard change freq. 1 min, not too often to     |
+" |                      annoy but often enough to remind you of time is passing|
+" | THU 2ND JUL 2009   o VER 2.1                                                |
+" |                    . corrected slightly over-zealous background brightening |
+" |                      in the lighter background of Constant highlight elem.  |
+" |                    . improved the clarity of the explantion of what the     |
+" |                      RGBEl4 function does                                   |
+" |                    . removed variable s:oldhA that had originally been part |
+" |                      of calculation for the timing of the change of colours,|
+" |                      that gradually got replaced by the more accurate       |
+" |                      s:oldactontime                                         |
+" |                    . added a proper description of what s:oldactontime does |
+" |                    . improved clarity of description of what g:changefreq   |
+" |                      does                                                   |
 " +-----------------------------------------------------------------------------+
 
-let s:oldhA=""
+" +------------------------------------------------------------------------------+
+" | The following static variable provide a way for the script to check if its   |
+" | time that the muscle function should call vim's 'highlight' command to cause |
+" | all the syntax elements colouring to change. A combination of this and       |
+" | 'changefreq' (below) is used to determine final yes/no (it is time or not)   |
+" +------------------------------------------------------------------------------+
 let s:oldactontime=-9999
+
+" +------------------------------------------------------------------------------+
+" | This variable is used to control how often the script deems it's time to     |
+" | 'progress' the colour (also see above). The higher the value the less often  |
+" | it will do so, the lower the more often it will do so.  480 is equivalent to |
+" | every 20 seconds. (86400, the total number of seconds in a day, squeezed down|
+" | to one hours, divided by 60 and then by 3 .. so it's like one hour divided by|
+" | 60 and then by 3 = 20 seconds. Obviously if you wanted the colour to change  |
+" | every minute then you'd do 86400 divided by 60. The script originally worked |
+" | by changing colour throughout the day so that's why it's still using this    |
+" | peculiar number 86400 as the 'time range'. You could play with this number   |
+" | until you find one that works out best for you. E.g. every thirty seconds    |
+" | (86400/60/2=720). Every two minutes (86400/6/5=2880). Every 2.5 minutes      |
+" | (86400/6/4=3600). Every 1 minute (86400/60=1440).                            |
+" +------------------------------------------------------------------------------+
+let g:changefreq=1440
 
 "debug
 "let g:mytime=40000
@@ -124,22 +163,28 @@ let s:oldactontime=-9999
 " +------------------------------------------------------------------------------+
 " | RGBEl function used to work out offsetting for RGB components pertaining to  |
 " | a background, i.e. the bit that says guibg= of the vim highlight command.    |
-" | Obviously background is different to foreground, so it's handled differently.|
-" | You can tell the function what to do with the background if the RGB value    |
+" | Background is handled different to foreground so it needs another function.  |
+" | You can tell this RGBEl function what to do with the background if RGB value |
 " | is *just* below the 'danger' general background, and above it. In each case  |
-" | You can tell it to brighten it or darken the passed RGB value. (darkAdj,     |
-" | lghtAdj params.) Positive values, (e.g. 40) add brightness, nagative         |
-" | removes it. Special cases 99 and -99 adds does this in a 'default' measure.  |
-" | You can also tell the function what to do if the RGB value is inside the     |
-" | danger zone. (dangerZoneAdj) Use this if you find using the normal foreground|
-" | modification in the text by itself doesn't quite cut it.                     |
-" | (i.e. text still looks fuzzy even when a high 'adjust' param. value is used  |
-" | with RGBEl2() - making it highly darkened, as darkened as you can get it, yet|
-" | making no difference. Normally I found darkening the text when passing       |
-" | 'danger' (where the background looks very similar to the text) was enough but|
-" | in some cases even whacking it all the way down to black didn't improve it,  |
-" | so I added this parameter 'dangerZoneAdj' to bring the background in to the  |
-" | rescue, allowing you to shift it up or down slighty.                         |
+" | you can tell it to brighten or darken the passed RGB value. (darkAdj,        |
+" | lghtAdj params.) Positive values, (e.g. 40) add brightness, nagative values  |
+" | remove it. Special cases 99 and -99 adds does this in a 'default' measure.   |
+" | You can also tell the function what to do if the RGB value is right inside   |
+" | the danger zone; not to be confused with darkAdj & lghtAdj that mean the     |
+" | two end tips outside of the danger area. This bit is the danger area itself, |
+" | the low-visisibility area, the 'danger zone'. (dangerZoneAdj) It works the   |
+" | same, a positive value causes background to brighten, a negative to darken.  |
+" | Like darkAdj & lghtAdj, you can also specify default 'brighten' or 'darken', |
+" | 99 or -99 respectively, but if you're not happy with the default just fine   |
+" | tune it exactly as you would like it to look exactly as you do with darkAdj  |
+" | & lghtAdj. Use this if you find using the normal foreground text colour      |
+" | modification by itself (RGBEl2 function) doesn't cut it. Text still looks    |
+" | blurry over a certain background colour even after you've adjusted the danger|
+" | adjustment parameters available in RGBEl2. Normally I found darkening text   |
+" | with RGBEl2 adjustment params makes the text 'visible' over danger zone but  |
+" | in some cases it wasn't up to it, so I added this param: 'dangerZoneAdj'.    |
+" | This allows you to 'fudge' the background colour up and down as desired until|
+" | you're happy with the result.                                                |
 " | Return value is either the up or down-shifted RGB background element if the  |
 " | element falls just outside the 'danger' boundary, a shifted-up RGB element   |
 " | if the value is fully inside the danger boundary (and you set dangerZoneAdj) |
@@ -313,8 +358,8 @@ let highLowLightToggle=0
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2+76,					todaysec,46500,14000,25000,40,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+20,					todaysec,46500,14000,25000,40,2)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,46500,14000,25000,-99,99,19,2)
-:	let adj5=	RGBEl4(adjBG2,								todaysec,46500,14000,25000,-99,99,19,2)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,46500,14000,25000,-99,4,19,2)
+:	let adj5=	RGBEl4(adjBG2,								todaysec,46500,14000,25000,-99,4,19,2)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj2,adj4,adj4,adj5)
 :	let adj1=	RGBEl5((-todaysec+86400)/338/2+110,					todaysec,50000,27000,29000,2)
 :	let adj2=	RGBEl5((-todaysec+86400)/338/2+64,					todaysec,50000,27000,29000,2)
@@ -411,7 +456,7 @@ let highLowLightToggle=0
 :	let adj5=	RGBEl4(adjBG1,								todaysec,63000,27000,7000,-99,-99,0,2)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,63000,27000,7000,-99,-99,0,2)
 :	let hS=printf("highlight Directory guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
-:	if todaysec/450!=s:oldactontime/450 || exists("g:mytime")
+:	if todaysec/g:changefreq!=s:oldactontime/g:changefreq || exists("g:mytime")
 :		let s:oldactontime=todaysec
 :		execute hA
 :		execute hA1
@@ -449,7 +494,6 @@ let highLowLightToggle=0
 :		execute hS
 :	endif
 :	redraw
-:	let s:oldhA=hA
 :	if todaysec>=69120 || todaysec<=17280
 :	echo strftime("%c")
 :	endif
