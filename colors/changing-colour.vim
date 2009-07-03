@@ -4,37 +4,31 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | WED 27TH MAY 2009: o VER 1.00                                               |
-" | MON 1ST JUN 2009:  o VER 1.1                                                |
-" |                    . Put comment markers to ensure whole script include-oops|
-" |                    . Corrected Question of element potential                |
-" | TUE 2ND JUN 2009:  o VER 1.2                                                |
-" |                    . Corrected Search element background was perm. yellow   |
-" |                    . Considerably reduced clutter, shortened names, etc     |
-" | TUE 2ND JUN 2009:  o VER 1.3                                                |
-" |                    . added pretty frames around function descriptions       |
-" |                    . created new entry for Directory element in grassy green|
-" |                    . corrected bug: lo-lights not perfectly synch. wit. text|
-" | WED 3RD JUN 2009:  o VER 1.4                                                |
-" |                    . improve way bckgrnds. enhanced, corrected some mistakes|
-" |         "          o VER 1.5                                                |
-" |                    . removed duplicate htmlComment* pair                    |
-" |                    . improved comment to a nice balanced-out grey           |
-" | THU 4TH JUN 2009:  o VER 1.6                                                |
-" |                    . brightened Constant and Identifier bgr. a tiny amount  |
-" | THU 11TH JUN 2009: o VER 1.7                                                |
-" |		       . corrected slightly glary Identifier at low light       |
-" | FRI 12TH JUN 2009: o VER 1.8                                                |
-" |		       . removed 'stopinsert' from au CursorHoldI               |
-" |		         unintentionally left in                                |
-" |		       . added comment to show how to remove invert effect      |
-" | SAT 13TH JUN 2009  o VER 1.9                                                |
-" |                    . made it very easy for you to set your own preferred    |
-" |                      frequency for the script to change the colour          |
-" |                    o VER 2.0                                                |
-" |                    . made standard change freq. 1 min, not too often to     |
-" |                      annoy but often enough to remind you of time is passing|
-" | THU 2ND JUL 2009   o VER 2.1                                                |
+" | FRI 3RD JUL 2009:  o VER 2.4                                                |
+" |                    . made statement backlighting effect less agressive      |
+" |                    . made the Constant text colour blue, not brown, as there|
+" |                      were too many other browns and it got repetitive       |
+" |                    . added a dab more backlighting to Identifier and        |
+" |                      darkened the text colour a shade                       |
+" |                    . reversed the order of the revision history comments    |
+" | THU 2ND JUL 2009   o VER 2.3                                                |
+" |                    . made the Constant text colour more gradual change as it|
+" |                      goes over the 'danger' area. Previously it went to jet |
+" |                      black suddenly as the background went from dark to     |
+" |                      light. It looked really silly. Now the colour is a     |
+" |                      more nice dark-brown colour, not jet-black.  Tuned-in  |
+" |                      the background 'down'-lighting of Constant at the dark |
+" |                      boundary of the danger zone so it is exactly as        |
+" |                      dark as it needs to be no more, and tuned-in the       |
+" |                      actually in-the-danger-zone' background adjustment as  |
+" |                      well so it brings out the new non-jet-black text colour|
+" |                    o VER 2.2                                                |
+" |                    . made the Constant background up-lighting a bit         |
+" |                      stronger as it was previously overcorrected and made   |
+" |                      *too* weak (oops!), and adjusted the 'dangerzone'      |
+" |                      background lighting of the same element to be not quite|
+" |                      as bright, so that it looks more tastefully done       |
+" |                    o VER 2.1                                                |
 " |                    . corrected slightly over-zealous background brightening |
 " |                      in the lighter background of Constant highlight elem.  |
 " |                    . improved the clarity of the explantion of what the     |
@@ -46,23 +40,36 @@
 " |                    . added a proper description of what s:oldactontime does |
 " |                    . improved clarity of description of what g:changefreq   |
 " |                      does                                                   |
-" |                    o VER 2.2                                                |
-" |                    . made the Constant background up-lighting a bit         |
-" |                      stronger as it was previously overcorrected and made   |
-" |                      *too* weak (oops!), and adjusted the 'dangerzone'      |
-" |                      background lighting of the same element to be not quite|
-" |                      as bright, so that it looks more tastefully done       |
-" |                    o VER 2.3                                                |
-" |                    . made the Constant text colour more gradual change as it|
-" |                      goes over the 'danger' area. Previously it went to jet |
-" |                      black suddenly as the background went from dark to     |
-" |                      light. It looked really silly. Now the colour is a     |
-" |                      more nice dark-brown colour, not jet-black.  Tuned-in  |
-" |                      the background 'down'-lighting of Constant at the dark |
-" |                      boundary of the danger zone so it is exactly as        |
-" |                      dark as it needs to be no more, and tuned-in the       |
-" |                      actually in-the-danger-zone' background adjustment as  |
-" |                      well so it brings out the new non-jet-black text colour|
+" | SAT 13TH JUN 2009  o VER 2.0                                                |
+" |                    . made standard change freq. 1 min, not too often to     |
+" |                      annoy but often enough to remind you of time is passing|
+" |                    o VER 1.9                                                |
+" |                    . made it very easy for you to set your own preferred    |
+" |                      frequency for the script to change the colour          |
+" | FRI 12TH JUN 2009: o VER 1.8                                                |
+" |		       . removed 'stopinsert' from au CursorHoldI               |
+" |		         unintentionally left in                                |
+" |		       . added comment to show how to remove invert effect      |
+" | THU 11TH JUN 2009: o VER 1.7                                                |
+" |		       . corrected slightly glary Identifier at low light       |
+" | THU 4TH JUN 2009:  o VER 1.6                                                |
+" |                    . brightened Constant and Identifier bgr. a tiny amount  |
+" | WED 3RD JUN 2009:  o VER 1.5                                                |
+" |                    . removed duplicate htmlComment* pair                    |
+" |                    . improved comment to a nice balanced-out grey           |
+" |                    o VER 1.4                                                |
+" |                    . improve way bckgrnds. enhanced, corrected some mistakes|
+" | TUE 2ND JUN 2009:  o VER 1.3                                                |
+" |                    . added pretty frames around function descriptions       |
+" |                    . created new entry for Directory element in grassy green|
+" |                    . corrected bug: lo-lights not perfectly synch. wit. text|
+" | TUE 2ND JUN 2009:  o VER 1.2                                                |
+" |                    . Corrected Search element background was perm. yellow   |
+" |                    . Considerably reduced clutter, shortened names, etc     |
+" | MON 1ST JUN 2009:  o VER 1.1                                                |
+" |                    . Put comment markers to ensure whole script include-oops|
+" |                    . Corrected Question of element potential                |
+" | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
 
 " +------------------------------------------------------------------------------+
@@ -363,9 +370,9 @@ let highLowLightToggle=0
 :	let adj1	=RGBEl2((-todaysec+86400)/338/4+160,					todaysec,50000,10000,16000,54,2)
 :	let adj2	=RGBEl2((-todaysec+86400)/338/4+76,					todaysec,50000,10000,16000,54,2)
 :	let adj3	=RGBEl2((-todaysec+86400)/338/4+23,					todaysec,50000,10000,16000,54,2)
-:	let adj4	=RGBEl4(adjBG1,								todaysec,50000,10000,16000,-99,99,0,2)
-:	let adj5	=RGBEl4(adjBG1,								todaysec,50000,10000,16000,-99,99,0,2)
-:	let adj6	=RGBEl4(adjBG2,								todaysec,50000,10000,16000,-99,99,0,2)
+:	let adj4	=RGBEl4(adjBG1,								todaysec,50000,10000,16000,-7,7,0,2)
+:	let adj5	=RGBEl4(adjBG1,								todaysec,50000,10000,16000,-7,7,0,2)
+:	let adj6	=RGBEl4(adjBG2,								todaysec,50000,10000,16000,-7,7,0,2)
 :	let hB=printf("highlight Statement guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adjBG5=(todaysec<43200)?todaysec/338/2:todaysec/450+63
 :	let hB1=printf("highlight VertSplit guifg=#%02x%02x%02x",				adjBG3,adjBG3,adjBG5)
@@ -373,21 +380,21 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+64,					todaysec,56000,10000,22000,40,2)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2,						todaysec,56000,10000,22000,40,2)
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
-:	let adj1=	RGBEl2((-todaysec+86400)/338/2+76,					todaysec,46500,13000,25000,12,2)
-:	let adj2=	RGBEl2((-todaysec+86400)/338/2+20,					todaysec,46500,13000,25000,12,2)
+:	let adj1=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,46500,13000,25000,12,2)
+:	let adj2=	RGBEl2((-todaysec+86400)/338/2+96,					todaysec,46500,13000,25000,12,2)
 :	let adj4=	RGBEl4(adjBG1,								todaysec,46500,13000,25000,-9,6,11,2)
 :	let adj5=	RGBEl4(adjBG2,								todaysec,46500,13000,25000,-9,6,11,2)
-:	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj2,adj4,adj4,adj5)
+:	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj4,adj5)
 :	let adj1=	RGBEl5((-todaysec+86400)/338/2+110,					todaysec,50000,27000,29000,2)
 :	let adj2=	RGBEl5((-todaysec+86400)/338/2+64,					todaysec,50000,27000,29000,2)
 :	let adj3=	RGBEl5((-todaysec+86400)/338/2,						todaysec,50000,27000,29000,2)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
-:	let adj1=	RGBEl2((-todaysec+86400)/338/2+58,					todaysec,57000,10000,24000,64,2)
+:	let adj1=	RGBEl2((-todaysec+86400)/338/2+18,					todaysec,57000,10000,24000,64,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+127,					todaysec,57000,10000,24000,64,2)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2,						todaysec,57000,10000,24000,64,2)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,57000,10000,24000,-3,-99,3,2)
-:	let adj5=	RGBEl4(adjBG1,								todaysec,57000,10000,24000,-3,-99,3,2)
-:	let adj6=	RGBEl4(adjBG2,								todaysec,57000,10000,24000,-3,-99,3,2)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,57000,10000,24000,-3,-99,5,2)
+:	let adj5=	RGBEl4(adjBG1,								todaysec,57000,10000,24000,-3,-99,5,2)
+:	let adj6=	RGBEl4(adjBG2,								todaysec,57000,10000,24000,-3,-99,5,2)
 :	let hE=printf("highlight Identifier guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2+100,					todaysec,43000,5000,16000,39,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,43000,5000,16000,39,2)
