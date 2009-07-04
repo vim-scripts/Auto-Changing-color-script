@@ -4,7 +4,11 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | SAT 4TH JUL 2009:  o VER 2.7                                                |
+" | SAT 4TH JUL 2009:  o VER 2.8                                                |
+" |                    . darkened the back-darkening of Constant at the low end |
+" |                      of the background spectrum, as it looks a bit fuzzy    |
+" |                      otherwise.                                             |
+" |                    o VER 2.7                                                |
 " |                    . made a slight correction to the backlighting of the    |
 " |                      Constant that was looking way to bright at the high    |
 " |                      end of the background spectrum                         |
@@ -398,8 +402,8 @@ let highLowLightToggle=0
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,46500,14000,25000,38,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+76,					todaysec,46500,14000,25000,38,2)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,46500,14000,25000,-14,7,10,2)
-:	let adj5=	RGBEl4(adjBG2,								todaysec,46500,14000,25000,-14,7,10,2)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,46500,14000,25000,-20,7,10,2)
+:	let adj5=	RGBEl4(adjBG2,								todaysec,46500,14000,25000,-20,7,10,2)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj4,adj5)
 :	let adj1=	RGBEl5((-todaysec+86400)/338/2+110,					todaysec,50000,27000,29000,2)
 :	let adj2=	RGBEl5((-todaysec+86400)/338/2+64,					todaysec,50000,27000,29000,2)
