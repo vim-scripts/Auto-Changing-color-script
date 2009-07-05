@@ -4,6 +4,9 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | SUN 5TH JUL 2009:  o VER 2.9                                                |
+" |                    . made backlighting for Statement in the clash-background|
+" |                      area less bright.                                      |
 " | SAT 4TH JUL 2009:  o VER 2.8                                                |
 " |                    . darkened the back-darkening of Constant at the low end |
 " |                      of the background spectrum, as it looks a bit fuzzy    |
@@ -390,9 +393,9 @@ let highLowLightToggle=0
 :	let adj1	=RGBEl2((-todaysec+86400)/338/4+160,					todaysec,50000,5000,16000,38,2)
 :	let adj2	=RGBEl2((-todaysec+86400)/338/4+76,					todaysec,50000,5000,16000,38,2)
 :	let adj3	=RGBEl2((-todaysec+86400)/338/4+23,					todaysec,50000,5000,16000,38,2)
-:	let adj4	=RGBEl4(adjBG1,								todaysec,50000,5000,16000,-17,13,44,2)
-:	let adj5	=RGBEl4(adjBG1,								todaysec,50000,5000,16000,-17,13,44,2)
-:	let adj6	=RGBEl4(adjBG2,								todaysec,50000,5000,16000,-17,13,44,2)
+:	let adj4	=RGBEl4(adjBG1,								todaysec,50000,5000,16000,-17,13,24,2)
+:	let adj5	=RGBEl4(adjBG1,								todaysec,50000,5000,16000,-17,13,24,2)
+:	let adj6	=RGBEl4(adjBG2,								todaysec,50000,5000,16000,-17,13,24,2)
 :	let hB=printf("highlight Statement guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adjBG5=(todaysec<43200)?todaysec/338/2:todaysec/450+63
 :	let hB1=printf("highlight VertSplit guifg=#%02x%02x%02x",				adjBG3,adjBG3,adjBG5)
