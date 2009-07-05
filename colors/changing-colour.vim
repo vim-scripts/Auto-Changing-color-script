@@ -4,7 +4,13 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | SUN 5TH JUL 2009:  o VER 2.9                                                |
+" | SUN 5TH JUL 2009:  o VER 3.0                                                |
+" |                    . finally made Constant backlighting so that it          |
+" |                      perfectly kicks in at darker background colours        |
+" |                      backgrounds                                            |
+" |                    . improved visibility around clash-background and just   |
+" |                      below the clash-background area of Comment             |
+" |                    o VER 2.9                                                |
 " |                    . made backlighting for Statement in the clash-background|
 " |                      area less bright.                                      |
 " | SAT 4TH JUL 2009:  o VER 2.8                                                |
@@ -403,10 +409,10 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+64,					todaysec,56000,10000,22000,40,2)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2,						todaysec,56000,10000,22000,40,2)
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
-:	let adj1=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,46500,14000,25000,38,2)
-:	let adj2=	RGBEl2((-todaysec+86400)/338/2+76,					todaysec,46500,14000,25000,38,2)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,46500,14000,25000,-20,7,10,2)
-:	let adj5=	RGBEl4(adjBG2,								todaysec,46500,14000,25000,-20,7,10,2)
+:	let adj1=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,46500,17000,14000,38,2)
+:	let adj2=	RGBEl2((-todaysec+86400)/338/2+76,					todaysec,46500,17000,14000,38,2)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,46500,17000,14000,-20,7,25,2)
+:	let adj5=	RGBEl4(adjBG2,								todaysec,46500,17000,14000,-20,7,25,2)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj4,adj5)
 :	let adj1=	RGBEl5((-todaysec+86400)/338/2+110,					todaysec,50000,27000,29000,2)
 :	let adj2=	RGBEl5((-todaysec+86400)/338/2+64,					todaysec,50000,27000,29000,2)
@@ -440,12 +446,12 @@ let highLowLightToggle=0
 :	let adj5=	RGBEl4(adjBG1,								todaysec,47000,3000,14000,-99,-99,99,2)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,47000,3000,14000,-99,-99,99,2)
 :       let hH=printf("highlight Title guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
-:	let adj1=	RGBEl2((-todaysec+86400)/338/2+60,					todaysec,50000,10000,13000,5,0)
-:	let adj2=	RGBEl2((-todaysec+86400)/338/2+60,					todaysec,50000,10000,13000,5,0)
-:	let adj3=	RGBEl2((-todaysec+86400)/338/2+60,					todaysec,50000,10000,13000,5,0)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,50000,10000,13000,-99,-99,99,0)
-:	let adj5=	RGBEl4(adjBG1,								todaysec,50000,10000,13000,-99,-99,99,0)
-:	let adj6=	RGBEl4(adjBG2,								todaysec,50000,10000,13000,-99,-99,99,0)
+:	let adj1=	RGBEl2((-todaysec+86400)/338/2+60,					todaysec,50000,3000,13000,31,0)
+:	let adj2=	RGBEl2((-todaysec+86400)/338/2+60,					todaysec,50000,3000,13000,31,0)
+:	let adj3=	RGBEl2((-todaysec+86400)/338/2+60,					todaysec,50000,3000,13000,31,0)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,50000,3000,13000,-21,-99,99,0)
+:	let adj5=	RGBEl4(adjBG1,								todaysec,50000,3000,13000,-21,-99,99,0)
+:	let adj6=	RGBEl4(adjBG2,								todaysec,50000,3000,13000,-21,-99,99,0)
 :	let hI=printf("highlight Comment guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let hI1=printf("highlight htmlComment guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let hI2=printf("highlight htmlCommentPart guifg=#%02x%02x%02x guibg=#%02x%02x%02x",	adj1,adj2,adj3,adj4,adj5,adj6)
