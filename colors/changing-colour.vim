@@ -4,6 +4,17 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | TUE 7TH JUL 2009:  o VER 3.2                                                |
+" |                    . removed a lot of the 'glary' backlighting by making    |
+" |                      the text color get darker                              |
+" |                    . greatly improved visibility of Constant at darker      |
+" |                      background colours without distorting the background   |
+" |                      too much.                                              |
+" |                    . greatly simplified the way RGBEl2 works, hence making  |
+" |                      it easier to estimate how much adjustment text needs   |
+" | MON 6TH JUL 2009:  o VER 3.1                                                |
+" |                    . made the backlighting of Statement and Constant less   |
+" |                      bright, it was overdone                                |
 " | SUN 5TH JUL 2009:  o VER 3.0                                                |
 " |                    . finally made Constant backlighting so that it          |
 " |                      perfectly kicks in at darker background colours        |
@@ -160,26 +171,19 @@ let g:changefreq=1440
 :		let dangerBgr=a:dangerBgr
 :	endif
 :	if a:actBgr>=dangerBgr-senDar && a:actBgr<=dangerBgr+senLig
-:		let whatdoyoucallit=(dangerBgr-a:actBgr)/130
-:		let whatdoyoucallit=0
-:		if adjust<40
-:			let steppa=0
-:		else
-:			let steppa=(dangerBgr-a:actBgr)/338
-:			if steppa<0
-:				let steppa=-steppa
-:			endif
-:			if steppa>40
-:				let steppa=40
-:			endif
-:			let steppa=-steppa+40
-:			let steppa=steppa*2
+:		let whatdoyoucallit=dangerBgr-a:actBgr
+:		if whatdoyoucallit<0
+:			let whatdoyoucallit=-whatdoyoucallit
 :		endif
-:		if a:actBgr<=dangerBgr
-:			let adjustedValue=a:RGBEl-adjust-whatdoyoucallit-steppa
-:		else
-:			let adjustedValue=a:RGBEl-adjust-steppa
+:		let whatdoyoucallit=whatdoyoucallit/130
+:		if whatdoyoucallit>255
+:			let whatdoyoucallit=255
 :		endif
+:		let whatdoyoucallit=-whatdoyoucallit+255
+:		let whatdoyoucallit=whatdoyoucallit*adjust
+:		let whatdoyoucallit=whatdoyoucallit/800
+:		let whatdoyoucallit=whatdoyoucallit+65
+:		let adjustedValue=a:RGBEl-whatdoyoucallit
 :	else
 :		let adjustedValue=a:RGBEl
 :	endif
@@ -396,12 +400,12 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2(adjBG1,								todaysec,86399,4000,1,40,2)
 :	let adj3=	RGBEl2(adjBG2+30,							todaysec,86399,4000,1,40,2)
 :	let hA9=printf("highlight DiffText guibg=#%02x%02x%02x",				adj1,adj2,adj3)
-:	let adj1	=RGBEl2((-todaysec+86400)/338/4+160,					todaysec,50000,5000,16000,38,2)
-:	let adj2	=RGBEl2((-todaysec+86400)/338/4+76,					todaysec,50000,5000,16000,38,2)
-:	let adj3	=RGBEl2((-todaysec+86400)/338/4+23,					todaysec,50000,5000,16000,38,2)
-:	let adj4	=RGBEl4(adjBG1,								todaysec,50000,5000,16000,-17,13,24,2)
-:	let adj5	=RGBEl4(adjBG1,								todaysec,50000,5000,16000,-17,13,24,2)
-:	let adj6	=RGBEl4(adjBG2,								todaysec,50000,5000,16000,-17,13,24,2)
+:	let adj1	=RGBEl2((-todaysec+86400)/338/4+160,					todaysec,50000,5000,16000,100,2)
+:	let adj2	=RGBEl2((-todaysec+86400)/338/4+76,					todaysec,50000,5000,16000,100,2)
+:	let adj3	=RGBEl2((-todaysec+86400)/338/4+23,					todaysec,50000,5000,16000,100,2)
+:	let adj4	=RGBEl4(adjBG1,								todaysec,50000,5000,16000,-17,2,-5,2)
+:	let adj5	=RGBEl4(adjBG1,								todaysec,50000,5000,16000,-17,2,-5,2)
+:	let adj6	=RGBEl4(adjBG2,								todaysec,50000,5000,16000,-17,2,-5,2)
 :	let hB=printf("highlight Statement guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adjBG5=(todaysec<43200)?todaysec/338/2:todaysec/450+63
 :	let hB1=printf("highlight VertSplit guifg=#%02x%02x%02x",				adjBG3,adjBG3,adjBG5)
@@ -409,18 +413,18 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+64,					todaysec,56000,10000,22000,40,2)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2,						todaysec,56000,10000,22000,40,2)
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
-:	let adj1=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,46500,17000,14000,38,2)
-:	let adj2=	RGBEl2((-todaysec+86400)/338/2+76,					todaysec,46500,17000,14000,38,2)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,46500,17000,14000,-20,7,25,2)
-:	let adj5=	RGBEl4(adjBG2,								todaysec,46500,17000,14000,-20,7,25,2)
+:	let adj1=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,46500,17000,14000,105,2)
+:	let adj2=	RGBEl2((-todaysec+86400)/338/2+76,					todaysec,46500,17000,14000,105,2)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,46500,17000,14000,-20,7,6,2)
+:	let adj5=	RGBEl4(adjBG2,								todaysec,46500,17000,14000,-20,7,6,2)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj4,adj5)
 :	let adj1=	RGBEl5((-todaysec+86400)/338/2+110,					todaysec,50000,27000,29000,2)
 :	let adj2=	RGBEl5((-todaysec+86400)/338/2+64,					todaysec,50000,27000,29000,2)
 :	let adj3=	RGBEl5((-todaysec+86400)/338/2,						todaysec,50000,27000,29000,2)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
-:	let adj1=	RGBEl2((-todaysec+86400)/338/2+18,					todaysec,57000,10000,24000,64,2)
-:	let adj2=	RGBEl2((-todaysec+86400)/338/2+127,					todaysec,57000,10000,24000,64,2)
-:	let adj3=	RGBEl2((-todaysec+86400)/338/2,						todaysec,57000,10000,24000,64,2)
+:	let adj1=	RGBEl2((-todaysec+86400)/338/2+18,					todaysec,57000,10000,24000,100,2)
+:	let adj2=	RGBEl2((-todaysec+86400)/338/2+127,					todaysec,57000,10000,24000,100,2)
+:	let adj3=	RGBEl2((-todaysec+86400)/338/2,						todaysec,57000,10000,24000,100,2)
 :	let adj4=	RGBEl4(adjBG1,								todaysec,57000,10000,24000,-8,-99,9,2)
 :	let adj5=	RGBEl4(adjBG1,								todaysec,57000,10000,24000,-8,-99,9,2)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,57000,10000,24000,-8,-99,9,2)
@@ -455,19 +459,19 @@ let highLowLightToggle=0
 :	let hI=printf("highlight Comment guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let hI1=printf("highlight htmlComment guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let hI2=printf("highlight htmlCommentPart guifg=#%02x%02x%02x guibg=#%02x%02x%02x",	adj1,adj2,adj3,adj4,adj5,adj6)
-:	let adj1=	RGBEl2(todaysec/338+70,							todaysec,99999,0,0,0,2)
-:	let adj2=	RGBEl2(todaysec/338+30,							todaysec,99999,0,0,0,2)
-:	let adj3=	RGBEl2(todaysec/338-100,						todaysec,99999,0,0,0,2)
-:	let adj4=	RGBEl2((-todaysec+86400)/338/2+70,					todaysec,37000,27000,20000,40,2)
-:	let adj5=	RGBEl2((-todaysec+86400)/338/2+60,					todaysec,37000,27000,20000,40,2)
-:	let adj6=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,37000,27000,20000,40,2)
+:	let adj1=	RGBEl2(todaysec/338+70,							todaysec,14000,12000,12000,80,2)
+:	let adj2=	RGBEl2(todaysec/338+30,							todaysec,14000,12000,12000,80,2)
+:	let adj3=	RGBEl2(todaysec/338-100,						todaysec,14000,12000,12000,80,2)
+:	let adj4=	RGBEl2((-todaysec+86400)/338/2+70,					todaysec,16000,17000,17000,120,2)
+:	let adj5=	RGBEl2((-todaysec+86400)/338/2+60,					todaysec,16000,17000,17000,120,2)
+:	let adj6=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,16000,17000,17000,120,2)
 :	let hJ=printf("highlight StatusLine guibg=#%02x%02x%02x guifg=#%02x%02x%02x gui=bold",	adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adj1=	RGBEl2(todaysec/338+70,							todaysec,99999,0,0,0,2)
 :	let adj2=	RGBEl2(todaysec/338+60,							todaysec,99999,0,0,0,2)
 :	let adj3=	RGBEl2(todaysec/338-100,						todaysec,99999,0,0,0,2)
-:	let adj4=	RGBEl2((-todaysec+86400)/338/2+70,					todaysec,14000,12000,29000,40,2)
-:	let adj5=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,14000,12000,29000,40,2)
-:	let adj6=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,14000,12000,29000,40,2)
+:	let adj4=	RGBEl2((-todaysec+86400)/338/2+70,					todaysec,14000,12000,29000,120,2)
+:	let adj5=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,14000,12000,29000,120,2)
+:	let adj6=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,14000,12000,29000,120,2)
 :	let hK=printf("highlight StatusLineNC guibg=#%02x%02x%02x guifg=#%02x%02x%02x gui=bold",adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2,						todaysec,37000,27000,20000,40,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+20,					todaysec,37000,27000,20000,40,2)
@@ -581,5 +585,4 @@ au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
-
 
