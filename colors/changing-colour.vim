@@ -4,6 +4,18 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | FRI 10TH JUL 2009: o VER 3.5                                                |
+" |                    . made the transition into 'danger' area from dark->light|
+" |                      of the Constant a bit more gradual so as to maintain   |
+" |                      an overall illusion of progress. Previously the change |
+" |                      had been abrupt (Constants went quite dark suddenly)   |
+" |                      so this illusion was lost. To do this modified the     |
+" |                      start and end times of the 'danger' area. Went ahead   |
+" |                      and added new easeArea global variable to allow the    |
+" |                      easing length to be controlled. This allowed me to     |
+" |                      go ahead and create longer easing for the Constant from|
+" |                      dark->light as well, again smoothing the change from   |
+" |                      non-'danger' to 'danger'.                              |
 " | THU 9TH JUL 2009:  o VER 3.4                                                |
 " |                    . added fading effect to the way backlighting engages    |
 " |                      so as background progresses darker->lighter or vice-   |
@@ -150,6 +162,17 @@ let s:oldactontime=-9999
 " | (86400/6/4=3600). Every 1 minute (86400/60=1440).                            |
 " +------------------------------------------------------------------------------+
 let g:changefreq=1440
+
+" +------------------------------------------------------------------------------+
+" | The following variable is the size of the area below and above that zone that|
+" | makes the text colour 'darken' to avoid clashing with the background. It     |
+" | lasts around 2 minutes and during this time the text colour stays exactly    |
+" | unmodified but the background is tweaked up or down to 'ease' visibility     |
+" | while not drastically changing anything yet. This happens in that area known |
+" | as the 'danger' area. The bigger this value the bigger that 'ease' period    |
+" | is, with 7200 being around 2 minutes above and below 'danger' area.          |
+" +------------------------------------------------------------------------------+
+let g:easeArea=8200
 
 "debug
 "let g:mytime=40000
@@ -319,19 +342,19 @@ let g:changefreq=1440
 :		let dangerZoneAdj=-15
 :	endif
 :	let adjustedValue=a:RGBEl
-:	if a:actBgr>=dangerBgr-senDar-7200 && a:actBgr<dangerBgr-senDar
-:		let        progressFrom=dangerBgr-senDar-7200
+:	if a:actBgr>=dangerBgr-senDar-g:easeArea && a:actBgr<dangerBgr-senDar
+:		let        progressFrom=dangerBgr-senDar-g:easeArea
 :		let        progressLoHi=a:actBgr-progressFrom
 :		let            diffLoHi=darkAdjHi-darkAdjLo
 :		let  scaledProgressLoHi=diffLoHi*progressLoHi
-:		let       adjustedValue=a:RGBEl+darkAdjLo+(scaledProgressLoHi/7200)
+:		let       adjustedValue=a:RGBEl+darkAdjLo+(scaledProgressLoHi/g:easeArea)
 :	endif
-:	if a:actBgr>dangerBgr+senLig && a:actBgr<=dangerBgr+senLig+7200
+:	if a:actBgr>dangerBgr+senLig && a:actBgr<=dangerBgr+senLig+g:easeArea
 :		let        progressFrom=dangerBgr+senLig
 :		let        progressLoHi=a:actBgr-progressFrom
 :		let            diffLoHi=lghtAdjHi-lghtAdjLo
 :		let  scaledProgressLoHi=diffLoHi*progressLoHi
-:		let       adjustedValue=a:RGBEl+lghtAdjLo+(scaledProgressLoHi/7200)
+:		let       adjustedValue=a:RGBEl+lghtAdjLo+(scaledProgressLoHi/g:easeArea)
 :	endif
 :	if a:actBgr>=(dangerBgr-senDar) && a:actBgr<=(dangerBgr+senLig) && dangerZoneAdj
 :		let adjustedValue=adjustedValue+dangerZoneAdj
@@ -465,10 +488,10 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+64,					todaysec,56000,10000,22000,40,2)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2,						todaysec,56000,10000,22000,40,2)
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
-:	let adj1=	RGBEl2((-todaysec+86400)/250/2+0,					todaysec,46500,17000,14000,112,2)
-:	let adj2=	RGBEl2((-todaysec+86400)/250/2+76,					todaysec,46500,17000,14000,112,2)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,46500,17000,14000,-6,-16,-2,-2,4,2)
-:	let adj5=	RGBEl4(adjBG2,								todaysec,46500,17000,14000,-6,-16,-2,-2,4,2)
+:	let adj1=	RGBEl2((-todaysec+86400)/250/2+0,					todaysec,46500,16000,13000,112,2)
+:	let adj2=	RGBEl2((-todaysec+86400)/250/2+76,					todaysec,46500,16000,13000,112,2)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,46500,16000,13000,-6,-13,-3,-2,5,2)
+:	let adj5=	RGBEl4(adjBG2,								todaysec,46500,16000,13000,-6,-13,-3,-2,5,2)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj4,adj5)
 :	let adj1=	RGBEl5((-todaysec+86400)/338/2+110,					todaysec,50000,27000,29000,2)
 :	let adj2=	RGBEl5((-todaysec+86400)/338/2+64,					todaysec,50000,27000,29000,2)
