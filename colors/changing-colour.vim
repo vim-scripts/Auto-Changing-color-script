@@ -4,6 +4,13 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | SAT 11TH JUL 2009: o VER 3.7                                                |
+" |                    . went over the contrast of Identifier at dark, medium,  |
+" |                      and light levels of background. Previously looked      |
+" |                      fuzzy in all areas. Contrast is quite strong now       |
+" |                      enhanced with plentiful helpings of 'back-lighting' and|
+" |                      'back-darkening' to bring out the green of the         |
+" |                      Identifier.                                            |
 " | FRI 10TH JUL 2009: o VER 3.6                                                |
 " |                    . made a tiny correction to the length of time before    |
 " |                      the Constant went into the clash-background 'danger'   |
@@ -506,12 +513,12 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl5((-todaysec+86400)/338/2+64,					todaysec,50000,27000,29000,2)
 :	let adj3=	RGBEl5((-todaysec+86400)/338/2,						todaysec,50000,27000,29000,2)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
-:	let adj1=	RGBEl2((-todaysec+86400)/338/2+18,					todaysec,57000,10000,17000,100,2)
-:	let adj2=	RGBEl2((-todaysec+86400)/338/2+127,					todaysec,57000,10000,17000,100,2)
-:	let adj3=	RGBEl2((-todaysec+86400)/338/2,						todaysec,57000,10000,17000,100,2)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,57000,10000,17000,-5,-12,-12,-9,9,2)
-:	let adj5=	RGBEl4(adjBG1,								todaysec,57000,10000,17000,-5,-12,-12,-9,9,2)
-:	let adj6=	RGBEl4(adjBG2,								todaysec,57000,10000,17000,-5,-12,-12,-9,9,2)
+:	let adj1=	RGBEl2((-todaysec+86400)/270/2+35,					todaysec,57000,6000,20000,230,2)
+:	let adj2=	RGBEl2((-todaysec+86400)/270/2+120,					todaysec,57000,6000,20000,230,2)
+:	let adj3=	RGBEl2((-todaysec+86400)/270/2,						todaysec,57000,6000,20000,220,2)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,57000,6000,20000,-5,-40,-9,-3,11,2)
+:	let adj5=	RGBEl4(adjBG1,								todaysec,57000,6000,20000,-5,-40,-9,-3,11,2)
+:	let adj6=	RGBEl4(adjBG2,								todaysec,57000,6000,20000,-5,-40,-9,-3,11,2)
 :	let hE=printf("highlight Identifier guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2+100,					todaysec,43000,5000,16000,39,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,43000,5000,16000,39,2)
