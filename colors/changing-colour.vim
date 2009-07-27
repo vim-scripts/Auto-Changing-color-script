@@ -4,6 +4,12 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | MON 27TH JUL 2009: o VER 4.0                                                |
+" |                    . realised that syntax element 'Search' was almost       |
+" |                      impossible to distinguish from general background      |
+" |                      at darker backgrounds. Fixed this so that Search now   |
+" |                      contrasts significantly from the general background    |
+" |                      at dark backgrounds without being too strong.          |
 " | THU 23RD JUL 2009: o VER 3.9                                                |
 " |                    . went over visibility of Identifier at lighter          |
 " |                      backgrounds. It was ok at the darker backgrounds,      |
@@ -489,7 +495,10 @@ let highLowLightToggle=0
 :       let hA2=printf("highlight CursorLine guibg=#%02x%02x%02x",				adjBG3,adjBG3,adjBG1) 
 :       let hA3=printf("highlight NonText guibg=#%02x%02x%02x guifg=#%02x%02x%02x",		adjBG3,adjBG1,adjBG1,adjBG3,adjBG1,adjBG1)  
 :       let hA4=printf("highlight LineNr guibg=#%02x%02x%02x",					adjBG1,adjBG3,adjBG1)
-:       let hA5=printf("highlight Search guibg=#%02x%02x%02x",					adjBG3,adjBG3,adjBG1) 
+:	let adj1=	RGBEl2(adjBG1+50,							todaysec,86399,4000,1,40,2)
+:	let adj2=	RGBEl2(adjBG1+40,							todaysec,86399,4000,1,40,2)
+:	let adj3=	RGBEl2(adjBG2,								todaysec,86399,4000,1,40,2)
+:       let hA5=printf("highlight Search guibg=#%02x%02x%02x",					adj1,adj2,adj3) 
 :	let adj1=	RGBEl2(adjBG1,								todaysec,86399,4000,1,40,2)
 :	let adj2=	RGBEl2(adjBG1+30,							todaysec,86399,4000,1,40,2)
 :	let adj3=	RGBEl2(adjBG2,								todaysec,86399,4000,1,40,2)
@@ -691,4 +700,3 @@ au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
-
