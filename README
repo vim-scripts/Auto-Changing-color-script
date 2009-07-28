@@ -1,0 +1,10 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=2658
+
+Tested and works well with Java, Javascript, HTML, CSS, PHP, ActionScript (with 'actionscript.vim', available elsewhere in Vim.org), AutoIt and AutoHotKey.  Gradually changes changing syntax colours over the hour. Works well with time script to speech script: http://www.vim.org/scripts/script.php?script_id=3257
+
+Benefits of script are:
+* reduce eye-strain and headaches caused by staring at code on-screen
+* reduce dis-orientation by keeping user informed of passing time
+* reduce boredom by stimulating right side of the brain
+
+Only affects GVIM. Nothing happens in VIM.
