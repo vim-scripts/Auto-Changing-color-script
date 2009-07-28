@@ -4,6 +4,14 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | MON 27TH JUL 2009: o VER 4.1                                                |
+" |                    . for some reason i missed that at the very darkest      |
+" |                      background Search was indistinguishable from the back- |
+" |                      ground - messed this up, my own fault i apologise.     |
+" |                      I focussed to narrowly on 'dark' and didn't go down    |
+" |                      all the way down to black where Search got invisible   |
+" |                      (or indistinguishable from the background, at any rate)|
+" |                      This is now fixed.                                     |
 " | MON 27TH JUL 2009: o VER 4.0                                                |
 " |                    . realised that syntax element 'Search' was almost       |
 " |                      impossible to distinguish from general background      |
@@ -495,9 +503,9 @@ let highLowLightToggle=0
 :       let hA2=printf("highlight CursorLine guibg=#%02x%02x%02x",				adjBG3,adjBG3,adjBG1) 
 :       let hA3=printf("highlight NonText guibg=#%02x%02x%02x guifg=#%02x%02x%02x",		adjBG3,adjBG1,adjBG1,adjBG3,adjBG1,adjBG1)  
 :       let hA4=printf("highlight LineNr guibg=#%02x%02x%02x",					adjBG1,adjBG3,adjBG1)
-:	let adj1=	RGBEl2(adjBG1+50,							todaysec,86399,4000,1,40,2)
-:	let adj2=	RGBEl2(adjBG1+40,							todaysec,86399,4000,1,40,2)
-:	let adj3=	RGBEl2(adjBG2,								todaysec,86399,4000,1,40,2)
+:	let adj1=	RGBEl4(adjBG1-30,							todaysec,0,0,10000,20,20,40,20,40,2)
+:	let adj2=	RGBEl4(adjBG1-10,							todaysec,0,0,10000,20,20,40,20,40,2)
+:	let adj3=	RGBEl4(adjBG2+10,							todaysec,0,0,10000,20,20,40,20,40,2)
 :       let hA5=printf("highlight Search guibg=#%02x%02x%02x",					adj1,adj2,adj3) 
 :	let adj1=	RGBEl2(adjBG1,								todaysec,86399,4000,1,40,2)
 :	let adj2=	RGBEl2(adjBG1+30,							todaysec,86399,4000,1,40,2)
@@ -700,3 +708,4 @@ au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
+
