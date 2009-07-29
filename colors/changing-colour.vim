@@ -4,6 +4,13 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | WED 29TH JUL 2009: o VER 4.7                                                |
+" |                    . made a slight boo-boo in that the speed being quicker  |
+" |                      of the background changes also meant that the          |
+" |                      frequency of the updates speeds up. Did not realise    |
+" |                      this. My mistake, poor programmer here. Fixed it now so|
+" |                      that by default the background updates only every      |
+" |                      minute.                                                |
 " | WED 29TH JUL 2009: o VER 4.6                                                |
 " |                    . changed the speed at which background shifts from light|
 " |                      to dark and vice-versa so that instead of going        |
@@ -239,18 +246,10 @@ let s:oldactontime=-9999
 " +------------------------------------------------------------------------------+
 " | This variable is used to control how often the script deems it's time to     |
 " | 'progress' the colour (also see above). The higher the value the less often  |
-" | it will do so, the lower the more often it will do so.  480 is equivalent to |
-" | every 20 seconds. (86400, the total number of seconds in a day, squeezed down|
-" | to one hours, divided by 60 and then by 3 .. so it's like one hour divided by|
-" | 60 and then by 3 = 20 seconds. Obviously if you wanted the colour to change  |
-" | every minute then you'd do 86400 divided by 60. The script originally worked |
-" | by changing colour throughout the day so that's why it's still using this    |
-" | peculiar number 86400 as the 'time range'. You could play with this number   |
-" | until you find one that works out best for you. E.g. every thirty seconds    |
-" | (86400/60/2=720). Every two minutes (86400/6/5=2880). Every 2.5 minutes      |
-" | (86400/6/4=3600). Every 1 minute (86400/60=1440).                            |
+" | it will do so, the lower the more often it will do so.  2880 is equivalnet   |
+" | to every minute, 5760 every two minutes.                                     |
 " +------------------------------------------------------------------------------+
-let g:changefreq=1440
+let g:changefreq=2880
 
 " +------------------------------------------------------------------------------+
 " | The following variable is the size of the area below and above that zone that|
