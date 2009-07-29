@@ -4,6 +4,9 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | WED 29TH JUL 2009: o VER 4.8                                                |
+" |                    . removed display of time. This is redundant now that the|
+" |                      changing colours help you keep track of time better.   |
 " | WED 29TH JUL 2009: o VER 4.7                                                |
 " |                    . made a slight boo-boo in that the speed being quicker  |
 " |                      of the background changes also meant that the          |
@@ -732,9 +735,6 @@ let highLowLightToggle=0
 :		execute hS
 :	endif
 :	redraw
-:	if todaysec>=69120 || todaysec<=17280
-:		echo strftime("%c")
-:	endif
 :endfunction       
 
 " +------------------------------------------------------------------------------+
