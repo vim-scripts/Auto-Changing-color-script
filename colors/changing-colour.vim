@@ -4,6 +4,19 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | WED 29TH JUL 2009: o VER 4.6                                                |
+" |                    . changed the speed at which background shifts from light|
+" |                      to dark and vice-versa so that instead of going        |
+" |                      gradually from dark to light over the hour then back   |
+" |                      in the next hour, the background now does so in a half |
+" |                      hour slots so the same as happened over two hours      |
+" |                      before now happens over one hour. The 'shaded          |
+" |                      backgrounds' added in 4.2 keep it interesting as on    |
+" |                      hour 1 the colour shades differently to what it does on|
+" |                      hour 2, and again to what it does on hour 3. If you    |
+" |                      feel this is too sudden stick to script version 4.5    |
+" |                      as this version does this more gradually over 2-hour   |
+" |                      slots.                                                 |
 " | WED 29TH JUL 2009: o VER 4.5                                                |
 " |                    . whilst trying to de-saturate the lighter background    |
 " |                      shades i seemed to get the math wrong and therefore    |
@@ -514,22 +527,17 @@ let highLowLightToggle=0
 :	let todaysec=((localtime()%(60*60)))*24
 :	if exists("g:mytime")
 :		let todaysec=g:mytime
+:	endif
+: 	let nightorday=a:nightorday
+:	if nightorday==1
+:		let todaysec=todaysec<43200?(-todaysec*2+86399):((todaysec-43200)*2)
 :	else
-: 		if a:nightorday==1
-:			let todaysec=-todaysec+86400
-:		else
-:			let todaysec=todaysec
-:		endif
-:		if (localtime()/60/60%2==1)
-:			let todaysec=-todaysec+86400
-:		else
-:			let todaysec=todaysec
-:		endif
+:		let todaysec=todaysec<43200?(todaysec*2):(-todaysec*2+172799)
 :	endif
 :	if exists("g:myhour")
 :		let myhour=g:myhour
 :	else
-:		let myhour=((localtime()/(60*60))%6)/2
+:		let myhour=(localtime()/(60*60))%3
 :	endif
 :	if myhour==0
 :		let adjBG1=(todaysec<43200)?todaysec/450:(todaysec-43200)/271+96
@@ -726,7 +734,7 @@ let highLowLightToggle=0
 :	endif
 :	redraw
 :	if todaysec>=69120 || todaysec<=17280
-:	echo strftime("%c")
+:		echo strftime("%c")
 :	endif
 :endfunction       
 
