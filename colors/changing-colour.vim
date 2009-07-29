@@ -4,6 +4,13 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | WED 29TH JUL 2009: o VER 4.4                                                |
+" |                    . made the higher backgrounds of the new differing       |
+" |                      shades a bit less glary. Previously they were quite    |
+" |                      saturated colours and didn't look nice. Now they're    |
+" |                      tasteful shades of pastel. The hour 1-2 colours are    |
+" |                      pastel yellow, hour 3-4 colours are cyan, and finally  |
+" |                      the hours 5-6 colours are pastel pink.                 |
 " | WED 29TH JUL 2009: o VER 4.3                                                |
 " |                    . made the Statement's danger-visibility zone wider      |
 " |                      at darker backgrounds. This was not wide enough to     |
@@ -521,17 +528,17 @@ let highLowLightToggle=0
 :	if myhour==0
 :		let adjBG1=(todaysec<43200)?todaysec/450:(todaysec-43200)/271+96
 :		let adjBG1A=(todaysec<43200)?todaysec/450:(todaysec-43200)/271+96
-:		let adjBG2=(todaysec<43200)?todaysec/380:(todaysec-43200)/676+127
+:		let adjBG2=(todaysec<43200)?todaysec/380:(todaysec-43200)/676+167
 :	endif
 :	if myhour==1
-:		let adjBG1=(todaysec<43200)?todaysec/450:(todaysec-43200)/676+127
-:		let adjBG1A=(todaysec<43200)?todaysec/380:(todaysec-43200)/676+127
+:		let adjBG1=(todaysec<43200)?todaysec/450:(todaysec-43200)/676+167
+:		let adjBG1A=(todaysec<43200)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG2=(todaysec<43200)?todaysec/450:(todaysec-43200)/271+96
 :	endif
 :	if myhour==2
 :		let adjBG1=(todaysec<43200)?todaysec/380:(todaysec-43200)/271+96
-:		let adjBG1A=(todaysec<43200)?todaysec/490:(todaysec-43200)/676+127
-:		let adjBG2=(todaysec<43200)?todaysec/490:(todaysec-43200)/676+96
+:		let adjBG1A=(todaysec<43200)?todaysec/490:(todaysec-43200)/676+167
+:		let adjBG2=(todaysec<43200)?todaysec/490:(todaysec-43200)/271+96
 :	endif
 :	let adjBG3=(adjBG1-32>=32)?adjBG1-32:32
 :	let adjBG4=(adjBG1-32>=32)?adjBG1-32:32
