@@ -4,6 +4,13 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | WED 29TH JUL 2009: o VER 4.3                                                |
+" |                    . made the Statement's danger-visibility zone wider      |
+" |                      at darker backgrounds. This was not wide enough to     |
+" |                      remain clear at the boundary of visibility-ok to       |
+" |                      visibility not-ok area, but now Statement's visbility  |
+" |                      protection area is extended a bit at the darker range  |
+" |                      making it more visible there.                          |
 " | TUE 28TH JUL 2009: o VER 4.2                                                |
 " |                    . added a pleasant (i hope not too bad at least)         |
 " |                      selection of background (shades) along with the        |
@@ -553,12 +560,12 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2(adjBG1A,								todaysec,86399,4000,1,40,2)
 :	let adj3=	RGBEl2(adjBG2+30,							todaysec,86399,4000,1,40,2)
 :	let hA9=printf("highlight DiffText guibg=#%02x%02x%02x",				adj1,adj2,adj3)
-:	let adj1	=RGBEl2((-todaysec+86400)/338/4+160,					todaysec,50000,5000,16000,100,2)
-:	let adj2	=RGBEl2((-todaysec+86400)/338/4+76,					todaysec,50000,5000,16000,100,2)
-:	let adj3	=RGBEl2((-todaysec+86400)/338/4+23,					todaysec,50000,5000,16000,100,2)
-:	let adj4	=RGBEl4(adjBG1,								todaysec,50000,5000,16000,-5,-15,3,1,-5,2)
-:	let adj5	=RGBEl4(adjBG1A,							todaysec,50000,5000,16000,-5,-15,3,1,-5,2)
-:	let adj6	=RGBEl4(adjBG2,								todaysec,50000,5000,16000,-5,-15,3,1,-5,2)
+:	let adj1	=RGBEl2((-todaysec+86400)/338/4+160,					todaysec,50000,8000,16000,100,2)
+:	let adj2	=RGBEl2((-todaysec+86400)/338/4+76,					todaysec,50000,8000,16000,100,2)
+:	let adj3	=RGBEl2((-todaysec+86400)/338/4+23,					todaysec,50000,8000,16000,100,2)
+:	let adj4	=RGBEl4(adjBG1,								todaysec,50000,8000,16000,-5,-15,3,1,-5,2)
+:	let adj5	=RGBEl4(adjBG1A,							todaysec,50000,8000,16000,-5,-15,3,1,-5,2)
+:	let adj6	=RGBEl4(adjBG2,								todaysec,50000,8000,16000,-5,-15,3,1,-5,2)
 :	let hB=printf("highlight Statement guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adjBG5=(todaysec<43200)?todaysec/338/2:todaysec/450+63
 :	let hB1=printf("highlight VertSplit guifg=#%02x%02x%02x",				adjBG3,adjBG3,adjBG5)
