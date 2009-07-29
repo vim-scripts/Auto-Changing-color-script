@@ -4,6 +4,12 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | WED 29TH JUL 2009: o VER 4.5                                                |
+" |                    . whilst trying to de-saturate the lighter background    |
+" |                      shades i seemed to get the math wrong and therefore    |
+" |                      at certain ranges the background looks super-saturated.|
+" |                      This is fixed now. The background is truly pastel      |
+" |                      at all lighter background ranges, i fixed the math.    |
 " | WED 29TH JUL 2009: o VER 4.4                                                |
 " |                    . made the higher backgrounds of the new differing       |
 " |                      shades a bit less glary. Previously they were quite    |
@@ -528,16 +534,16 @@ let highLowLightToggle=0
 :	if myhour==0
 :		let adjBG1=(todaysec<43200)?todaysec/450:(todaysec-43200)/271+96
 :		let adjBG1A=(todaysec<43200)?todaysec/450:(todaysec-43200)/271+96
-:		let adjBG2=(todaysec<43200)?todaysec/380:(todaysec-43200)/676+167
+:		let adjBG2=(todaysec<43200)?todaysec/380:(todaysec-43200)/360+108
 :	endif
 :	if myhour==1
-:		let adjBG1=(todaysec<43200)?todaysec/450:(todaysec-43200)/676+167
+:		let adjBG1=(todaysec<43200)?todaysec/450:(todaysec-43200)/360+108
 :		let adjBG1A=(todaysec<43200)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG2=(todaysec<43200)?todaysec/450:(todaysec-43200)/271+96
 :	endif
 :	if myhour==2
 :		let adjBG1=(todaysec<43200)?todaysec/380:(todaysec-43200)/271+96
-:		let adjBG1A=(todaysec<43200)?todaysec/490:(todaysec-43200)/676+167
+:		let adjBG1A=(todaysec<43200)?todaysec/490:(todaysec-43200)/360+108
 :		let adjBG2=(todaysec<43200)?todaysec/490:(todaysec-43200)/271+96
 :	endif
 :	let adjBG3=(adjBG1-32>=32)?adjBG1-32:32
