@@ -4,14 +4,27 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | THU 30TH JUL 2009: o VER 5.1                                                |
-" |                      Made Identifier have the 'lights on' look a bit later  |
+" | THU 30TH JUL 2009: o VER 5.2                                                |
+" |                    . Made the backgrounds fade very smoothly, as i found    |
+" |                      that there were still inconsistencies. They have now   |
+" |                      have been fixed. The colours of the background now     |
+" |                      blend smoothly from dark to light. Fixed sudden        |
+" |                      brightening that occurred of the of background. Now the|
+" |                      transition is sweet. Also the background stays         |
+" |                      consistently coloured. Previously it would go dark     |
+" |                      green and suddently change to a very light-red colour. |
+" |                      A slight glitch that is now corrected by manipulating  |
+" |                      R,G,B values better. Hour 1: dark-brown to light       |
+" |                      yellow. Hour 2: dark-green to light-green. Hour 3: dark|
+" |                      grey-purple to light-pink.                             |
+" |                    o VER 5.1                                                |
+" |                    . Made Identifier have the 'lights on' look a bit later  |
 " |                      so that when this happens seems about the right time   |
 " |                      with relation to how dark the background is. Previously|
 " |                      Idenfier became 'lights on' well before the background |
 " |                      was really that dark and this looked a bit stupid.     |
-" | THU 30TH JUL 2009: o VER 5.0                                                |
-" |                      Realised that the background was not continuous on the |
+" |                    o VER 5.0                                                |
+" |                    . Realised that the background was not continuous on the |
 " |                      second hour. Made the background fading continuous, so |
 " |                      it looks like there's continuity. Hour 1 background    |
 " |                      fades smoothly between dark-blue to light-yellow. Hours|
@@ -23,7 +36,7 @@
 " |                      to get a feel for how they're working and hence get    |
 " |                      better shades, but for now they're working. (Look      |
 " |                      smooth). Watch this space for better ideas.            |
-" | THU 30TH JUL 2009: o VER 4.9                                                |
+" |                    o VER 4.9                                                |
 " |                    . made the visibility-protection of Identifier a bit less|
 " |                      glary. Previously i was trying to use brightening of   |
 " |                      the background to improve visibility but it was too    |
@@ -34,14 +47,14 @@
 " | WED 29TH JUL 2009: o VER 4.8                                                |
 " |                    . removed display of time. This is redundant now that the|
 " |                      changing colours help you keep track of time better.   |
-" | WED 29TH JUL 2009: o VER 4.7                                                |
+" |                    o VER 4.7                                                |
 " |                    . made a slight boo-boo in that the speed being quicker  |
 " |                      of the background changes also meant that the          |
 " |                      frequency of the updates speeds up. Did not realise    |
 " |                      this. My mistake, poor programmer here. Fixed it now so|
 " |                      that by default the background updates only every      |
 " |                      minute.                                                |
-" | WED 29TH JUL 2009: o VER 4.6                                                |
+" |                    o VER 4.6                                                |
 " |                    . changed the speed at which background shifts from light|
 " |                      to dark and vice-versa so that instead of going        |
 " |                      gradually from dark to light over the hour then back   |
@@ -54,20 +67,20 @@
 " |                      feel this is too sudden stick to script version 4.5    |
 " |                      as this version does this more gradually over 2-hour   |
 " |                      slots.                                                 |
-" | WED 29TH JUL 2009: o VER 4.5                                                |
+" |                    o VER 4.5                                                |
 " |                    . whilst trying to de-saturate the lighter background    |
 " |                      shades i seemed to get the math wrong and therefore    |
 " |                      at certain ranges the background looks super-saturated.|
 " |                      This is fixed now. The background is truly pastel      |
 " |                      at all lighter background ranges, i fixed the math.    |
-" | WED 29TH JUL 2009: o VER 4.4                                                |
+" |                    o VER 4.4                                                |
 " |                    . made the higher backgrounds of the new differing       |
 " |                      shades a bit less glary. Previously they were quite    |
 " |                      saturated colours and didn't look nice. Now they're    |
 " |                      tasteful shades of pastel. The hour 1-2 colours are    |
 " |                      pastel yellow, hour 3-4 colours are cyan, and finally  |
 " |                      the hours 5-6 colours are pastel pink.                 |
-" | WED 29TH JUL 2009: o VER 4.3                                                |
+" |                    o VER 4.3                                                |
 " |                    . made the Statement's danger-visibility zone wider      |
 " |                      at darker backgrounds. This was not wide enough to     |
 " |                      remain clear at the boundary of visibility-ok to       |
@@ -93,7 +106,7 @@
 " |                      all the way down to black where Search got invisible   |
 " |                      (or indistinguishable from the background, at any rate)|
 " |                      This is now fixed.                                     |
-" | MON 27TH JUL 2009: o VER 4.0                                                |
+" |                    o VER 4.0                                                |
 " |                    . realised that syntax element 'Search' was almost       |
 " |                      impossible to distinguish from general background      |
 " |                      at darker backgrounds. Fixed this so that Search now   |
@@ -569,19 +582,19 @@ let highLowLightToggle=0
 :		let myhour=(localtime()/(60*60))%3
 :	endif
 :	if myhour==0
-:		let adjBG1=(todaysec<43200)?todaysec/450:(todaysec-43200)/271+96
-:		let adjBG1A=(todaysec<43200)?todaysec/450:(todaysec-43200)/271+96
-:		let adjBG2=(todaysec<43200)?todaysec/380:(todaysec-43200)/360+108
+:		let adjBG1=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
+:		let adjBG1A=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
+:		let adjBG2=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :	endif
 :	if myhour==1
-:		let adjBG1=(todaysec<43200)?todaysec/450:(todaysec-43200)/360+108
-:		let adjBG1A=(todaysec<43200)?todaysec/380:(todaysec-43200)/271+96
-:		let adjBG2=(todaysec<43200)?todaysec/450:(todaysec-43200)/360+108
+:		let adjBG1=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
+:		let adjBG1A=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
+:		let adjBG2=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :	endif
 :	if myhour==2
-:		let adjBG1=(todaysec<43200)?todaysec/380:(todaysec-43200)/271+96
-:		let adjBG1A=(todaysec<43200)?todaysec/490:(todaysec-43200)/360+108
-:		let adjBG2=(todaysec<43200)?todaysec/490:(todaysec-43200)/360+108
+:		let adjBG1=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
+:		let adjBG1A=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
+:		let adjBG2=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :	endif
 :	let adjBG3=(adjBG1-32>=32)?adjBG1-32:32
 :	let adjBG4=(adjBG1-32>=32)?adjBG1-32:32
