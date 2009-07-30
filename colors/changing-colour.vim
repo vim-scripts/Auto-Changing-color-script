@@ -4,6 +4,14 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | THU 30TH JUL 2009: o VER 4.9                                                |
+" |                    . made the visibility-protection of Identifier a bit less|
+" |                      glary. Previously i was trying to use brightening of   |
+" |                      the background to improve visibility but it was too    |
+" |                      strong. This was my fault. I was trying to improve it. |
+" |                      Apologies. I've now corrected this so that Identifier  |
+" |                      remains remain nice and easy on the eyes as the back-  |
+" |                      ground fades from dark-light and vice versa.           |
 " | WED 29TH JUL 2009: o VER 4.8                                                |
 " |                    . removed display of time. This is redundant now that the|
 " |                      changing colours help you keep track of time better.   |
@@ -609,9 +617,9 @@ let highLowLightToggle=0
 :	let adj1=	RGBEl2((-todaysec+86400)/270/2+35,					todaysec,57000,6000,20000,230,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/270/2+120,					todaysec,57000,6000,20000,230,2)
 :	let adj3=	RGBEl2((-todaysec+86400)/270/2,						todaysec,57000,6000,20000,220,2)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,57000,6000,000,-5,-7,-5,-3,99,2)
-:	let adj5=	RGBEl4(adjBG1A,								todaysec,57000,6000,000,-5,-7,-5,-3,99,2)
-:	let adj6=	RGBEl4(adjBG2,								todaysec,57000,6000,000,-5,-7,-5,-3,99,2)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,57000,6000,000,-5,-7,-5,-3,4,2)
+:	let adj5=	RGBEl4(adjBG1A,								todaysec,57000,6000,000,-5,-7,-5,-3,4,2)
+:	let adj6=	RGBEl4(adjBG2,								todaysec,57000,6000,000,-5,-7,-5,-3,4,2)
 :	let hE=printf("highlight Identifier guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2+100,					todaysec,43000,5000,16000,39,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,43000,5000,16000,39,2)
