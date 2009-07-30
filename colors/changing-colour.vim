@@ -4,7 +4,15 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | THU 30TH JUL 2009: o VER 5.2                                                |
+" | THU 30TH JUL 2009: o 5.3                                                    |
+" |                      Fine-tuned the visibility protection of Comment so that|
+" |                      it now looks great around the dark background area.    |
+" |                      Previously was looking a bit muggy. Stretched this     |
+" |                      protection exactly around the perceptional boundary    |
+" |                      area and fined-tuned the 'back-darkening' effect at    |
+" |                      this lower range as well so that it now just does that |
+" |                      job it should do.                                      |
+" |                    o VER 5.2                                                |
 " |                    . Made the backgrounds fade very smoothly, as i found    |
 " |                      that there were still inconsistencies. They have now   |
 " |                      have been fixed. The colours of the background now     |
@@ -674,12 +682,12 @@ let highLowLightToggle=0
 :	let adj5=	RGBEl4(adjBG1A,								todaysec,47000,3000,14000,-99,-99,-99,-99,99,2)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,47000,3000,14000,-99,-99,-99,-99,99,2)
 :       let hH=printf("highlight Title guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
-:	let adj1=	RGBEl2((-todaysec+86400)/338/2+60,					todaysec,50000,3000,13000,31,0)
-:	let adj2=	RGBEl2((-todaysec+86400)/338/2+60,					todaysec,50000,3000,13000,31,0)
-:	let adj3=	RGBEl2((-todaysec+86400)/338/2+60,					todaysec,50000,3000,13000,31,0)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,50000,3000,13000,-21,-21,-99,-99,99,0)
-:	let adj5=	RGBEl4(adjBG1A,								todaysec,50000,3000,13000,-21,-21,-99,-99,99,0)
-:	let adj6=	RGBEl4(adjBG2,								todaysec,50000,3000,13000,-21,-21,-99,-99,99,0)
+:	let adj1=	RGBEl2((-todaysec+86400)/338/2+60,					todaysec,50000,10000,13000,31,0)
+:	let adj2=	RGBEl2((-todaysec+86400)/338/2+60,					todaysec,50000,10000,13000,31,0)
+:	let adj3=	RGBEl2((-todaysec+86400)/338/2+60,					todaysec,50000,10000,13000,31,0)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,50000,10000,13000,-5,-21,-99,-99,99,0)
+:	let adj5=	RGBEl4(adjBG1A,								todaysec,50000,10000,13000,-5,-21,-99,-99,99,0)
+:	let adj6=	RGBEl4(adjBG2,								todaysec,50000,10000,13000,-5,-21,-99,-99,99,0)
 :	let hI=printf("highlight Comment guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let hI1=printf("highlight htmlComment guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let hI2=printf("highlight htmlCommentPart guifg=#%02x%02x%02x guibg=#%02x%02x%02x",	adj1,adj2,adj3,adj4,adj5,adj6)
