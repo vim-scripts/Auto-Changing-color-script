@@ -4,6 +4,19 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | THU 30TH JUL 2009: o VER 5.0                                                |
+" |                      Realised that the background was not continuous on the |
+" |                      second hour. Made the background fading continuous, so |
+" |                      it looks like there's continuity. Hour 1 background    |
+" |                      fades smoothly between dark-blue to light-yellow. Hours|
+" |                      2 it goes smoothly from dark-green to a lighter green. |
+" |                      Finally hour 3 the background goes smoothly from a     |
+" |                      dark-red to a light pinky colour. I feel that whilst   |
+" |                      these are not the prettiest shades ever, that they are |
+" |                      at least doing the job. I need to try these out fully  |
+" |                      to get a feel for how they're working and hence get    |
+" |                      better shades, but for now they're working. (Look      |
+" |                      smooth). Watch this space for better ideas.            |
 " | THU 30TH JUL 2009: o VER 4.9                                                |
 " |                    . made the visibility-protection of Identifier a bit less|
 " |                      glary. Previously i was trying to use brightening of   |
@@ -557,12 +570,12 @@ let highLowLightToggle=0
 :	if myhour==1
 :		let adjBG1=(todaysec<43200)?todaysec/450:(todaysec-43200)/360+108
 :		let adjBG1A=(todaysec<43200)?todaysec/380:(todaysec-43200)/271+96
-:		let adjBG2=(todaysec<43200)?todaysec/450:(todaysec-43200)/271+96
+:		let adjBG2=(todaysec<43200)?todaysec/450:(todaysec-43200)/360+108
 :	endif
 :	if myhour==2
 :		let adjBG1=(todaysec<43200)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG1A=(todaysec<43200)?todaysec/490:(todaysec-43200)/360+108
-:		let adjBG2=(todaysec<43200)?todaysec/490:(todaysec-43200)/271+96
+:		let adjBG2=(todaysec<43200)?todaysec/490:(todaysec-43200)/360+108
 :	endif
 :	let adjBG3=(adjBG1-32>=32)?adjBG1-32:32
 :	let adjBG4=(adjBG1-32>=32)?adjBG1-32:32
