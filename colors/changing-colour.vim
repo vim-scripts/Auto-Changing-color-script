@@ -4,12 +4,19 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | THU  6TH AUG 2009: o 5.5                                                    |
+" |                    . Cured disastrous visibility failure of Directories in  |
+" |                      the file browser command :Ex. Directory was almost     |
+" |                      totally invisible at a particular background lightness |
+" |                      as it happened exactly when I needed to see what       |
+" |                      directory I was in. Update to this script now and this |
+" |                      wont happen to you.                                    |
 " | FRI 31TH JUL 2009: o 5.4                                                    |
 " |                    . Stretched the 'lighting-up time' of Identifier a bit   |
 " |                      later into the darkness. The 'lighting-up' was         |
 " |                      coming-up slightly before it 'got really dark', so this|
-" |                      looked a bit silly. Now Identifier feels more like it  |
-" |                      lights up at exactly the correct time.                 |
+" |                      looked silly. Now Identifier feels more like it lights |
+" |                      up at exactly the correct time.
 " | THU 30TH JUL 2009: o 5.3                                                    |
 " |                      Fine-tuned the visibility protection of Comment so that|
 " |                      it now looks great around the dark background area.    |
@@ -744,12 +751,12 @@ let highLowLightToggle=0
 :	let adj6=	RGBEl4(adjBG2,								todaysec,77000,10000,26000,-99,-99,-99,-99,99,2)
 :	let hR=printf("highlight Question guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let hR1=printf("highlight MoreMsg guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
-:	let adj1=	RGBEl2((-todaysec+86400)/338/2+100,					todaysec,63000,27000,7000,40,2)
-:	let adj2=	RGBEl2((-todaysec+86400)/338/2+160,					todaysec,63000,27000,7000,40,2)
-:	let adj3=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,63000,27000,7000,40,2)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,63000,27000,7000,-99,-99,-99,-99,0,2)
-:	let adj5=	RGBEl4(adjBG1A,								todaysec,63000,27000,7000,-99,-99,-99,-99,0,2)
-:	let adj6=	RGBEl4(adjBG2,								todaysec,63000,27000,7000,-99,-99,-99,-99,0,2)
+:	let adj1=	RGBEl2((-todaysec+86400)/338/2+100,					todaysec,50000,27000,7000,40,2)
+:	let adj2=	RGBEl2((-todaysec+86400)/338/2+160,					todaysec,50000,27000,7000,40,2)
+:	let adj3=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,50000,27000,7000,40,2)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,50000,27000,7000,-99,-99,-99,-99,25,2)
+:	let adj5=	RGBEl4(adjBG1A,								todaysec,50000,27000,7000,-99,-99,-99,-99,25,2)
+:	let adj6=	RGBEl4(adjBG2,								todaysec,50000,27000,7000,-99,-99,-99,-99,25,2)
 :	let hS=printf("highlight Directory guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	if todaysec/g:changefreq!=s:oldactontime/g:changefreq || exists("g:mytime")
 :		let s:oldactontime=todaysec
