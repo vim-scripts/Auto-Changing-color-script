@@ -4,7 +4,12 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | THU  6TH AUG 2009: o 5.6                                                    |
+" | THU  6TH AUG 2009: o 5.7                                                    |
+" |                    . Found that making Visual a bit milder made it a bit    |
+" |                      difficult to read sometimes so made it a little bit    |
+" |                      stronger so hopefully it still doesn't obstruct text   |
+" |                      but is clear enough to see.                            |
+" |                      5.6                                                    |
 " |                    . Still experienced problems with visibility of 'Directo-|
 " |                      ry', not noticed before because Directory does not     |
 " |                      often appear - occurs inside the :Ex command (File     |
@@ -13,7 +18,7 @@
 " |                      was previously was blocking out the text. Now it's     |
 " |                      only a shade different to make sure the selected text  |
 " |                      text stays visible.                                    |
-" |                    o 5.5                                                    |
+" |                      5.5                                                    |
 " |                    . Cured disastrous visibility failure of Directories in  |
 " |                      the file browser command :Ex. Directory was almost     |
 " |                      totally invisible at a particular background lightness |
@@ -733,9 +738,9 @@ let highLowLightToggle=0
 :	let adjBG6=(adjBG5-32>=0)?adjBG5-32:0
 :	let hM=printf("highlight PMenu guibg=#%02x%02x%02x",					adjBG6,adjBG6,adjBG6)
 :	let hN="highlight PMenuSel guibg=Yellow guifg=Blue"
-:	let adj1=	RGBEl2(adjBG1+20,							todaysec,86399,4000,1,40,2)
+:	let adj1=	RGBEl2(adjBG1+30,							todaysec,86399,4000,1,40,2)
 :	let adj2=	RGBEl2(adjBG1A+10,							todaysec,86399,4000,1,40,2)
-:	let adj3=	RGBEl2(adjBG2,								todaysec,86399,4000,1,40,2)
+:	let adj3=	RGBEl2(adjBG2+10,							todaysec,86399,4000,1,40,2)
 :	let hL=printf("highlight Visual guibg=#%02x%02x%02x",					adj1,adj2,adj3)
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2+150,					todaysec,60000,8000,13000,40,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+120,					todaysec,60000,8000,13000,40,2)
