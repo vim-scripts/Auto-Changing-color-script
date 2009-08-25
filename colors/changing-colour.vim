@@ -4,7 +4,12 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | TUE 25TH AUG 2009: o 5.9                                                    |
+" | TUE 25TH AUG 2009: o 6.0                                                    |
+" |                    . Had to darken the Identifier around the area where it  |
+" |                      looks bad with the background. I had made this weaker  |
+" |                      but it's too weak. This is fixed and now it's quite    |
+" |                      nice, not too dark - you can see the green- but darker.|
+" |                      5.9                                                    |
 " |                    . My mistake got some bad values into Identifier somehow |
 " |                      this has been fixed sorry. Was getting super-dark      |
 " |                      instead of just turning a slightly darker shade of     |
@@ -694,9 +699,9 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl5((-todaysec+86400)/338/2+64,					todaysec,50000,27000,29000,2)
 :	let adj3=	RGBEl5((-todaysec+86400)/338/2,						todaysec,50000,27000,29000,2)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
-:	let adj1=	RGBEl2((-todaysec+86400)/270/2+35,					todaysec,57000,15500,20000,40,2)
-:	let adj2=	RGBEl2((-todaysec+86400)/270/2+103,					todaysec,57000,15500,20000,40,2)
-:	let adj3=	RGBEl2((-todaysec+86400)/270/2,						todaysec,57000,15500,20000,40,2)
+:	let adj1=	RGBEl2((-todaysec+86400)/270/2+35,					todaysec,57000,15500,20000,50,2)
+:	let adj2=	RGBEl2((-todaysec+86400)/270/2+103,					todaysec,57000,15500,20000,50,2)
+:	let adj3=	RGBEl2((-todaysec+86400)/270/2,						todaysec,57000,15500,20000,50,2)
 :	let adj4=	RGBEl4(adjBG1,								todaysec,57000,15500,000,-5,-7,-5,-3,4,2)
 :	let adj5=	RGBEl4(adjBG1A,								todaysec,57000,15500,000,-5,-7,-5,-3,4,2)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,57000,15500,000,-5,-7,-5,-3,4,2)
