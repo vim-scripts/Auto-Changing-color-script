@@ -4,6 +4,12 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | TUE 25TH AUG 2009: o 5.8                                                    |
+" |                    . Added some colours to the Javascript colour coding     |
+" |                      as it looks very poor otherwise. Constant numbers      |
+" |                      in JavaScript now behave the same as PHP Constants.    |
+" |                      Javascript brackets now behave the same as PHP         |
+" |                      punctuation symbols.                                   |
 " | THU  6TH AUG 2009: o 5.7                                                    |
 " |                    . Found that making Visual a bit milder made it a bit    |
 " |                      difficult to read sometimes so made it a little bit    |
@@ -676,7 +682,8 @@ let highLowLightToggle=0
 :	let adj4=	RGBEl4(adjBG1,								todaysec,46500,15000,13000,-6,-13,-3,-2,5,2)
 :	let adj5=	RGBEl4(adjBG1A,								todaysec,46500,15000,13000,-6,-13,-3,-2,5,2)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,46500,15000,13000,-6,-13,-3,-2,5,2)
-:	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj5,adj6)
+:	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",			adj1,adj1,adj2,adj4,adj5,adj6)
+:	let hC1=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj5,adj6)
 :	let adj1=	RGBEl5((-todaysec+86400)/338/2+110,					todaysec,50000,27000,29000,2)
 :	let adj2=	RGBEl5((-todaysec+86400)/338/2+64,					todaysec,50000,27000,29000,2)
 :	let adj3=	RGBEl5((-todaysec+86400)/338/2,						todaysec,50000,27000,29000,2)
@@ -701,7 +708,8 @@ let highLowLightToggle=0
 :	let adj4=	RGBEl4(adjBG1,								todaysec,60500,14000,19000,-99,-99,-99,-99,0,2)
 :	let adj5=	RGBEl4(adjBG1A,								todaysec,60500,14000,19000,-99,-99,-99,-99,0,2)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,60500,14000,19000,-99,-99,-99,-99,0,2)
-:	let hG=printf("highlight Special guifg=#%02x%02x%02x gui=bold guibg=#%02x%02x%02x",	adj1,adj2,adj3,adj4,adj5,adj6) 
+:	let hG=printf("highlight Special guifg=#%02x%02x%02x gui=bold guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
+:	let hG1=printf("highlight JavaScriptParens guifg=#%02x%02x%02x gui=bold guibg=#%02x%02x%02x",	adj1,adj2,adj3,adj4,adj5,adj6) 
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2+120,					todaysec,47000,3000,14000,64,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+10,					todaysec,47000,3000,14000,64,2)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2+80,					todaysec,47000,3000,14000,64,2)
@@ -788,10 +796,12 @@ let highLowLightToggle=0
 :		execute hB1
 :		execute hB2
 :		execute hC
+:		execute hC1
 :		execute hD
 :		execute hE
 :		execute hF
 :		execute hG
+:		execute hG1
 :		execute hH
 :		execute hI
 :		execute hI1
