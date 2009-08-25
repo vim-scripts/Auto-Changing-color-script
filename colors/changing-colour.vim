@@ -4,7 +4,12 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | TUE 25TH AUG 2009: o 6.0                                                    |
+" | TUE 25TH AUG 2009: o 6.1                                                    |
+" |                    . Realised that the LineNr highlight item was the same   |
+" |                      as Normal and that this looks boring. Have changed     |
+" |                      this now to look more of a pale or dark blue depending |
+" |                      on which looks best relative the background.           |
+" |                    o 6.0                                                    |
 " |                    . Had to darken the Identifier around the area where it  |
 " |                      looks bad with the background. I had made this weaker  |
 " |                      but it's too weak. This is fixed and now it's quite    |
@@ -358,7 +363,7 @@ let g:changefreq=2880
 let g:easeArea=8200
 
 "debug
-"let g:mytime=40000
+let g:mytime=16000
 "let g:myhour=0
 "let g:mysenDar=10000
 "let g:mysenLig=24000
@@ -684,9 +689,9 @@ let highLowLightToggle=0
 :	let hB=printf("highlight Statement guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adjBG5=(todaysec<43200)?todaysec/338/2:todaysec/450+63
 :	let hB1=printf("highlight VertSplit guifg=#%02x%02x%02x",				adjBG3,adjBG3,adjBG5)
-:	let adj1=	RGBEl2((-todaysec+86400)/338/2+110,					todaysec,56000,10000,22000,40,2)
-:	let adj2=	RGBEl2((-todaysec+86400)/338/2+64,					todaysec,56000,10000,22000,40,2)
-:	let adj3=	RGBEl2((-todaysec+86400)/338/2,						todaysec,56000,10000,22000,40,2)
+:	let adj1=	RGBEl2((-todaysec+86400)/338/2+40,					todaysec,44000,8000,20000,100,2)
+:	let adj2=	RGBEl2((-todaysec+86400)/338/2+54,					todaysec,44000,8000,20000,100,2)
+:	let adj3=	RGBEl2((-todaysec+86400)/338/2+80,					todaysec,44000,8000,20000,100,2)
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
 :	let adj1=	RGBEl2((-todaysec+86400)/250/2+0,					todaysec,46500,15000,13000,112,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/250/2+76,					todaysec,46500,15000,13000,112,2)
