@@ -4,6 +4,11 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | WED 26TH AUG 2009: o 6.2                                                    |
+" |                    . For some reason the Identifiers got some bad values,   |
+" |                      not very optimal. Must have had a bad day. This is     |
+" |                      quite nice now , tuned in at light and dark background |
+" |                      ranges. Looks as it should. Sorry about this.          |
 " | TUE 25TH AUG 2009: o 6.1                                                    |
 " |                    . Realised that the LineNr highlight item was the same   |
 " |                      as Normal and that this looks boring. Have changed     |
@@ -19,7 +24,7 @@
 " |                      this has been fixed sorry. Was getting super-dark      |
 " |                      instead of just turning a slightly darker shade of     |
 " |                      green where the visibility gets bad with the           |
-" |                      background.
+" |                      background.                                            |
 " |                      5.8                                                    |
 " |                    . Added some colours to the Javascript colour coding     |
 " |                      as it looks very poor otherwise. Constant numbers      |
@@ -363,7 +368,7 @@ let g:changefreq=2880
 let g:easeArea=8200
 
 "debug
-let g:mytime=16000
+"let g:mytime=16000
 "let g:myhour=0
 "let g:mysenDar=10000
 "let g:mysenLig=24000
@@ -704,12 +709,12 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl5((-todaysec+86400)/338/2+64,					todaysec,50000,27000,29000,2)
 :	let adj3=	RGBEl5((-todaysec+86400)/338/2,						todaysec,50000,27000,29000,2)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
-:	let adj1=	RGBEl2((-todaysec+86400)/270/2+35,					todaysec,57000,15500,20000,50,2)
-:	let adj2=	RGBEl2((-todaysec+86400)/270/2+103,					todaysec,57000,15500,20000,50,2)
-:	let adj3=	RGBEl2((-todaysec+86400)/270/2,						todaysec,57000,15500,20000,50,2)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,57000,15500,000,-5,-7,-5,-3,4,2)
-:	let adj5=	RGBEl4(adjBG1A,								todaysec,57000,15500,000,-5,-7,-5,-3,4,2)
-:	let adj6=	RGBEl4(adjBG2,								todaysec,57000,15500,000,-5,-7,-5,-3,4,2)
+:	let adj1=	RGBEl2((-todaysec+86400)/270/2+35,					todaysec,57000,9000,20000,70,2)
+:	let adj2=	RGBEl2((-todaysec+86400)/270/2+103,					todaysec,57000,9000,20000,70,2)
+:	let adj3=	RGBEl2((-todaysec+86400)/270/2,						todaysec,57000,9000,20000,70,2)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,57000,9000,20000,-5,-18,-5,-3,4,2)
+:	let adj5=	RGBEl4(adjBG1A,								todaysec,57000,9000,20000,-5,-18,-5,-3,4,2)
+:	let adj6=	RGBEl4(adjBG2,								todaysec,57000,9000,20000,-5,-18,-5,-3,4,2)
 :	let hE=printf("highlight Identifier guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2+100,					todaysec,43000,5000,16000,39,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,43000,5000,16000,39,2)
@@ -836,6 +841,9 @@ let highLowLightToggle=0
 :		execute hS
 :	endif
 :	redraw
+:	if exists("g:mytime") || exists("g:myhour") || exists("g:mysenDar") || exists("g:mysenLig") || exists("g:myadjust")
+:		echo "WARNING: debug is *on*"
+:	endif
 :endfunction       
 
 " +------------------------------------------------------------------------------+
