@@ -1,13 +1,20 @@
+
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | WED 26TH AUG 2009: o 6.2                                                    |
+" | WED 26TH AUG 2009: o 6.3                                                    |
+" |                    . Removed the jarring black vs. white effect that the    |
+" |                      Normal identifier had, now this simply brightens a bit |
+" |                      when the background and it start to clash. It now looks|
+" |                      reasonably pleasing to the eye as time passes, rather  |
+" |                      than abruptly change from black->white and vice versa. |
+" |                      6.2                                                    |
 " |                    . For some reason the Identifiers got some bad values,   |
 " |                      not very optimal. Must have had a bad day. This is     |
-" |                      quite nice now , tuned in at light and dark background |
+" |                      quite nice, tuned in at light and dark background      |
 " |                      ranges. Looks as it should. Sorry about this.          |
 " | TUE 25TH AUG 2009: o 6.1                                                    |
 " |                    . Realised that the LineNr highlight item was the same   |
@@ -430,6 +437,43 @@ let g:easeArea=8200
 :endfunction
 
 " +------------------------------------------------------------------------------+
+" | Main RGBEl for Normal (like RGBEl2 but brightens, not darkens - Normal is    |
+" | a bit trickier because it is also where the general background is set        |
+" +------------------------------------------------------------------------------+
+:function RGBEl2a(RGBEl,actBgr,dangerBgr,senDar,senLig,debug)
+:	if a:debug==1
+:		return a:RGBEl
+:	endif
+:	if exists("g:mysenDar") && a:debug!=2
+:		let senDar=g:mysenDar
+:	else
+:		let senDar=a:senDar
+:	endif
+:	if exists("g:mysenLig") && a:debug!=2
+:		let senLig=g:mysenLig
+:	else
+:		let senLig=a:senLig
+:	endif
+:	if exists("g:mydangerBgr") && a:debug!=2
+:		let dangerBgr=g:mydangerBgr
+:	else
+:		let dangerBgr=a:dangerBgr
+:	endif
+:	if a:actBgr>=dangerBgr-senDar && a:actBgr<=dangerBgr+senLig
+:		let adjustedValue=a:RGBEl+110
+:	else
+:		let adjustedValue=a:RGBEl
+:	endif
+:	if adjustedValue<0
+:		let adjustedValue=0
+:	endif
+:	if adjustedValue>255
+:		let adjustedValue=255
+:	endif
+:	return adjustedValue
+:endfunction
+
+" +------------------------------------------------------------------------------+
 " | RGBEl function for cursor to work out amount to offset RGB component to stop |
 " | it from clashing with the background colour.                                 |
 " | Return value is modified or otherwise value (not modified if no clash).      |
@@ -705,9 +749,9 @@ let highLowLightToggle=0
 :	let adj6=	RGBEl4(adjBG2,								todaysec,46500,15000,13000,-6,-13,-3,-2,5,2)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",			adj1,adj1,adj2,adj4,adj5,adj6)
 :	let hC1=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj5,adj6)
-:	let adj1=	RGBEl5((-todaysec+86400)/338/2+110,					todaysec,50000,27000,29000,2)
-:	let adj2=	RGBEl5((-todaysec+86400)/338/2+64,					todaysec,50000,27000,29000,2)
-:	let adj3=	RGBEl5((-todaysec+86400)/338/2,						todaysec,50000,27000,29000,2)
+:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,50000,10500,12000,2)
+:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,50000,10500,12000,2)
+:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,50000,10500,12000,2)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
 :	let adj1=	RGBEl2((-todaysec+86400)/270/2+35,					todaysec,57000,9000,20000,70,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/270/2+103,					todaysec,57000,9000,20000,70,2)
