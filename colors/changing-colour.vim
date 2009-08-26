@@ -363,7 +363,7 @@ let g:changefreq=2880
 let g:easeArea=8200
 
 "debug
-let g:mytime=16000
+"let g:mytime=16000
 "let g:myhour=0
 "let g:mysenDar=10000
 "let g:mysenLig=24000
