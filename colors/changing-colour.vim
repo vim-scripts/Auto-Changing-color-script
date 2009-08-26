@@ -1,11 +1,20 @@
-
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | WED 26TH AUG 2009: o 6.3                                                    |
+" | WED 26TH AUG 2009: o 6.4                                                    |
+" |                    . The same as before but made the brightening work a     |
+" |                      bit more 'blended-in' with the background, so as the   |
+" |                      background lightens the Normal element kicks-in a bit  |
+" |                      stronger with its own lightening so that it doesn't    |
+" |                      get 'out-lightened' by the lighter background, while   |
+" |                      at the same time Normal doesn't lighten too strongly   |
+" |                      at darker background ranges to compensate for the fact |
+" |                      that contrast is better anyway. Now Normal blends in   |
+" |                      very nicely throughout all background lightnesses.     |
+" |                    o 6.3                                                    |
 " |                    . Removed the jarring black vs. white effect that the    |
 " |                      Normal identifier had, now this simply brightens a bit |
 " |                      when the background and it start to clash. It now looks|
@@ -440,7 +449,7 @@ let g:easeArea=8200
 " | Main RGBEl for Normal (like RGBEl2 but brightens, not darkens - Normal is    |
 " | a bit trickier because it is also where the general background is set        |
 " +------------------------------------------------------------------------------+
-:function RGBEl2a(RGBEl,actBgr,dangerBgr,senDar,senLig,debug)
+:function RGBEl2a(RGBEl,actBgr,dangerBgr,senDar,senLig,loadj,hiadj,debug)
 :	if a:debug==1
 :		return a:RGBEl
 :	endif
@@ -460,7 +469,15 @@ let g:easeArea=8200
 :		let dangerBgr=a:dangerBgr
 :	endif
 :	if a:actBgr>=dangerBgr-senDar && a:actBgr<=dangerBgr+senLig
-:		let adjustedValue=a:RGBEl+110
+:		let        progressFrom=dangerBgr-senDar
+:		let        progressLoHi=a:actBgr-progressFrom
+:		let            diffLoHi=(dangerBgr+senLig)-(dangerBgr-senDar)
+:		let     progressPerThou=progressLoHi/(diffLoHi/1000)
+:		let     ourinterestDiff=a:hiadj-a:loadj
+:		let     weareScaleRatio=1000/ourinterestDiff
+:		let            interest=progressPerThou/weareScaleRatio
+:		let           interest2=interest+a:loadj
+:		let       adjustedValue=a:RGBEl+interest2
 :	else
 :		let adjustedValue=a:RGBEl
 :	endif
@@ -749,9 +766,9 @@ let highLowLightToggle=0
 :	let adj6=	RGBEl4(adjBG2,								todaysec,46500,15000,13000,-6,-13,-3,-2,5,2)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",			adj1,adj1,adj2,adj4,adj5,adj6)
 :	let hC1=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj5,adj6)
-:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,50000,10500,12000,2)
-:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,50000,10500,12000,2)
-:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,50000,10500,12000,2)
+:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,50000,15500,13000,40,110,2)
+:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,50000,15500,13000,40,110,2)
+:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,50000,15500,13000,40,110,2)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
 :	let adj1=	RGBEl2((-todaysec+86400)/270/2+35,					todaysec,57000,9000,20000,70,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/270/2+103,					todaysec,57000,9000,20000,70,2)
