@@ -4,7 +4,15 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | THU 27TH AUG 2009: o 6.5                                                    |
+" | THU 27TH AUG 2009: o 6.6                                                    |
+" |                    . A bit of icing on the cake really, made the cursor     |
+" |                      turn a nice primary red at the highest background      |
+" |                      lightness. It's better than before as before it just   |
+" |                      turned a darker yellow and this was dull and           |
+" |                      unimaginative and didn't out. Now with the red         |
+" |                      the cursor looks nice and strong at a lighter          |
+" |                      background brightness.                                 |
+" |                    o 6.5                                                    |
 " |                    . Fined-tuned the visibility of Normal at lighter back-  |
 " |                      grounds.                                               |
 " | WED 26TH AUG 2009: o 6.4                                                    |
@@ -498,13 +506,13 @@ let g:easeArea=8200
 " | it from clashing with the background colour.                                 |
 " | Return value is modified or otherwise value (not modified if no clash).      |
 " +------------------------------------------------------------------------------+
-:function RGBEl3(RGBEl,actBgr,dangerBgr)
+:function RGBEl3(RGBEl,actBgr,dangerBgr,adj)
 :	let diff=a:actBgr-a:dangerBgr
 :	if diff<0
 :		let diff=-diff
 :	endif
 :	if diff<8000
-:		let adjustedValue=a:RGBEl-128
+:		let adjustedValue=a:RGBEl-a:adj
 :		if adjustedValue<0
 :			let adjustedValue=0
 :		endif
@@ -839,10 +847,11 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+120,					todaysec,60000,8000,13000,40,2)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,60000,8000,13000,40,2)
 :	let hO=printf("highlight Type guifg=#%02x%02x%02x",					adj1,adj2,adj3)
-:	let adj1=RGBEl3(255,todaysec,85000)
-:	let adj2=RGBEl3(0,todaysec,85000)
-:	let hP=printf("highlight Cursor guibg=#%02x%02x%02x",					adj1,adj1,adj2)
-:	let hP1=printf("highlight MatchParen guibg=#%02x%02x%02x",				adj1,adj1,adj2)
+:	let adj1=RGBEl3(255,									todaysec,85000,0)
+:	let adj2=RGBEl3(255,									todaysec,85000,255)
+:	let adj3=RGBEl3(0,									todaysec,85000,0)
+:	let hP=printf("highlight Cursor guibg=#%02x%02x%02x",					adj1,adj2,adj3)
+:	let hP1=printf("highlight MatchParen guibg=#%02x%02x%02x",				adj1,adj2,adj3)
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2+100,					todaysec,44000,10000,26000,40,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,44000,10000,26000,40,2)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2+180,					todaysec,44000,10000,26000,40,2)
