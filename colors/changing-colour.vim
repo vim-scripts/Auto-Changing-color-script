@@ -4,6 +4,19 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | FRI 28TH AUG 2009: o 6.7                                                    |
+" |                      Made a fix so that the background now lightens         |
+" |                      and darkens, lightens and darkens, etc.. using a       |
+" |                      six-color rotation  different pastel shades: light-    |
+" |                      yellow, light-green, light-red, light-blue, light cyan,|
+" |                      and light magenta. This means that the background now  |
+" |                      lightens-up using a certain shade, darkens down in     |
+" |                      another shade, then lightens-up in yet another, and so |
+" |                      on. for a total of six different colours over 3 hours. |
+" |                      I've tried to make it so that the background simulates |
+" |                      the way the real sky colours at morning time and then  |
+" |                      colours at evening time and then again at morning time,|
+" |                      and so on.                                             |
 " | THU 27TH AUG 2009: o 6.6                                                    |
 " |                    . A bit of icing on the cake really, made the cursor     |
 " |                      turn a nice primary red at the highest background      |
@@ -706,29 +719,56 @@ let highLowLightToggle=0
 :	endif
 : 	let nightorday=a:nightorday
 :	if nightorday==1
-:		let todaysec=todaysec<43200?(-todaysec*2+86399):((todaysec-43200)*2)
+:		if todaysec<43200
+:			let todaysec=-todaysec*2+86399
+:			let dusk=0
+:		else
+:			let todaysec=(todaysec-43200)*2
+:			let dusk=1
+:		endif
 :	else
-:		let todaysec=todaysec<43200?(todaysec*2):(-todaysec*2+172799)
+:		if todaysec<43200
+:			let todaysec=todaysec*2
+:			let dusk=0
+:		else
+:			let todaysec=-todaysec*2+172799
+:			let dusk=1
+:		endif
 :	endif
 :	if exists("g:myhour")
 :		let myhour=g:myhour
 :	else
 :		let myhour=(localtime()/(60*60))%3
 :	endif
-:	if myhour==0
+:	if myhour==0 && dusk==0
 :		let adjBG1=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG1A=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG2=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :	endif
-:	if myhour==1
+:	if myhour==0 && dusk==1
 :		let adjBG1=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :		let adjBG1A=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG2=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :	endif
-:	if myhour==2
+:	if myhour==1 && dusk==0
 :		let adjBG1=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG1A=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :		let adjBG2=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
+:	endif
+:	if myhour==1 && dusk==1
+:		let adjBG1=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
+:		let adjBG1A=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
+:		let adjBG2=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
+:	endif
+:	if myhour==2 && dusk==0
+:		let adjBG1=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
+:		let adjBG1A=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
+:		let adjBG2=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
+:	endif
+:	if myhour==2 && dusk==1
+:		let adjBG1=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
+:		let adjBG1A=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
+:		let adjBG2=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :	endif
 :	let adjBG3=(adjBG1-32>=32)?adjBG1-32:32
 :	let adjBG4=(adjBG1-32>=32)?adjBG1-32:32
