@@ -4,7 +4,14 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | FRI 28TH AUG 2009: o 6.7                                                    |
+" | FRI 28TH AUG 2009: o 6.8                                                    |
+" |                      Used a similar technique to correct a not-quite-conti  |
+" |                      uous StatusLine and StatusLineNC and for the Normal.   |
+" |                      Before StatusLine and StatusLineNC would suddenly      |
+" |                      flip into black or white when visibility got poor to   |
+" |                      avoid the visibility problem but this now works the    |
+" |                      same way as Normal was made to in revision 6.3.        |
+" |                    o 6.7                                                    |
 " |                      Made a fix so that the background now lightens         |
 " |                      and darkens, lightens and darkens, etc.. using a       |
 " |                      six-color rotation  different pastel shades: light-    |
@@ -719,7 +726,7 @@ let highLowLightToggle=0
 :	endif
 : 	let nightorday=a:nightorday
 :	if nightorday==1
-:		if todaysec<43200
+:		if todaysec<43199
 :			let todaysec=-todaysec*2+86399
 :			let dusk=0
 :		else
@@ -727,7 +734,7 @@ let highLowLightToggle=0
 :			let dusk=1
 :		endif
 :	else
-:		if todaysec<43200
+:		if todaysec<43199
 :			let todaysec=todaysec*2
 :			let dusk=0
 :		else
@@ -862,16 +869,16 @@ let highLowLightToggle=0
 :	let adj1=	RGBEl6(todaysec/338+70							)
 :	let adj2=	RGBEl6(todaysec/338+30							)
 :	let adj3=	RGBEl6(todaysec/338-100							)
-:	let adj4=	RGBEl5((-todaysec+86400)/338/2+70,					todaysec,35000,13000,14000,2)
-:	let adj5=	RGBEl5((-todaysec+86400)/338/2+60,					todaysec,35000,13000,14000,2)
-:	let adj6=	RGBEl5((-todaysec+86400)/338/2+0,					todaysec,35000,13000,14000,2)
+:	let adj4=	RGBEl2a((-todaysec+86400)/338/2+70,					todaysec,35000,15000,14000,60,120,2)
+:	let adj5=	RGBEl2a((-todaysec+86400)/338/2+60,					todaysec,35000,15000,14000,60,120,2)
+:	let adj6=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,35000,15000,14000,60,120,2)
 :	let hJ=printf("highlight StatusLine guibg=#%02x%02x%02x guifg=#%02x%02x%02x gui=bold",	adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adj1=	RGBEl6(todaysec/338+70							)
 :	let adj2=	RGBEl6(todaysec/338+60							)
 :	let adj3=	RGBEl6(todaysec/338-100							)
-:	let adj4=	RGBEl5((-todaysec+86400)/338/2+70,					todaysec,19000,10000,14000,2)
-:	let adj5=	RGBEl5((-todaysec+86400)/338/2+0,					todaysec,19000,10000,14000,2)
-:	let adj6=	RGBEl5((-todaysec+86400)/338/2+0,					todaysec,19000,10000,14000,2)
+:	let adj4=	RGBEl2a((-todaysec+86400)/338/2+70,					todaysec,20000,10000,14000,40,120,2)
+:	let adj5=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,20000,10000,14000,40,120,2)
+:	let adj6=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,20000,10000,14000,40,120,2)
 :	let hK=printf("highlight StatusLineNC guibg=#%02x%02x%02x guifg=#%02x%02x%02x gui=bold",adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2,						todaysec,37000,27000,20000,40,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+20,					todaysec,37000,27000,20000,40,2)
