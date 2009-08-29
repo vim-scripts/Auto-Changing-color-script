@@ -4,7 +4,17 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | SAT 29TH AUG 2009: o 6.9                                                    |
+" | SAT 29TH AUG 2009: o 7.0                                                    |
+" |                      Made the script so that when you go into Insert mode   |
+" |                      the background inverts using the 'next' colour in      |
+" |                      the 6-colour half-hour colour rotation. That way       |
+" |                      whenever you go into Insert mode the background will   |
+" |                      turn into the background in 30 minutes' time in Normal |
+" |                      mode giving you a quick 'peek' into the next half-hour.|
+" |                      Previously the background would change just into       |
+" |                      whatever the colour was on the other half hour of the  |
+" |                      current hour.                                          |
+" |                    o 6.9                                                    |
 " |                      Corrected a slight visibility glitch in Special.       |
 " | FRI 28TH AUG 2009: o 6.8                                                    |
 " |                      Used a similar technique to correct a not-quite-conti  |
@@ -415,7 +425,7 @@ let g:changefreq=2880
 " | is, with 7200 being around 2 minutes above and below 'danger' area.          |
 " +------------------------------------------------------------------------------+
 let g:easeArea=8200
-
+:
 "debug
 "let g:mytime=16000
 "let g:myhour=0
@@ -749,32 +759,32 @@ let highLowLightToggle=0
 :	else
 :		let myhour=(localtime()/(60*60))%3
 :	endif
-:	if myhour==0 && dusk==0
+:	if (myhour==0 && dusk==0 && nightorday==0) || (myhour==2 && dusk==1 && nightorday==1)
 :		let adjBG1=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG1A=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG2=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :	endif
-:	if myhour==0 && dusk==1
+:	if (myhour==0 && dusk==1 && nightorday==0) || (myhour==0 && dusk==0 && nightorday==1)
 :		let adjBG1=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :		let adjBG1A=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG2=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :	endif
-:	if myhour==1 && dusk==0
+:	if (myhour==1 && dusk==0 && nightorday==0) || (myhour==0 && dusk==1 && nightorday==1)
 :		let adjBG1=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG1A=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :		let adjBG2=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :	endif
-:	if myhour==1 && dusk==1
+:	if (myhour==1 && dusk==1 && nightorday==0) || (myhour==1 && dusk==0 && nightorday==1)
 :		let adjBG1=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :		let adjBG1A=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :		let adjBG2=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :	endif
-:	if myhour==2 && dusk==0
+:	if (myhour==2 && dusk==0 && nightorday==0) || (myhour==1 && dusk==1 && nightorday==1)
 :		let adjBG1=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :		let adjBG1A=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG2=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :	endif
-:	if myhour==2 && dusk==1
+:	if (myhour==2 && dusk==1 && nightorday==0) || (myhour==2 && dusk==0 && nightorday==1)
 :		let adjBG1=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG1A=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :		let adjBG2=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
