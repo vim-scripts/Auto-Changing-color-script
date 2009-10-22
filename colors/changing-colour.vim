@@ -4,7 +4,11 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | THU 22ND OCT 2009: o 7.1                                                    |
+" | THU 22ND OCT 2009: o 7.2                                                    |
+" |                      Removed a number that was being output to the status   |
+" |                      line by the new code to cause the script to change     |
+" |                      colour wihtout waiting for user intervention.          |
+" |                      7.1                                                    |
 " |                      Added some lines that enable the script to constantly  |
 " |                      change colour, not wait until the text is changed or   |
 " |                      the user moves the cursor. That way it really acts like|
@@ -451,7 +455,7 @@ let g:easeArea=8200
 " +------------------------------------------------------------------------------+
 let moveflag = 0
 let k = 1
-au CursorHold * echo k | let k+=1 | let moveflag=1 | exe "normal l"
+au CursorHold * let k+=1 | let moveflag=1 | exe "normal l"
 au CursorMoved * if moveflag==1 | exe "normal h" | let moveflag=0 | endif
 set noswapfile
 set ut=3000
