@@ -4,6 +4,14 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | THU 22ND OCT 2009: o 7.1                                                    |
+" |                      Added some lines that enable the script to constantly  |
+" |                      change colour, not wait until the text is changed or   |
+" |                      the user moves the cursor. That way it really acts like|
+" |                      it's supposed to, updating the colours subtly as the   |
+" |                      minutes go by every minute, keeping it interesting,    |
+" |                      reducing eye-strain and informaing you of time going   |
+" |                      by.                                                    | 
 " | SAT 29TH AUG 2009: o 7.0                                                    |
 " |                      Made the script so that when you go into Insert mode   |
 " |                      the background inverts using the 'next' colour in      |
@@ -432,6 +440,21 @@ let g:easeArea=8200
 "let g:mysenDar=10000
 "let g:mysenLig=24000
 "let g:myadjust=64
+
+
+" +------------------------------------------------------------------------------+
+" | The following code causes VIM to think the cursor has moved continuously this|
+" | in turn toggles the moving part of the changing colour script. Without this  |
+" | code the changing colour script only changes colour when you actually move   |
+" | or enter text.                                                               |
+" | Courtesy of: http://vim.wikia.com/wiki/Timer_to_execute_commands_periodically|
+" +------------------------------------------------------------------------------+
+let moveflag = 0
+let k = 1
+au CursorHold * echo k | let k+=1 | let moveflag=1 | exe "normal l"
+au CursorMoved * if moveflag==1 | exe "normal h" | let moveflag=0 | endif
+set noswapfile
+set ut=3000
 
 " +------------------------------------------------------------------------------+
 " | Main RGBEl function, used to work out amount to offset RGB value by to avoid |
