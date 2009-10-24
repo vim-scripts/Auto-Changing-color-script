@@ -4,7 +4,16 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | SAT 24TH OCT 2009: o 7.3                                                    |
+" | SAT 24TH OCT 2009: o 7.4                                                    |
+" |                      Went carefuly over Statement as this was changing      |
+" |                      too agressively over the difficult visibility patch.   |
+" |                      Originally the visibility-tweaking functions were not  |
+" |                      as detailed so this reflected the limited options      |
+" |                      there were then. Now Statement fully uses 'ramped-     |
+" |                      brighten-ups' that as this term suggests brighten-up   |
+" |                      backgrounds to correct visibility problems in a smooth |
+" |                      (not abrupt) manner                                    |
+" |                      7.3                                                    |
 " |                      Tried my best to tune-up the Normal syntax element     |
 " |                      which is unique because it's background is the global  |
 " |                      background. Other elements can have their backgrounds  |
@@ -858,12 +867,12 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2(adjBG1A,								todaysec,86399,4000,1,40,2)
 :	let adj3=	RGBEl2(adjBG2+30,							todaysec,86399,4000,1,40,2)
 :	let hA9=printf("highlight DiffText guibg=#%02x%02x%02x",				adj1,adj2,adj3)
-:	let adj1	=RGBEl2((-todaysec+86400)/338/4+160,					todaysec,50000,8000,16000,100,2)
-:	let adj2	=RGBEl2((-todaysec+86400)/338/4+76,					todaysec,50000,8000,16000,100,2)
-:	let adj3	=RGBEl2((-todaysec+86400)/338/4+23,					todaysec,50000,8000,16000,100,2)
-:	let adj4	=RGBEl4(adjBG1,								todaysec,50000,8000,16000,-5,-15,3,1,-5,2)
-:	let adj5	=RGBEl4(adjBG1A,							todaysec,50000,8000,16000,-5,-15,3,1,-5,2)
-:	let adj6	=RGBEl4(adjBG2,								todaysec,50000,8000,16000,-5,-15,3,1,-5,2)
+:	let adj1	=RGBEl2((-todaysec+86400)/338/4+160,					todaysec,50000,4000,5000,-85,2)
+:	let adj2	=RGBEl2((-todaysec+86400)/338/4+76,					todaysec,50000,4000,5000,-85,2)
+:	let adj3	=RGBEl2((-todaysec+86400)/338/4+23,					todaysec,50000,4000,5000,-85,2)
+:	let adj4	=RGBEl4(adjBG1,								todaysec,50000,4000,5000,-5,-15,6,1,3,2)
+:	let adj5	=RGBEl4(adjBG1A,							todaysec,50000,4000,5000,-5,-15,6,1,3,2)
+:	let adj6	=RGBEl4(adjBG2,								todaysec,50000,4000,5000,-5,-15,6,1,3,2)
 :	let hB=printf("highlight Statement guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adjBG5=(todaysec<43200)?todaysec/338/2:todaysec/450+63
 :	let hB1=printf("highlight VertSplit guifg=#%02x%02x%02x",				adjBG3,adjBG3,adjBG5)
@@ -1049,4 +1058,3 @@ au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
-
