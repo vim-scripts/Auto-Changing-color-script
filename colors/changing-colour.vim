@@ -4,6 +4,21 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | SAT 24TH OCT 2009: o 7.3                                                    |
+" |                      Tried my best to tune-up the Normal syntax element     |
+" |                      which is unique because it's background is the global  |
+" |                      background. Other elements can have their backgrounds  |
+" |                      "fixed-up" using various tricks to correct their       |
+" |                      visibility but Normal can't. Typically Normal is the   |
+" |                      keywords and most of the variable names in Javascript. |
+" |                      Other languages rely on it to a lesser degree, but     |
+" |                      still can be quite heavily dependent on it. The better |
+" |                      supported languages (like PHP) rely on it a lot less.  |
+" |                      Anyway, if you use Changing Colour script now Normal   |
+" |                      doesn't stand-out glaring too much but while still     |
+" |                      remaining visible at both bright and dark backgrounds. |
+" |                      It's quite a subtle compromise between glare and       |
+" |                      visibility this one and i hope i got it right.         |
 " | THU 22ND OCT 2009: o 7.2                                                    |
 " |                      Removed a number that was being output to the status   |
 " |                      line by the new code to cause the script to change     |
@@ -863,9 +878,9 @@ let highLowLightToggle=0
 :	let adj6=	RGBEl4(adjBG2,								todaysec,46500,15000,13000,-6,-13,-3,-2,5,2)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",			adj1,adj1,adj2,adj4,adj5,adj6)
 :	let hC1=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj5,adj6)
-:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,50000,15500,14000,40,135,2)
-:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,50000,15500,14000,40,135,2)
-:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,50000,15500,14000,40,135,2)
+:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,50000,15500,12000,45,116,2)
+:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,50000,15500,12000,45,116,2)
+:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,50000,15500,12000,45,116,2)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
 :	let adj1=	RGBEl2((-todaysec+86400)/270/2+35,					todaysec,57000,9000,20000,70,2)
 :	let adj2=	RGBEl2((-todaysec+86400)/270/2+103,					todaysec,57000,9000,20000,70,2)
