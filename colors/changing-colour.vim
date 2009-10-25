@@ -4,6 +4,10 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | SUN 25TH OCT 2009: o 7.5                                                    |
+" |                      Improved the visibility of Statement a bit more. It    |
+" |                      was still looking a bit blurry at the lighter back-    |
+" |                      ground. Anyway, it looks very pretty now.              |
 " | SAT 24TH OCT 2009: o 7.4                                                    |
 " |                      Went carefuly over Statement as this was changing      |
 " |                      too agressively over the difficult visibility patch.   |
@@ -870,9 +874,9 @@ let highLowLightToggle=0
 :	let adj1	=RGBEl2((-todaysec+86400)/338/4+160,					todaysec,50000,4000,5000,-85,2)
 :	let adj2	=RGBEl2((-todaysec+86400)/338/4+76,					todaysec,50000,4000,5000,-85,2)
 :	let adj3	=RGBEl2((-todaysec+86400)/338/4+23,					todaysec,50000,4000,5000,-85,2)
-:	let adj4	=RGBEl4(adjBG1,								todaysec,50000,4000,5000,-5,-15,6,1,3,2)
-:	let adj5	=RGBEl4(adjBG1A,							todaysec,50000,4000,5000,-5,-15,6,1,3,2)
-:	let adj6	=RGBEl4(adjBG2,								todaysec,50000,4000,5000,-5,-15,6,1,3,2)
+:	let adj4	=RGBEl4(adjBG1,								todaysec,50000,4000,5000,-5,-15,8,1,3,2)
+:	let adj5	=RGBEl4(adjBG1A,							todaysec,50000,4000,5000,-5,-15,8,1,3,2)
+:	let adj6	=RGBEl4(adjBG2,								todaysec,50000,4000,5000,-5,-15,8,1,3,2)
 :	let hB=printf("highlight Statement guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adjBG5=(todaysec<43200)?todaysec/338/2:todaysec/450+63
 :	let hB1=printf("highlight VertSplit guifg=#%02x%02x%02x",				adjBG3,adjBG3,adjBG5)
@@ -1058,3 +1062,4 @@ au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
+
