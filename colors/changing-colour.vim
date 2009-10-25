@@ -4,7 +4,13 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | SUN 25TH OCT 2009: o 7.5                                                    |
+" | SUN 25TH OCT 2009: o 7.6                                                    |
+" |                      Spotted the visibility of Visual (the colour Vim uses  |
+" |                      to select text) at darkest background light nearly     |
+" |                      invisible - fixed that. Further refined the boundary of|
+" |                      Statement at light end of background spectrum. Not only|
+" |                      is it pretty now but works well.                       |
+" |                      7.5                                                    |
 " |                      Improved the visibility of Statement a bit more. It    |
 " |                      was still looking a bit blurry at the lighter back-    |
 " |                      ground. Anyway, it looks very pretty now.              |
@@ -874,9 +880,9 @@ let highLowLightToggle=0
 :	let adj1	=RGBEl2((-todaysec+86400)/338/4+160,					todaysec,50000,4000,5000,-85,2)
 :	let adj2	=RGBEl2((-todaysec+86400)/338/4+76,					todaysec,50000,4000,5000,-85,2)
 :	let adj3	=RGBEl2((-todaysec+86400)/338/4+23,					todaysec,50000,4000,5000,-85,2)
-:	let adj4	=RGBEl4(adjBG1,								todaysec,50000,4000,5000,-5,-15,8,1,3,2)
-:	let adj5	=RGBEl4(adjBG1A,							todaysec,50000,4000,5000,-5,-15,8,1,3,2)
-:	let adj6	=RGBEl4(adjBG2,								todaysec,50000,4000,5000,-5,-15,8,1,3,2)
+:	let adj4	=RGBEl4(adjBG1,								todaysec,50000,4000,5000,-5,-15,10,2,3,2)
+:	let adj5	=RGBEl4(adjBG1A,							todaysec,50000,4000,5000,-5,-15,10,2,3,2)
+:	let adj6	=RGBEl4(adjBG2,								todaysec,50000,4000,5000,-5,-15,10,2,3,2)
 :	let hB=printf("highlight Statement guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adjBG5=(todaysec<43200)?todaysec/338/2:todaysec/450+63
 :	let hB1=printf("highlight VertSplit guifg=#%02x%02x%02x",				adjBG3,adjBG3,adjBG5)
@@ -953,8 +959,8 @@ let highLowLightToggle=0
 :	let adjBG6=(adjBG5-32>=0)?adjBG5-32:0
 :	let hM=printf("highlight PMenu guibg=#%02x%02x%02x",					adjBG6,adjBG6,adjBG6)
 :	let hN="highlight PMenuSel guibg=Yellow guifg=Blue"
-:	let adj1=	RGBEl2(adjBG1+30,							todaysec,86399,4000,1,40,2)
-:	let adj2=	RGBEl2(adjBG1A+10,							todaysec,86399,4000,1,40,2)
+:	let adj1=	RGBEl2(adjBG1+40,							todaysec,86399,4000,1,40,2)
+:	let adj2=	RGBEl2(adjBG1A+15,							todaysec,86399,4000,1,40,2)
 :	let adj3=	RGBEl2(adjBG2+10,							todaysec,86399,4000,1,40,2)
 :	let hL=printf("highlight Visual guibg=#%02x%02x%02x",					adj1,adj2,adj3)
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2+150,					todaysec,60000,8000,13000,40,2)
