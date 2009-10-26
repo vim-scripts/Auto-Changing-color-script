@@ -4,6 +4,16 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | MON 26TH OCT 2009: o 7.9                                                    |
+" |                      Still having difficulty with the Normal. It's a fine   |
+" |                      compromise between Glare and visibility.  Just         |
+" |                      brightened Normal up an infinetessimal amount just to  |
+" |                      improve that legibility whilst hopefully keeping the   |
+" |                      illusion of smoothness smooth. Sorry to keep changing  |
+" |                      things but it's a trial an error process. I will get it|
+" |                      right one day, if necessary I may have to re-write the |
+" |                      custom function to handle the specific visibility      |
+" |                      issues of the Normal element.                          |
 " | SUN 25TH OCT 2009: o 7.8                                                    |
 " |                      Made the Normal look still a bit less glary. Still     |
 " |                      struggling with this because there is no comfort zone, |
@@ -1080,4 +1090,3 @@ au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
-
