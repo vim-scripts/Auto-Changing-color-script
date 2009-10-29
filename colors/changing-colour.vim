@@ -4,6 +4,15 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | THU 29TH OCT 2009: o 8.0                                                    |
+" |                      Fixed a slight glitch with the 'timer' that made Vim   |
+" |                      indiscriminately move the cursor right and then left   |
+" |                      which occasionally (depending on where your cursor was)|
+" |                      made the screen either scroll or flash nastily,        |
+" |                      depending on what you had set 'whichwrap' to. This     |
+" |                      has now been fixed. The 'timer' hack is a bit more     |
+" |                      intelligent. It now moves only where nothing would     |
+" |                      change too drastically or cause a beep/flashed window. |
 " | MON 26TH OCT 2009: o 7.9                                                    |
 " |                      Still having difficulty with the Normal. It's a fine   |
 " |                      compromise between Glare and visibility.  Just         |
@@ -511,8 +520,8 @@ let g:easeArea=8200
 " +------------------------------------------------------------------------------+
 let moveflag = 0
 let k = 1
-au CursorHold * let k+=1 | let moveflag=1 | exe "normal l"
-au CursorMoved * if moveflag==1 | exe "normal h" | let moveflag=0 | endif
+au CursorHold * let k+=1 | let moveflag=1 | let middleline=(line("w0")+line("w$"))/2 | if line(".")<=middleline | exe "normal j" | else | exe "normal k" | endif
+au CursorMoved * if moveflag==1 | let middleline=(line("w0")+line("w$"))/2 | if line(".")<=middleline | exe "normal k" | else | exe "normal j" | endif | let moveflag=0 | endif
 set noswapfile
 set ut=3000
 
@@ -1090,3 +1099,4 @@ au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
+
