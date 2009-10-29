@@ -4,7 +4,10 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | THU 29TH OCT 2009: o 8.1                                                    |
+" | THU 29TH OCT 2009: o 8.2                                                    |
+" |                      Removed an unecessary variable 'k' that was in the     |
+" |                      'timer' routine.                                       |
+" |                      8.1                                                    |
 " |                      Corrected a slight glitch with the improved 'timer'    |
 " |                      routine that happened if the cursor was bang in the    |
 " |                      middle of the screen or the line above it. It got      |
