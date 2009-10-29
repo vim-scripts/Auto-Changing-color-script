@@ -4,7 +4,18 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | THU 29TH OCT 2009: o 8.0                                                    |
+" | THU 29TH OCT 2009: o 8.1                                                    |
+" |                      Corrected a slight glitch with the improved 'timer'    |
+" |                      routine that happened if the cursor was bang in the    |
+" |                      middle of the screen or the line above it. It got      |
+" |                      confused because what had been true previously had     |
+" |                      just changed. Now fixed. Did this by adding special    |
+" |                      cases of where to move 'safely' if the cursor is a)    |
+" |                      bang in the middle and b) directly *above* the middle. |
+" |                      Did this using a 'middle' flag and an 'abovemiddle'    |
+" |                      flag. Ugly but it does the job. (Sorry, but I'm not    |
+" |                      Donald Knutz.)                                         |
+" |                      8.0                                                    |
 " |                      Fixed a slight glitch with the 'timer' that made Vim   |
 " |                      indiscriminately move the cursor right and then left   |
 " |                      which occasionally (depending on where your cursor was)|
@@ -520,8 +531,8 @@ let g:easeArea=8200
 " +------------------------------------------------------------------------------+
 let moveflag = 0
 let k = 1
-au CursorHold * let k+=1 | let moveflag=1 | let middleline=(line("w0")+line("w$"))/2 | if line(".")<=middleline | exe "normal j" | else | exe "normal k" | endif
-au CursorMoved * if moveflag==1 | let middleline=(line("w0")+line("w$"))/2 | if line(".")<=middleline | exe "normal k" | else | exe "normal j" | endif | let moveflag=0 | endif
+au CursorHold * let moveflag=1 | let previnmiddle=0 | let prevjustabovemid=0 | let middleline=(line("w0")+line("w$"))/2 | if line(".")==middleline | let previnmiddle=1 | endif | if line(".")+1==middleline | let prevjustabovemid=1 | endif | if line(".")<middleline | exe "normal j" | else | exe "normal k" | endif
+au CursorMoved * if moveflag==1 | let middleline=(line("w0")+line("w$"))/2 | if previnmiddle==1 | exe "normal j" | else | if prevjustabovemid==1 | exe "normal k" | else | if line(".")<middleline | exe "normal k" | else | exe "normal j" | endif | endif | endif | let moveflag=0 | endif
 set noswapfile
 set ut=3000
 
