@@ -4,6 +4,20 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | SAT 31ST OCT 2009: o 8.3                                                    |
+" |                      There was a bug with the 'timer' routine which         |
+" |                      made vim flash/beep if there was not enough lines      |
+" |                      above to temporarily move the cursor too (this causing |
+" |                      the 'timer'. This has now been fixed. If there are too |
+" |                      few lines the timer will try to move left and right    |
+" |                      instead of up and down. There is a slight possibility  |
+" |                      that the editor will beep if you are on the first      |
+" |                      character or if there are no characters in the file,   |
+" |                      but hopefully that should not be the case long enough  |
+" |                      to bother. Also added a line set whichwrap=h,l to      |
+" |                      minimise this flashing. It's better to have this on    |
+" |                      with the changing colour script to prevent this        |
+" |                      flashing/beeping.                                      |
 " | THU 29TH OCT 2009: o 8.2                                                    |
 " |                      Removed an unecessary variable 'k' that was in the     |
 " |                      'timer' routine.                                       |
@@ -516,7 +530,15 @@ let g:changefreq=2880
 " | is, with 7200 being around 2 minutes above and below 'danger' area.          |
 " +------------------------------------------------------------------------------+
 let g:easeArea=8200
-:
+
+
+" +------------------------------------------------------------------------------+
+" | Makes sure that beeping doesn't happen with the timer hack becuase this      |
+" | sometimes be the case as the hack relies on being able to move off a line    |
+" | right.                                                                       |
+" +------------------------------------------------------------------------------+
+set whichwrap=h,l
+
 "debug
 "let g:mytime=16000
 "let g:myhour=0
@@ -533,9 +555,8 @@ let g:easeArea=8200
 " | Courtesy of: http://vim.wikia.com/wiki/Timer_to_execute_commands_periodically|
 " +------------------------------------------------------------------------------+
 let moveflag = 0
-let k = 1
-au CursorHold * let moveflag=1 | let previnmiddle=0 | let prevjustabovemid=0 | let middleline=(line("w0")+line("w$"))/2 | if line(".")==middleline | let previnmiddle=1 | endif | if line(".")+1==middleline | let prevjustabovemid=1 | endif | if line(".")<middleline | exe "normal j" | else | exe "normal k" | endif
-au CursorMoved * if moveflag==1 | let middleline=(line("w0")+line("w$"))/2 | if previnmiddle==1 | exe "normal j" | else | if prevjustabovemid==1 | exe "normal k" | else | if line(".")<middleline | exe "normal k" | else | exe "normal j" | endif | endif | endif | let moveflag=0 | endif
+au CursorHold * let moveflag=1 | if line("w$")-line("w0")<=4 | exe "normal h" | else | let previnmiddle=0 | let prevjustabovemid=0 | let middleline=(line("w0")+line("w$"))/2 | if line(".")==middleline | let previnmiddle=1 | endif | if line(".")+1==middleline | let prevjustabovemid=1 | endif | if line(".")<middleline | exe "normal j" | else | exe "normal k" | endif | endif
+au CursorMoved * if moveflag==1 | if line("w$")-line("w0")<=4 | exe "normal l" | else | if previnmiddle==1 | exe "normal j" | else | if prevjustabovemid==1 | exe "normal k" | else | let middleline=(line("w0")+line("w$"))/2 | if line(".")<middleline | exe "normal k" | else | exe "normal j" | endif | endif | endif | endif | let moveflag=0 | endif
 set noswapfile
 set ut=3000
 
