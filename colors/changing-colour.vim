@@ -4,7 +4,11 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | SAT 31ST OCT 2009: o 8.4                                                    |
+" | SAT 31ST OCT 2009: o 8.5                                                    |
+" |                      Fixed an 'undeclared variable' error that can occur    |
+" |                      when the number of lines in a small (about 5 lines)    |
+" |                      file goes down to fewer.                               |
+" |                      8.4                                                    |
 " |                      Finally made the 'timer' well-behaved by detecting if  |
 " |                      the cursor was on the first column of a line in the    |
 " |                      case where there were too few lines to move up/down.   |
@@ -568,9 +572,9 @@ set whichwrap=h,l
 " | or enter text.                                                               |
 " | Courtesy of: http://vim.wikia.com/wiki/Timer_to_execute_commands_periodically|
 " +------------------------------------------------------------------------------+
-let moveflag = 0
-au CursorHold * let moveflag=1 | if line("w$")-line("w0")<=4 | let wasStartOfLine=0 | if col(".")!=1 | exe "normal h" | else | exe "normal l" | let wasStartOfLine=1 | endif | else | let previnmiddle=0 | let prevjustabovemid=0 | let middleline=(line("w0")+line("w$"))/2 | if line(".")==middleline | let previnmiddle=1 | endif | if line(".")+1==middleline | let prevjustabovemid=1 | endif | if line(".")<middleline | exe "normal j" | else | exe "normal k" | endif | endif
-au CursorMoved * if moveflag==1 | if line("w$")-line("w0")<=4 | if wasStartOfLine==0 | exe "normal l" | else | exe "normal h" | endif | else | if previnmiddle==1 | exe "normal j" | else | if prevjustabovemid==1 | exe "normal k" | else | let middleline=(line("w0")+line("w$"))/2 | if line(".")<middleline | exe "normal k" | else | exe "normal j" | endif | endif | endif | endif | let moveflag=0 | endif
+let moveFlag = 0
+au CursorHold * let moveFlag=1 | let prevInMiddle=0  | let prevJustAboveMid=0 | if line("w$")-line("w0")<=4 | let wasStartOfLine=0 | if col(".")!=1 | exe "normal h" | else | exe "normal l" | let wasStartOfLine=1 | endif | else | let middleLine=(line("w0")+line("w$"))/2 | if line(".")==middleLine | let prevInMiddle=1 | endif | if line(".")+1==middleLine | let prevJustAboveMid=1 | endif | if line(".")<middleLine | exe "normal j" | else | exe "normal k" | endif | endif
+au CursorMoved * if moveFlag==1 | if line("w$")-line("w0")<=4 | if wasStartOfLine==0 | exe "normal l" | else | exe "normal h" | endif | else | if prevInMiddle==1 | exe "normal j" | else | if prevJustAboveMid==1 | exe "normal k" | else | let middleLine=(line("w0")+line("w$"))/2 | if line(".")<middleLine | exe "normal k" | else | exe "normal j" | endif | endif | endif | endif | let moveFlag=0 | endif
 set noswapfile
 set ut=3000
 
@@ -1148,3 +1152,4 @@ au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
+
