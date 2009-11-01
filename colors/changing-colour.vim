@@ -4,20 +4,34 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | SAT 31ST OCT 2009: o 8.3                                                    |
-" |                      There was a bug with the 'timer' routine which         |
-" |                      made vim flash/beep if there was not enough lines      |
-" |                      above to temporarily move the cursor too (this causing |
-" |                      the 'timer'. This has now been fixed. If there are too |
+" | SAT 31ST OCT 2009: o 8.4                                                    |
+" |                      Finally made the 'timer' well-behaved by detecting if  |
+" |                      the cursor was on the first column of a line in the    |
+" |                      case where there were too few lines to move up/down.   |
+" |                      The cursor now moves *right* if you're at column 1     |
+" |                      (first column), *not* left as before. The cursor now   |
+" |                      moves left only if your cursor is *not* on column 1,   |
+" |                      rather than indiscriminately move left Anyway, beeping/|
+" |                      flashing should now almost go away. There is a case    |
+" |                      that I can't handle and that's when there is only one  |
+" |                      character in the file, in which case the editor beep/  |
+" |                      flash once as it tries to do a 'timer' but there isn't |
+" |                      any space to move 'right' to, but hopefully that       |
+" |                      shouldn't be too bad.                                  |
+" |                      8.3                                                    |
+" |                      There was a bug with the 'timer' routine which made vim|
+" |                      flash/beep if there was not enough lines above to      |
+" |                      temporarily move the cursor to (this causing the       |
+" |                      'timer'.) This has now been fixed. If there are too    |
 " |                      few lines the timer will try to move left and right    |
 " |                      instead of up and down. There is a slight possibility  |
-" |                      that the editor will beep if you are on the first      |
-" |                      character or if there are no characters in the file,   |
-" |                      but hopefully that should not be the case long enough  |
-" |                      to bother. Also added a line set whichwrap=h,l to      |
-" |                      minimise this flashing. It's better to have this on    |
-" |                      with the changing colour script to prevent this        |
-" |                      flashing/beeping.                                      |
+" |                      that the editor will beep at you if you are on the     |
+" |                      first character or if there are no characters in the   |
+" |                      file, but hopefully that should not be the case long   |
+" |                      enough to bother. Also added a line set whichwrap=h,l  |
+" |                      to minimise this flashing. If you like using this      |
+" |                      script it is better to leave this on as it will        |
+" |                      minimise this flashing/beeping.                        |
 " | THU 29TH OCT 2009: o 8.2                                                    |
 " |                      Removed an unecessary variable 'k' that was in the     |
 " |                      'timer' routine.                                       |
@@ -534,8 +548,8 @@ let g:easeArea=8200
 
 " +------------------------------------------------------------------------------+
 " | Makes sure that beeping doesn't happen with the timer hack becuase this      |
-" | sometimes be the case as the hack relies on being able to move off a line    |
-" | right.                                                                       |
+" | sometimes be the case as the 'timer' hack relies on being able to move off a |
+" | line left using h key.                                                       |
 " +------------------------------------------------------------------------------+
 set whichwrap=h,l
 
@@ -555,8 +569,8 @@ set whichwrap=h,l
 " | Courtesy of: http://vim.wikia.com/wiki/Timer_to_execute_commands_periodically|
 " +------------------------------------------------------------------------------+
 let moveflag = 0
-au CursorHold * let moveflag=1 | if line("w$")-line("w0")<=4 | exe "normal h" | else | let previnmiddle=0 | let prevjustabovemid=0 | let middleline=(line("w0")+line("w$"))/2 | if line(".")==middleline | let previnmiddle=1 | endif | if line(".")+1==middleline | let prevjustabovemid=1 | endif | if line(".")<middleline | exe "normal j" | else | exe "normal k" | endif | endif
-au CursorMoved * if moveflag==1 | if line("w$")-line("w0")<=4 | exe "normal l" | else | if previnmiddle==1 | exe "normal j" | else | if prevjustabovemid==1 | exe "normal k" | else | let middleline=(line("w0")+line("w$"))/2 | if line(".")<middleline | exe "normal k" | else | exe "normal j" | endif | endif | endif | endif | let moveflag=0 | endif
+au CursorHold * let moveflag=1 | if line("w$")-line("w0")<=4 | let wasStartOfLine=0 | if col(".")!=1 | exe "normal h" | else | exe "normal l" | let wasStartOfLine=1 | endif | else | let previnmiddle=0 | let prevjustabovemid=0 | let middleline=(line("w0")+line("w$"))/2 | if line(".")==middleline | let previnmiddle=1 | endif | if line(".")+1==middleline | let prevjustabovemid=1 | endif | if line(".")<middleline | exe "normal j" | else | exe "normal k" | endif | endif
+au CursorMoved * if moveflag==1 | if line("w$")-line("w0")<=4 | if wasStartOfLine==0 | exe "normal l" | else | exe "normal h" | endif | else | if previnmiddle==1 | exe "normal j" | else | if prevjustabovemid==1 | exe "normal k" | else | let middleline=(line("w0")+line("w$"))/2 | if line(".")<middleline | exe "normal k" | else | exe "normal j" | endif | endif | endif | endif | let moveflag=0 | endif
 set noswapfile
 set ut=3000
 
@@ -1134,4 +1148,3 @@ au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
-
