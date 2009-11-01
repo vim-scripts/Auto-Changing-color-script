@@ -4,7 +4,18 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | SAT 31ST OCT 2009: o 8.5                                                    |
+" | SAT 31ST OCT 2009: o 8.6                                                    |
+" |                      Simplified the logic to just 'did i move to cause a    |
+" |                      timer previously, and if so where, hence move the      |
+" |                      opposite way'. Now it's pretty flawless apart from     |
+" |                      when you're on the final line and this line has no     |
+" |                      characters and the size of the file is only 3 lines    |
+" |                      long. This not only causes a flash/beep and the timer  |
+" |                      not to work (hence no automatic colour changes) but    |
+" |                      also when you try moving off this line it could go     |
+" |                      funny (the cursor mysteriously jumps up a line) but    |
+" |                      it's nothing serious.                                  |
+" |                      8.5                                                    |
 " |                      Fixed an 'undeclared variable' error that can occur    |
 " |                      when the number of lines in a small (about 5 lines)    |
 " |                      file goes down to fewer.                               |
@@ -573,8 +584,8 @@ set whichwrap=h,l
 " | Courtesy of: http://vim.wikia.com/wiki/Timer_to_execute_commands_periodically|
 " +------------------------------------------------------------------------------+
 let moveFlag = 0
-au CursorHold * let moveFlag=1 | let prevInMiddle=0  | let prevJustAboveMid=0 | if line("w$")-line("w0")<=4 | let wasStartOfLine=0 | if col(".")!=1 | exe "normal h" | else | exe "normal l" | let wasStartOfLine=1 | endif | else | let middleLine=(line("w0")+line("w$"))/2 | if line(".")==middleLine | let prevInMiddle=1 | endif | if line(".")+1==middleLine | let prevJustAboveMid=1 | endif | if line(".")<middleLine | exe "normal j" | else | exe "normal k" | endif | endif
-au CursorMoved * if moveFlag==1 | if line("w$")-line("w0")<=4 | if wasStartOfLine==0 | exe "normal l" | else | exe "normal h" | endif | else | if prevInMiddle==1 | exe "normal j" | else | if prevJustAboveMid==1 | exe "normal k" | else | let middleLine=(line("w0")+line("w$"))/2 | if line(".")<middleLine | exe "normal k" | else | exe "normal j" | endif | endif | endif | endif | let moveFlag=0 | endif
+au CursorHold * let moveFlag=1 | let cursorMovedUP=0 | let cursorMovedDOWN=0 | let wasStartOfLine=0 | if line("w$")-line("w0")<=2 | if col(".")!=1 | exe "normal h" | else | exe "normal l" | let wasStartOfLine=1 | endif | else | let middleLine=(line("w0")+line("w$"))/2 | if line(".")<middleLine | let cursorMovedDOWN=1 | exe "normal j" | else | let cursorMovedUP=1 | exe "normal k" | endif | endif 
+au CursorMoved * if moveFlag==1 | if line("w$")-line("w0")<=2 | if wasStartOfLine==0 | exe "normal l" | else | exe "normal h" | endif | else | if cursorMovedUP==1 | exe "normal j" | endif | if cursorMovedDOWN==1 | exe "normal k" | endif | endif | let moveFlag=0 | endif
 set noswapfile
 set ut=3000
 
