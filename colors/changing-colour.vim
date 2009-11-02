@@ -4,7 +4,12 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | MON 2ND OCT 2009:  o 8.8                                                    |
+" | MON 2ND OCT 2009:  o 8.9                                                    |
+" |                      Removed set whichwrap=h,l command as this was there    |
+" |                      only so that the old (cursor movement based) timer     |
+" |                      could work. According to the help you shouldn't even   |
+" |                      set these keys in whichwrap. It's out now anyway.      |
+" |                    o 8.8                                                    |
 " |                      Got rid of the time display in the Yukihiro Nakadaira  |
 " |                      timer function, and moved a variable definition        |
 " |                      outside the routine to make it more efficient.         |
@@ -573,13 +578,6 @@ let g:changefreq=2880
 " +------------------------------------------------------------------------------+
 let g:easeArea=8200
 
-
-" +------------------------------------------------------------------------------+
-" | Makes sure that beeping doesn't happen with the timer hack becuase this      |
-" | sometimes be the case as the 'timer' hack relies on being able to move off a |
-" | line left using h key.                                                       |
-" +------------------------------------------------------------------------------+
-set whichwrap=h,l
 
 "debug
 "let g:mytime=16000
