@@ -4,7 +4,11 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | MON 2ND OCT 2009:  o 8.7                                                    |
+" | MON 2ND OCT 2009:  o 8.8                                                    |
+" |                      Got rid of the time display in the Yukihiro Nakadaira  |
+" |                      timer function, and moved a variable definition        |
+" |                      outside the routine to make it more efficient.         |
+" |                    o 8.7                                                    |
 " |                      Fixed problem of 'stolen keypresses' that happened when|
 " |                      the user happened to move the cursor at the same time  |
 " |                      as the timer routine was happening. Also there were    |
@@ -592,11 +596,10 @@ set whichwrap=h,l
 " | causes too many problems. Courtesey of Yukihiro Nakadaira. Source:-          |
 " | http://old.nabble.com/timer-revisited-td8816391.html.                        |
 " +------------------------------------------------------------------------------+
+let g:K_IGNORE = "\x80\xFD\x35"   " internal key code that is ignored
 autocmd CursorHold * call Timer()
 function! Timer()
-  echo strftime("%c")
-  let K_IGNORE = "\x80\xFD\x35"   " internal key code that is ignored
-  call feedkeys(K_IGNORE)
+  call feedkeys(g:K_IGNORE)
 endfunction 
 
 " +------------------------------------------------------------------------------+
