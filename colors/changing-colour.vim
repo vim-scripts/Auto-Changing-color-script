@@ -4,6 +4,15 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | MON 2ND OCT 2009:  o 8.7                                                    |
+" |                      Fixed problem of 'stolen keypresses' that happened when|
+" |                      the user happened to move the cursor at the same time  |
+" |                      as the timer routine was happening. Also there were    |
+" |                      ocassional glitches with the cursor moving where it    |
+" |                      shouldn't. Now this doesn't happen. The new routine    |
+" |                      uses a much simpler method. Courtesey of Yukihiro      |
+" |                      Nakadaira. (source:                                    |
+" |                      http://old.nabble.com/timer-revisited-td8816391.html). |
 " | SAT 31ST OCT 2009: o 8.6                                                    |
 " |                      Simplified the logic to just 'did i move to cause a    |
 " |                      timer previously, and if so where, hence move the      |
@@ -577,17 +586,18 @@ set whichwrap=h,l
 
 
 " +------------------------------------------------------------------------------+
-" | The following code causes VIM to think the cursor has moved continuously this|
-" | in turn toggles the moving part of the changing colour script. Without this  |
-" | code the changing colour script only changes colour when you actually move   |
-" | or enter text.                                                               |
-" | Courtesy of: http://vim.wikia.com/wiki/Timer_to_execute_commands_periodically|
+" | The following routine causes a non-printing keypress to be generated when    |
+" | the cursor has been idle, hence causing a kind of 'timer' function.  Replaces|
+" | previous 'cusor-movement' based one that hacked around with the cursor but   |
+" | causes too many problems. Courtesey of Yukihiro Nakadaira. Source:-          |
+" | http://old.nabble.com/timer-revisited-td8816391.html.                        |
 " +------------------------------------------------------------------------------+
-let moveFlag = 0
-au CursorHold * let moveFlag=1 | let cursorMovedUP=0 | let cursorMovedDOWN=0 | let wasStartOfLine=0 | if line("w$")-line("w0")<=2 | if col(".")!=1 | exe "normal h" | else | exe "normal l" | let wasStartOfLine=1 | endif | else | let middleLine=(line("w0")+line("w$"))/2 | if line(".")<middleLine | let cursorMovedDOWN=1 | exe "normal j" | else | let cursorMovedUP=1 | exe "normal k" | endif | endif 
-au CursorMoved * if moveFlag==1 | if line("w$")-line("w0")<=2 | if wasStartOfLine==0 | exe "normal l" | else | exe "normal h" | endif | else | if cursorMovedUP==1 | exe "normal j" | endif | if cursorMovedDOWN==1 | exe "normal k" | endif | endif | let moveFlag=0 | endif
-set noswapfile
-set ut=3000
+autocmd CursorHold * call Timer()
+function! Timer()
+  echo strftime("%c")
+  let K_IGNORE = "\x80\xFD\x35"   " internal key code that is ignored
+  call feedkeys(K_IGNORE)
+endfunction 
 
 " +------------------------------------------------------------------------------+
 " | Main RGBEl function, used to work out amount to offset RGB value by to avoid |
