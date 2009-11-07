@@ -4,7 +4,19 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | SAT 7TH OCT 2009:  o 9.0                                                    |
+" | SAT 7TH OCT 2009:  o 9.1                                                    |
+" |                      Added a new 'dark dip' adjustable ramp to the          |
+" |                      'Normal' syntax element, this allows a subtle          |
+" |                      incremental 'darkening' of the text as it nears the    |
+" |                      point where it will go into 'light' mode. This         |
+" |                      darkening helps keep the visibility up right up until  |
+" |                      the last minute. Maybe some fine-tuning needed but it's|
+" |                      much better as it is than before. Before visibility    |
+" |                      just worsened around the point where Normal would      |
+" |                      switch from light text to dark text and vice-versa as  |
+" |                      the background darkened or lightened. This is no longer|
+" |                      true.                                                  |
+" |                      9.0                                                    |
 " |                      Took out all unecessary debug stuff out of RGB         |
 " |                      functions. Now it runs much quicker.                   |
 " | MON 2ND OCT 2009:  o 8.9                                                    |
@@ -634,7 +646,7 @@ endfunction
 " | Main RGBEl for Normal (like RGBEl2 but brightens, not darkens - Normal is    |
 " | a bit trickier because it is also where the general background is set        |
 " +------------------------------------------------------------------------------+
-:function RGBEl2a(RGBEl,actBgr,dangerBgr,senDar,senLig,loadj,hiadj)
+:function RGBEl2a(RGBEl,actBgr,dangerBgr,senDar,senLig,loadj,hiadj,loDipDar,hiDipDar)
 :	if a:actBgr>=a:dangerBgr-a:senDar && a:actBgr<=a:dangerBgr+a:senLig
 :		let        progressFrom=a:dangerBgr-a:senDar
 :		let        progressLoHi=a:actBgr-progressFrom
@@ -647,6 +659,17 @@ endfunction
 :		let       adjustedValue=a:RGBEl+interest2
 :	else
 :		let adjustedValue=a:RGBEl
+:	endif
+:	if a:actBgr>a:dangerBgr+a:senLig && a:actBgr<=a:dangerBgr+a:senLig+g:easeArea
+:		let        progressFrom=a:dangerBgr+a:senLig
+:		let        progressLoHi=a:actBgr-progressFrom
+:		let            diffLoHi=(a:dangerBgr+a:senLig+g:easeArea)-(a:dangerBgr-a:senLig)
+:		let     progressPerThou=progressLoHi/(diffLoHi/1000)
+:		let     ourinterestDiff=a:hiDipDar-a:loDipDar
+:		let     weareScaleRatio=1000/ourinterestDiff
+:		let            interest=progressPerThou/weareScaleRatio
+:		let           interest2=interest+a:loDipDar
+:		let       adjustedValue=a:RGBEl+interest2
 :	endif
 :	if adjustedValue<0
 :		let adjustedValue=0
@@ -924,9 +947,9 @@ let highLowLightToggle=0
 :	let adj6=	RGBEl4(adjBG2,								todaysec,46500,15000,13000,-6,-13,-3,-2,5)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",			adj1,adj1,adj2,adj4,adj5,adj6)
 :	let hC1=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj5,adj6)
-:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,50000,15500,11000,12,86)
-:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,50000,15500,11000,12,86)
-:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,50000,15500,11000,12,86)
+:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,50000,15500,000,12,60,-42,0)
+:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,50000,15500,000,12,60,-42,0)
+:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,50000,15500,000,12,60,-42,0)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
 :	let adj1=	RGBEl2((-todaysec+86400)/270/2+35,					todaysec,57000,9000,20000,70)
 :	let adj2=	RGBEl2((-todaysec+86400)/270/2+103,					todaysec,57000,9000,20000,70)
@@ -969,16 +992,16 @@ let highLowLightToggle=0
 :	let adj1=	RGBEl6(todaysec/338+70							)
 :	let adj2=	RGBEl6(todaysec/338+30							)
 :	let adj3=	RGBEl6(todaysec/338-100							)
-:	let adj4=	RGBEl2a((-todaysec+86400)/338/2+70,					todaysec,35000,15000,14000,60,120)
-:	let adj5=	RGBEl2a((-todaysec+86400)/338/2+60,					todaysec,35000,15000,14000,60,120)
-:	let adj6=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,35000,15000,14000,60,120)
+:	let adj4=	RGBEl2a((-todaysec+86400)/338/2+70,					todaysec,35000,15000,14000,60,120,-4,0)
+:	let adj5=	RGBEl2a((-todaysec+86400)/338/2+60,					todaysec,35000,15000,14000,60,120,-4,0)
+:	let adj6=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,35000,15000,14000,60,120,-4,0)
 :	let hJ=printf("highlight StatusLine guibg=#%02x%02x%02x guifg=#%02x%02x%02x gui=bold",	adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adj1=	RGBEl6(todaysec/338+70							)
 :	let adj2=	RGBEl6(todaysec/338+60							)
 :	let adj3=	RGBEl6(todaysec/338-100							)
-:	let adj4=	RGBEl2a((-todaysec+86400)/338/2+70,					todaysec,20000,10000,14000,40,120)
-:	let adj5=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,20000,10000,14000,40,120)
-:	let adj6=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,20000,10000,14000,40,120)
+:	let adj4=	RGBEl2a((-todaysec+86400)/338/2+70,					todaysec,20000,10000,14000,40,120,-4,0)
+:	let adj5=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,20000,10000,14000,40,120,-4,0)
+:	let adj6=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,20000,10000,14000,40,120,-4,0)
 :	let hK=printf("highlight StatusLineNC guibg=#%02x%02x%02x guifg=#%02x%02x%02x gui=bold",adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2,						todaysec,37000,27000,20000,40)
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+20,					todaysec,37000,27000,20000,40)
@@ -1095,4 +1118,5 @@ au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
+
 
