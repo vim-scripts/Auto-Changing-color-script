@@ -4,7 +4,12 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | SAT 7TH OCT 2009:    9.3                                                    |
+" | SAT 7TH OCT 2009:    9.4                                                    |
+" |                      Made the Normal simple. It's light when it's dark,     |
+" |                      and darkens as it lightens. Simple. Plus it now blends |
+" |                      blends nicely with the other elements particularly     |
+" |                      Constant which is very important in the vim system.    |
+" |                      9.3                                                    |
 " |                      Realised that i had left a slightly exposed area       |
 " |                      around the light area of the background. This is where |
 " |                      background is light-ish but the Normal text is not     |
@@ -607,11 +612,6 @@ let g:changefreq=2880
 " +------------------------------------------------------------------------------+
 let g:easeArea=8200
 
-" +------------------------------------------------------------------------------+
-" | This works like easeArea but is used by the Normal element.                  |
-" +------------------------------------------------------------------------------+
-let g:easeArea2=30000
-
 "debug
 "let g:mytime=16000
 "let g:myhour=0
@@ -665,7 +665,7 @@ endfunction
 " | Main RGBEl for Normal (like RGBEl2 but brightens, not darkens - Normal is    |
 " | a bit trickier because it is also where the general background is set        |
 " +------------------------------------------------------------------------------+
-:function RGBEl2a(RGBEl,actBgr,dangerBgr,senDar,senLig,loadj,hiadj,loDipDar,hiDipDar)
+:function RGBEl2a(RGBEl,actBgr,dangerBgr,senDar,senLig,loadj,hiadj)
 :	if a:actBgr>=a:dangerBgr-a:senDar && a:actBgr<=a:dangerBgr+a:senLig
 :		let        progressFrom=a:dangerBgr-a:senDar
 :		let        progressLoHi=a:actBgr-progressFrom
@@ -678,17 +678,6 @@ endfunction
 :		let       adjustedValue=a:RGBEl+interest2
 :	else
 :		let adjustedValue=a:RGBEl
-:	endif
-:	if a:actBgr>a:dangerBgr+a:senLig && a:actBgr<=a:dangerBgr+a:senLig+g:easeArea2
-:		let        progressFrom=a:dangerBgr+a:senLig
-:		let        progressLoHi=a:actBgr-progressFrom
-:		let            diffLoHi=(a:dangerBgr+a:senLig+g:easeArea2)-(a:dangerBgr-a:senLig)
-:		let     progressPerThou=progressLoHi/(diffLoHi/1000)
-:		let     ourinterestDiff=a:hiDipDar-a:loDipDar
-:		let     weareScaleRatio=1000/ourinterestDiff
-:		let            interest=progressPerThou/weareScaleRatio
-:		let           interest2=interest+a:loDipDar
-:		let       adjustedValue=a:RGBEl+interest2
 :	endif
 :	if adjustedValue<0
 :		let adjustedValue=0
@@ -966,9 +955,9 @@ let highLowLightToggle=0
 :	let adj6=	RGBEl4(adjBG2,								todaysec,46500,15000,13000,-6,-13,-3,-2,5)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",			adj1,adj1,adj2,adj4,adj5,adj6)
 :	let hC1=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj5,adj6)
-:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,48000,13500,000,12,60,-72,-34)
-:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,48000,13500,000,12,60,-72,-34)
-:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,48000,13500,000,12,60,-72,-34)
+:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,36000,3500,30000,-132,-34)
+:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,36000,3500,30000,-132,-34)
+:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,36000,3500,30000,-132,-34)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
 :	let adj1=	RGBEl2((-todaysec+86400)/270/2+35,					todaysec,57000,9000,20000,70)
 :	let adj2=	RGBEl2((-todaysec+86400)/270/2+103,					todaysec,57000,9000,20000,70)
@@ -1011,16 +1000,16 @@ let highLowLightToggle=0
 :	let adj1=	RGBEl6(todaysec/338+70							)
 :	let adj2=	RGBEl6(todaysec/338+30							)
 :	let adj3=	RGBEl6(todaysec/338-100							)
-:	let adj4=	RGBEl2a((-todaysec+86400)/338/2+70,					todaysec,35000,15000,14000,60,120,-4,0)
-:	let adj5=	RGBEl2a((-todaysec+86400)/338/2+60,					todaysec,35000,15000,14000,60,120,-4,0)
-:	let adj6=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,35000,15000,14000,60,120,-4,0)
+:	let adj4=	RGBEl2a((-todaysec+86400)/338/2+70,					todaysec,35000,15000,14000,60,120)
+:	let adj5=	RGBEl2a((-todaysec+86400)/338/2+60,					todaysec,35000,15000,14000,60,120)
+:	let adj6=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,35000,15000,14000,60,120)
 :	let hJ=printf("highlight StatusLine guibg=#%02x%02x%02x guifg=#%02x%02x%02x gui=bold",	adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adj1=	RGBEl6(todaysec/338+70							)
 :	let adj2=	RGBEl6(todaysec/338+60							)
 :	let adj3=	RGBEl6(todaysec/338-100							)
-:	let adj4=	RGBEl2a((-todaysec+86400)/338/2+70,					todaysec,20000,10000,14000,40,120,-4,0)
-:	let adj5=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,20000,10000,14000,40,120,-4,0)
-:	let adj6=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,20000,10000,14000,40,120,-4,0)
+:	let adj4=	RGBEl2a((-todaysec+86400)/338/2+70,					todaysec,20000,10000,14000,40,120)
+:	let adj5=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,20000,10000,14000,40,120)
+:	let adj6=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,20000,10000,14000,40,120)
 :	let hK=printf("highlight StatusLineNC guibg=#%02x%02x%02x guifg=#%02x%02x%02x gui=bold",adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2,						todaysec,37000,27000,20000,40)
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+20,					todaysec,37000,27000,20000,40)
