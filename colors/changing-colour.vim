@@ -4,7 +4,13 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | SUN 8TH OCT 2009:    9.5                                                    |
+" | SUN 8TH OCT 2009:    9.6                                                    |
+" |                      Made slight tune-up of Comment to make it less strong  |
+" |                      Possibily a bit too weak in certain areas but it's     |
+" |                      better comment is a little harder to see temporarily   |
+" |                      than being too strong. Might work on this later to     |
+" |                      get to the bottom of it.                               |
+" |                      9.5                                                    |
 " |                      Made some fine adjustments around the boundary cases   |
 " |                      of Normal and Statement. Now sharper than before.      |
 " | SAT 7TH OCT 2009:    9.4                                                    |
@@ -692,6 +698,47 @@ endfunction
 :endfunction
 
 " +------------------------------------------------------------------------------+
+" | Special RGBEl function for cases that needed special care. It provides       |
+" | more control over the text's high or low lighting in the danger visibility   |
+" | zone.                                                                        |
+" +------------------------------------------------------------------------------+
+:function RGBEl2b(RGBEl,actBgr,dangerBgr,senDar,senLig,adjust1,adjust2)
+:	if a:actBgr>=a:dangerBgr-a:senDar && a:actBgr<=a:dangerBgr+a:senLig
+:		let        progressFrom=a:dangerBgr-a:senDar
+:		let        progressLoHi=a:actBgr-progressFrom
+:		let            diffLoHi=(a:dangerBgr+a:senLig)-(a:dangerBgr-a:senDar)
+:		let     progressPerThou=progressLoHi/(diffLoHi/1000)
+:		let     ourinterestDiff=a:adjust2-a:adjust1
+:		let     weareScaleRatio=1000/ourinterestDiff
+:		let            interest=progressPerThou/weareScaleRatio
+:		let           interest2=interest+a:adjust1
+:		let      adjustedAdjust=interest2
+:		let whatdoyoucallit=a:dangerBgr-a:actBgr
+:		if whatdoyoucallit<0
+:			let whatdoyoucallit=-whatdoyoucallit
+:		endif
+:		let whatdoyoucallit=whatdoyoucallit/130
+:		if whatdoyoucallit>255
+:			let whatdoyoucallit=255
+:		endif
+:		let whatdoyoucallit=-whatdoyoucallit+255
+:		let whatdoyoucallit=whatdoyoucallit*adjustedAdjust
+:		let whatdoyoucallit=whatdoyoucallit/800
+:		let whatdoyoucallit=whatdoyoucallit+65
+:		let adjustedValue=a:RGBEl-whatdoyoucallit
+:	else
+:		let adjustedValue=a:RGBEl
+:	endif
+:	if adjustedValue<0
+:		let adjustedValue=0
+:	endif
+:	if adjustedValue>255
+:		let adjustedValue=255
+:	endif
+:	return adjustedValue
+:endfunction
+
+" +------------------------------------------------------------------------------+
 " | RGBEl function for cursor to work out amount to offset RGB component to stop |
 " | it from clashing with the background colour.                                 |
 " | Return value is modified or otherwise value (not modified if no clash).      |
@@ -991,12 +1038,12 @@ let highLowLightToggle=0
 :	let adj5=	RGBEl4(adjBG1A,								todaysec,47000,3000,14000,-99,-99,-99,-99,99)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,47000,3000,14000,-99,-99,-99,-99,99)
 :       let hH=printf("highlight Title guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
-:	let adj1=	RGBEl2((-todaysec+86400)/338/2+60,					todaysec,50000,10000,13000,31)
-:	let adj2=	RGBEl2((-todaysec+86400)/338/2+60,					todaysec,50000,10000,13000,31)
-:	let adj3=	RGBEl2((-todaysec+86400)/338/2+60,					todaysec,50000,10000,13000,31)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,50000,10000,13000,-5,-21,-99,-99,99)
-:	let adj5=	RGBEl4(adjBG1A,								todaysec,50000,10000,13000,-5,-21,-99,-99,99)
-:	let adj6=	RGBEl4(adjBG2,								todaysec,50000,10000,13000,-5,-21,-99,-99,99)
+:	let adj1=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,5000,22000,40,-300)
+:	let adj2=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,5000,22000,40,-300)
+:	let adj3=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,5000,22000,40,-300)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,50000,5000,22000,-5,-18,0,0,-2)
+:	let adj5=	RGBEl4(adjBG1A,								todaysec,50000,5000,22000,-5,-18,0,0,-2)
+:	let adj6=	RGBEl4(adjBG2,								todaysec,50000,5000,22000,-5,-18,0,0,-2)
 :	let hI=printf("highlight Comment guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let hI1=printf("highlight htmlComment guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let hI2=printf("highlight htmlCommentPart guifg=#%02x%02x%02x guibg=#%02x%02x%02x",	adj1,adj2,adj3,adj4,adj5,adj6)
