@@ -4,6 +4,12 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | MON 9TH OCT 2009:    9.7                                                    |
+" |                      Made Comments a bit more usable, although there is a   |
+" |                      glitch in the math i can't figure out. This makes the  |
+" |                      comments hard to see for a couple of minutes but they  |
+" |                      are just about usable. Will keep trying to get to the  |
+" |                      bottom of it.                                          |
 " | SUN 8TH OCT 2009:    9.6                                                    |
 " |                      Made slight tune-up of Comment to make it less strong  |
 " |                      Possibily a bit too weak in certain areas but it's     |
@@ -702,17 +708,25 @@ endfunction
 " | more control over the text's high or low lighting in the danger visibility   |
 " | zone.                                                                        |
 " +------------------------------------------------------------------------------+
-:function RGBEl2b(RGBEl,actBgr,dangerBgr,senDar,senLig,adjust1,adjust2)
+:function RGBEl2b(RGBEl,actBgr,dangerBgr,senDar,senLig,adjust1,adjust2,adjust3)
 :	if a:actBgr>=a:dangerBgr-a:senDar && a:actBgr<=a:dangerBgr+a:senLig
 :		let        progressFrom=a:dangerBgr-a:senDar
 :		let        progressLoHi=a:actBgr-progressFrom
 :		let            diffLoHi=(a:dangerBgr+a:senLig)-(a:dangerBgr-a:senDar)
 :		let     progressPerThou=progressLoHi/(diffLoHi/1000)
-:		let     ourinterestDiff=a:adjust2-a:adjust1
-:		let     weareScaleRatio=1000/ourinterestDiff
-:		let            interest=progressPerThou/weareScaleRatio
-:		let           interest2=interest+a:adjust1
-:		let      adjustedAdjust=interest2
+:		if progressPerThou<500
+:			let     ourinterestDiff=a:adjust2-a:adjust1
+:			let     weareScaleRatio=1000/ourinterestDiff
+:			let            interest=progressPerThou/weareScaleRatio
+:			let           interest2=interest+a:adjust1
+:			let      adjustedAdjust=interest2
+:		else
+:			let     ourinterestDiff=a:adjust3-a:adjust2
+:			let     weareScaleRatio=1000/ourinterestDiff
+:			let            interest=progressPerThou/weareScaleRatio
+:			let           interest2=interest+a:adjust2
+:			let      adjustedAdjust=interest2
+:		endif
 :		let whatdoyoucallit=a:dangerBgr-a:actBgr
 :		if whatdoyoucallit<0
 :			let whatdoyoucallit=-whatdoyoucallit
@@ -1038,12 +1052,12 @@ let highLowLightToggle=0
 :	let adj5=	RGBEl4(adjBG1A,								todaysec,47000,3000,14000,-99,-99,-99,-99,99)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,47000,3000,14000,-99,-99,-99,-99,99)
 :       let hH=printf("highlight Title guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
-:	let adj1=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,5000,22000,40,-300)
-:	let adj2=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,5000,22000,40,-300)
-:	let adj3=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,5000,22000,40,-300)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,50000,5000,22000,-5,-18,0,0,-2)
-:	let adj5=	RGBEl4(adjBG1A,								todaysec,50000,5000,22000,-5,-18,0,0,-2)
-:	let adj6=	RGBEl4(adjBG2,								todaysec,50000,5000,22000,-5,-18,0,0,-2)
+:	let adj1=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,5000,22000,40,0,-300)
+:	let adj2=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,5000,22000,40,0,-300)
+:	let adj3=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,5000,22000,40,0,-300)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,50000,5000,22000,-5,-18,0,0,-3)
+:	let adj5=	RGBEl4(adjBG1A,								todaysec,50000,5000,22000,-5,-18,0,0,-3)
+:	let adj6=	RGBEl4(adjBG2,								todaysec,50000,5000,22000,-5,-18,0,0,-3)
 :	let hI=printf("highlight Comment guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let hI1=printf("highlight htmlComment guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let hI2=printf("highlight htmlCommentPart guifg=#%02x%02x%02x guibg=#%02x%02x%02x",	adj1,adj2,adj3,adj4,adj5,adj6)
@@ -1176,5 +1190,4 @@ au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
-
 
