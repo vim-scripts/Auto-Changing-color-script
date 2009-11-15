@@ -4,7 +4,15 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | SUN 15TH OCT 2009:   9.8                                                    |
+" | SUN 15TH OCT 2009:   9.9                                                    |
+" |                      Whilst perhaps not George-Lucas effects, this Normal   |
+" |                      elements approaches smoothness as it flips back-and-   |
+" |                      forth between dark-based and light-based background    |
+" |                      scheme, and remains pretty visible through this        |
+" |                      change. This version just sharpens up the contrast     |
+" |                      at the dark end of the Normal effect a tad, so it      |
+" |                      keeps looking lively.                                  |
+" |                      9.8                                                    |
 " |                      Made funky adjustments to ease the visual flow of      |
 " |                      Normal from dark-light background and vice versa by    |
 " |                      individually switching the RGB components up/down one  |
@@ -1039,9 +1047,9 @@ let highLowLightToggle=0
 :	let adj6=	RGBEl4(adjBG2,								todaysec,46500,15000,13000,-6,-13,-3,-2,5)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",			adj1,adj1,adj2,adj4,adj5,adj6)
 :	let hC1=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj5,adj6)
-:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,32000,3500,32000,-132,-34)
-:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,31000,3500,32000,-132,-34)
-:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,33000,3500,32000,-132,-34)
+:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,32000,3500,32000,-138,-34)
+:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,31000,3500,32000,-138,-34)
+:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,33000,3500,32000,-138,-34)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
 :	let adj1=	RGBEl2((-todaysec+86400)/270/2+35,					todaysec,57000,9000,20000,70)
 :	let adj2=	RGBEl2((-todaysec+86400)/270/2+103,					todaysec,57000,9000,20000,70)
