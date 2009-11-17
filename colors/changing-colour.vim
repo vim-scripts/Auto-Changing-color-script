@@ -4,9 +4,12 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | TUE 17TH OCT 2009:   10.0                                                   |
+" | TUE 17TH OCT 2009:   10.1                                                   |
+" |                      Just a quick update. Had to tune-up the white-peak as  |
+" |                      it was staying on a bit too long.                      |
+" |                      10.0                                                   |
 " |                      On the 10.0 version, perhaps the best version. Normal  |
-" |                      Now blends more smoothly than ever at darker           |
+" |                      now blends more smoothly than ever at darker           |
 " |                      background ranges, and the background colour at the    |
 " |                      lighter ranges now peaks up to a pure white before     |
 " |                      coming down again to a tint which can be a shade of    |
@@ -1010,7 +1013,7 @@ let highLowLightToggle=0
 :		let adjBG1A=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :		let adjBG2=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :	endif
-:	let whiteadd=(todaysec-62000)/600
+:	let whiteadd=(todaysec-60000)/850
 :	if whiteadd>0
 :		let adjBG1=adjBG1+whiteadd
 :		if adjBG1>255
