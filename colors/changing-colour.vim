@@ -4,6 +4,16 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | TUE 17TH OCT 2009:   10.0                                                   |
+" |                      On the 10.0 version, perhaps the best version. Normal  |
+" |                      Now blends more smoothly than ever at darker           |
+" |                      background ranges, and the background colour at the    |
+" |                      lighter ranges now peaks up to a pure white before     |
+" |                      coming down again to a tint which can be a shade of    |
+" |                      either light-green, cyan, rose. The contrast is great, |
+" |                      the visibility is great, and the smoothness is great.  |
+" |                      If you haven't tried this before you'll really be      |
+" |                      amazed.                                                |
 " | SUN 15TH OCT 2009:   9.9                                                    |
 " |                      Whilst perhaps not George-Lucas effects, this Normal   |
 " |                      elements approaches smoothness as it flips back-and-   |
@@ -1000,6 +1010,23 @@ let highLowLightToggle=0
 :		let adjBG1A=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :		let adjBG2=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :	endif
+:	let whiteadd=(todaysec-62000)/600
+:	if whiteadd>0
+:		let adjBG1=adjBG1+whiteadd
+:		if adjBG1>255
+:			let adjBG1=255
+:		endif
+:		let adjBG1A=adjBG1A+whiteadd
+:		if adjBG1A>255
+:			let adjBG1A=255
+:		endif
+:		let adjBG2=adjBG2+whiteadd
+:		if adjBG2>255
+:			let adjBG2=255
+:		endif
+:	else
+:		let whiteadd=0
+:	endif
 :	let adjBG3=(adjBG1-32>=32)?adjBG1-32:32
 :	let adjBG4=(adjBG1-32>=32)?adjBG1-32:32
 :       let hA=printf("highlight Normal guibg=#%02x%02x%02x",					adjBG1,adjBG1A,adjBG2)
@@ -1047,9 +1074,9 @@ let highLowLightToggle=0
 :	let adj6=	RGBEl4(adjBG2,								todaysec,46500,15000,13000,-6,-13,-3,-2,5)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",			adj1,adj1,adj2,adj4,adj5,adj6)
 :	let hC1=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj5,adj6)
-:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,32000,3500,32000,-138,-34)
-:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,31000,3500,32000,-138,-34)
-:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,33000,3500,32000,-138,-34)
+:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,32000,4200,36000,-142,-34)
+:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,32000,6600,36000,-142,-34)
+:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,32000,1900,36000,-142,-34)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
 :	let adj1=	RGBEl2((-todaysec+86400)/270/2+35,					todaysec,57000,9000,20000,70)
 :	let adj2=	RGBEl2((-todaysec+86400)/270/2+103,					todaysec,57000,9000,20000,70)
@@ -1218,4 +1245,5 @@ au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
+
 
