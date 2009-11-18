@@ -4,6 +4,8 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | WED 18TH OCT 2009:   10.2                                                   |
+" |                      Further tuning-up.                                     |
 " | TUE 17TH OCT 2009:   10.1                                                   |
 " |                      Just a quick update. Had to tune-up the white-peak as  |
 " |                      it was staying on a bit too long.                      |
@@ -1077,9 +1079,9 @@ let highLowLightToggle=0
 :	let adj6=	RGBEl4(adjBG2,								todaysec,46500,15000,13000,-6,-13,-3,-2,5)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",			adj1,adj1,adj2,adj4,adj5,adj6)
 :	let hC1=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj5,adj6)
-:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,32000,4200,36000,-142,-34)
-:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,32000,6600,36000,-142,-34)
-:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,32000,1900,36000,-142,-34)
+:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,32000,4200,38000,-146,-32)
+:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,32000,6600,38000,-146,-32)
+:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,32000,0100,38000,-146,-32)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
 :	let adj1=	RGBEl2((-todaysec+86400)/270/2+35,					todaysec,57000,9000,20000,70)
 :	let adj2=	RGBEl2((-todaysec+86400)/270/2+103,					todaysec,57000,9000,20000,70)
@@ -1147,9 +1149,9 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+120,					todaysec,60000,8000,13000,40)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2+0,					todaysec,60000,8000,13000,40)
 :	let hO=printf("highlight Type guifg=#%02x%02x%02x",					adj1,adj2,adj3)
-:	let adj1=RGBEl3(255,									todaysec,85000,0)
-:	let adj2=RGBEl3(255,									todaysec,85000,255)
-:	let adj3=RGBEl3(0,									todaysec,85000,0)
+:	let adj1=RGBEl3(255,									todaysec,80000,0)
+:	let adj2=RGBEl3(255,									todaysec,80000,255)
+:	let adj3=RGBEl3(0,									todaysec,80000,0)
 :	let hP=printf("highlight Cursor guibg=#%02x%02x%02x",					adj1,adj2,adj3)
 :	let hP1=printf("highlight MatchParen guibg=#%02x%02x%02x",				adj1,adj2,adj3)
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2+100,					todaysec,44000,10000,26000,40)
@@ -1248,5 +1250,4 @@ au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
-
 
