@@ -4,7 +4,10 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | WED 18TH OCT 2009:   10.2                                                   |
+" | WED 18TH OCT 2009:   10.3                                                   |
+" |                      Trouble-shoot some visibilty problems associated with  |
+" |                      syntax elements Pmenu and CursorLine.                  |
+" |                      10.2                                                   |
 " |                      Further tuning-up.                                     |
 " | TUE 17TH OCT 2009:   10.1                                                   |
 " |                      Just a quick update. Had to tune-up the white-peak as  |
@@ -1032,8 +1035,8 @@ let highLowLightToggle=0
 :	else
 :		let whiteadd=0
 :	endif
-:	let adjBG3=(adjBG1-32>=32)?adjBG1-32:32
-:	let adjBG4=(adjBG1-32>=32)?adjBG1-32:32
+:	let adjBG3=(adjBG1-32>=32)?adjBG1-8:adjBG1+8
+:	let adjBG4=(adjBG1-32>=32)?adjBG1-8:adjBG1+8
 :       let hA=printf("highlight Normal guibg=#%02x%02x%02x",					adjBG1,adjBG1A,adjBG2)
 :       let hA1=printf("highlight Folded guibg=#%02x%02x%02x guifg=#%02x%02x%02x",		adjBG1,adjBG1,adjBG4,adjBG1,adjBG1,adjBG4)
 :       let hA2=printf("highlight CursorLine guibg=#%02x%02x%02x",				adjBG3,adjBG3,adjBG1) 
@@ -1139,7 +1142,7 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+20,					todaysec,37000,27000,20000,40)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2+80,					todaysec,37000,27000,20000,40)
 :	let adjBG6=(adjBG5-32>=0)?adjBG5-32:0
-:	let hM=printf("highlight PMenu guibg=#%02x%02x%02x",					adjBG6,adjBG6,adjBG6)
+:	let hM=printf("highlight PMenu guibg=#%02x%02x%02x",					adjBG3,adjBG3,adjBG1)
 :	let hN="highlight PMenuSel guibg=Yellow guifg=Blue"
 :	let adj1=	RGBEl2(adjBG1+40,							todaysec,86399,4000,1,40)
 :	let adj2=	RGBEl2(adjBG1A+15,							todaysec,86399,4000,1,40)
