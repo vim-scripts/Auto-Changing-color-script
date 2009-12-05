@@ -4,7 +4,11 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | SAT 5th DEC 2009:    10.8                                                   |
+" | SAT 5th DEC 2009:    10.9                                                   |
+" |                      Now the Identifier's green is starting to work out nice|
+" |                      and particularly with the new green in 'Normal' which  |
+" |                      complements with that of Identifier's.                 |
+" |                      10.8                                                   |
 " |                      Not claiming this is perfect but seems to be working   |
 " |                      for me, Identifier's green now feels a bit smoother.   |
 " |                      10.7                                                   |
@@ -1100,9 +1104,9 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,32000,4200,38000,-165,-32)
 :	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,32000,0100,38000,-165,-32)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
-:	let adj1=	RGBEl2((-todaysec+86400)/245/2+35,					todaysec,57000,9000,18000,70)
-:	let adj2=	RGBEl2((-todaysec+86400)/245/2+96,					todaysec,57000,9000,18000,70)
-:	let adj3=	RGBEl2((-todaysec+86400)/235/2,						todaysec,57000,9000,18000,70)
+:	let adj1=	RGBEl2((-todaysec+86400)/245/2+40,					todaysec,57000,9000,15000,45)
+:	let adj2=	RGBEl2((-todaysec+86400)/245/2+101,					todaysec,57000,9000,15000,45)
+:	let adj3=	RGBEl2((-todaysec+86400)/235/2+5,					todaysec,57000,9000,15000,45)
 :	let adj4=	RGBEl4(adjBG1,								todaysec,57000,9000,18000,-5,-10,-5,-3,4)
 :	let adj5=	RGBEl4(adjBG1A,								todaysec,57000,9000,18000,-5,-10,-5,-3,4)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,57000,9000,18000,-5,-10,-5,-3,4)
