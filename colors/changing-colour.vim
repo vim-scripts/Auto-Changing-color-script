@@ -4,6 +4,10 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | SAT 5th DEC 2009:    10.6                                                   |
+" |                      Got rid at last of the awful pink colour for the       |
+" |                      Normal, at dark ranges. Now it's green, and hence a    |
+" |                      bit more usable.                                       |
 " | FRI 4th DEC 2009:    10.5                                                   |
 " |                      Identifier vis 'fix' still too agreessive, tweaked.    |
 " |                      10.4                                                   |
@@ -1086,9 +1090,9 @@ let highLowLightToggle=0
 :	let adj6=	RGBEl4(adjBG2,								todaysec,46500,15000,13000,-6,-13,-3,-2,5)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",			adj1,adj1,adj2,adj4,adj5,adj6)
 :	let hC1=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj5,adj6)
-:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,32000,4200,38000,-146,-32)
-:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,32000,6600,38000,-146,-32)
-:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,32000,0100,38000,-146,-32)
+:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,32000,6600,38000,-165,-32)
+:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+64,					todaysec,32000,4200,38000,-165,-32)
+:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,32000,0100,38000,-165,-32)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
 :	let adj1=	RGBEl2((-todaysec+86400)/270/2+35,					todaysec,57000,9000,20000,70)
 :	let adj2=	RGBEl2((-todaysec+86400)/270/2+103,					todaysec,57000,9000,20000,70)
