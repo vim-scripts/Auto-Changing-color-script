@@ -4,6 +4,8 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | MON 11TH JAN 2010:   12.1                                                   |
+" |                      Changed possible annoying effect to 'off' by default.  |
 " | SUN 10TH JAN 2010:   12.0                                                   |
 " |                      Cosmetic improvements.                                 |
 " |                      11.9                                                   |
@@ -671,16 +673,16 @@ let highLowLightToggle=0
 :endfunction       
 
 " +------------------------------------------------------------------------------+
-" | Wrapper function takes into account 'invert' global variable, used when      |
-" | doing 'invert' colours behave light-dark instead of dark-light.              |
-" | If you thought this effect was annoying you could you could modify this      |
-" | function so it always calls muscle function with 0.                          |
+" | Wrapper function takes into account 'invert' global variable, used for doing |
+" | an 'invert' effect when you enter/leave Insert. In case this was annoying    |
+" | I left this off, but if you wanted to try it out simply change the second    |
+" | call to SetHighLight() so that it calls it with 1 rather than 0.             |
 " +------------------------------------------------------------------------------+
 :function ExtraSetHighLight()
 :	if g:highLowLightToggle==0
 :		call SetHighLight(0)
 :	else
-:		call SetHighLight(1)
+:		call SetHighLight(0)
 :	endif
 :endfunction
 
