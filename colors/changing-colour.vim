@@ -4,9 +4,11 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | SUN 10TH JAN 2010:   11.9                                                   |
+" | SUN 10TH JAN 2010:   12.0                                                   |
 " |                      Cosmetic improvements.                                 |
-" | SUN 10TH JAN 2010:   11.8                                                   |
+" |                      11.9                                                   |
+" |                      Cosmetic improvements.                                 |
+" |                      11.8                                                   |
 " |                      Cosmetic improvements.                                 |
 " |                      11.7                                                   |
 " |                      Further tweaks around Constant and Identifier.         |
@@ -526,23 +528,23 @@ let highLowLightToggle=0
 :	let adj6=	RGBEl4(adjBG2,								todaysec,46500,28000,16000,-5,-10,-3,-2,4)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj5,adj6)
 :	let hC1=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x",	adj1,adj1,adj2,adj4,adj5,adj6)
-:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,35000,9600,35000,-137,-32)
-:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+76,					todaysec,35000,0100,35000,-137,-32)
-:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,35000,0100,35000,-137,-32)
+:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,35000,9600,51400,-137,30)
+:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+76,					todaysec,35000,0100,51400,-137,30)
+:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,35000,0100,51400,-137,30)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
-:	let adj1=	RGBEl2a((-todaysec+86400)/365/2+66,					todaysec,57000,16000,15000,-115,-65)
-:	let adj2=	RGBEl2a((-todaysec+86400)/365/2+97,					todaysec,57000,16000,15000,-115,-65)
-:	let adj3=	RGBEl2a((-todaysec+86400)/355/2,					todaysec,57000,16000,15000,-115,-65)
+:	let adj1=	RGBEl2a((-todaysec+86400)/365/2+66,					todaysec,57000,16000,15000,-115,-45)
+:	let adj2=	RGBEl2a((-todaysec+86400)/365/2+97,					todaysec,57000,16000,15000,-115,-45)
+:	let adj3=	RGBEl2a((-todaysec+86400)/355/2,					todaysec,57000,16000,15000,-115,-45)
 :	let adj4=	RGBEl4(adjBG1-5,							todaysec,57000,16000,18000,-2,-8,0,1,2)
 :	let adj5=	RGBEl4(adjBG1A-5,							todaysec,57000,16000,18000,-2,-8,0,1,2)
 :	let adj6=	RGBEl4(adjBG2-5,							todaysec,57000,16000,18000,-2,-8,0,1,2)
 :	let hE=printf("highlight Identifier guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
-:	let adj1=	RGBEl2((-todaysec+86400)/355/2+100,					todaysec,43000,5000,16000,50)
-:	let adj2=	RGBEl2((-todaysec+86400)/355/2+0,					todaysec,43000,5000,16000,50)
-:	let adj3=	RGBEl2((-todaysec+86400)/355/2+140,					todaysec,43000,5000,16000,50)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,43000,5000,16000,-99,-99,4,4,0)
-:	let adj5=	RGBEl4(adjBG1A,								todaysec,43000,5000,16000,-99,-99,4,4,0)
-:	let adj6=	RGBEl4(adjBG2,								todaysec,43000,5000,16000,-99,-99,4,4,0)
+:	let adj1=	RGBEl2((-todaysec+86400)/355/2+97,					todaysec,43000,8000,16000,50)
+:	let adj2=	RGBEl2((-todaysec+86400)/355/2+0,					todaysec,43000,8000,16000,50)
+:	let adj3=	RGBEl2((-todaysec+86400)/355/2+137,					todaysec,43000,8000,16000,50)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,43000,8000,16000,-99,-99,0,0,0)
+:	let adj5=	RGBEl4(adjBG1A,								todaysec,43000,8000,16000,-99,-99,0,0,0)
+:	let adj6=	RGBEl4(adjBG2,								todaysec,43000,8000,16000,-99,-99,0,0,0)
 :	let hF=printf("highlight PreProc guifg=#%02x%02x%02x gui=bold guibg=#%02x%02x%02x",	adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adj1=	RGBEl2((-todaysec+86400)/600/4+187,					todaysec,57000,16000,15000,68)
 :	let adj2=	RGBEl2((-todaysec+86400)/600/4+95,					todaysec,57000,16000,15000,68)
