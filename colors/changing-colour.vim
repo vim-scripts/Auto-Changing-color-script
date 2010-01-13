@@ -4,6 +4,8 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | WED 13TH JAN 2010:   12.2                                                   |
+" |                      Cosmetic improvements.                                 |
 " | MON 11TH JAN 2010:   12.1                                                   |
 " |                      Changed possible annoying effect to 'off' by default.  |
 " | SUN 10TH JAN 2010:   12.0                                                   |
@@ -25,54 +27,7 @@
 " |                      Improved some elements that had somehow become         |
 " |                      invisible like Folded. There should be no elements     |
 " |                      that are invisible now.                                |
-" | FRI  8TH JAN 2010:   11.2                                                   |
-" |                      Tweaked all the elements, removed some glitches.       |
-" | MON 21ST DEC 2009:   11.1                                                   |
-" |                      Tweaked visibility of Identifier and Statement.        |
-" | WED 16TH DEC 2009:   11.0                                                   |
-" |                      Prettied-up Identifier and Statement. Still some       |
-" |                      non-vital glitches like sometimes the search/replace   |
-" |                      prompt is invisible, (fg==bg), folded lines text       |
-" |                      invisible (fg=bg) (which may not be so bad) and        |
-" |                      cursorline's colour is not always very distinct from   |
-" |                      general background (which may not be a problem if      |
-" |                      you don't use it.) But generally getting there.        |
-" | SAT 5th DEC 2009:    10.9                                                   |
-" |                      Now the Identifier's green is starting to work out nice|
-" |                      and particularly with the new green in 'Normal' which  |
-" |                      complements with that of Identifier's.                 |
-" |                      10.8                                                   |
-" |                      Not claiming this is perfect but seems to be working   |
-" |                      for me, Identifier's green now feels a bit smoother.   |
-" |                      10.7                                                   |
-" |                      Made the Identier's green a bit nicer, at dark and     |
-" |                      light backgrounds.                                     |
-" |                      10.6                                                   |
-" |                      Got rid at last of the awful pink colour for the       |
-" |                      Normal, at dark ranges. Now it's green, and hence a    |
-" |                      bit more usable.                                       |
-" | FRI 4th DEC 2009:    10.5                                                   |
-" |                      Identifier vis 'fix' still too agreessive, tweaked.    |
-" |                      10.4                                                   |
-" |                      Made the Identifier 'fix' visibility less agressive.   |
-" | WED 18TH OCT 2009:   10.3                                                   |
-" |                      Trouble-shoot some visibilty problems associated with  |
-" |                      syntax elements Pmenu and CursorLine.                  |
-" |                      10.2                                                   |
-" |                      Further tuning-up.                                     |
-" | TUE 17TH OCT 2009:   10.1                                                   |
-" |                      Just a quick update. Had to tune-up the white-peak as  |
-" |                      it was staying on a bit too long.                      |
-" |                      10.0                                                   |
-" |                      On the 10.0 version, perhaps the best version. Normal  |
-" |                      now blends more smoothly than ever at darker           |
-" |                      background ranges, and the background colour at the    |
-" |                      lighter ranges now peaks up to a pure white before     |
-" |                      coming down again to a tint which can be a shade of    |
-" |                      either light-green, cyan, rose. The contrast is great, |
-" |                      the visibility is great, and the smoothness is great.  |
-" |                      If you haven't tried this before you'll really be      |
-" |                      amazed.                                                |
+" |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
 
@@ -534,12 +489,12 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2a((-todaysec+86400)/338/2+76,					todaysec,35000,0100,51400,-137,30)
 :	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,35000,0100,51400,-137,30)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
-:	let adj1=	RGBEl2a((-todaysec+86400)/365/2+66,					todaysec,57000,16000,15000,-115,-45)
-:	let adj2=	RGBEl2a((-todaysec+86400)/365/2+97,					todaysec,57000,16000,15000,-115,-45)
-:	let adj3=	RGBEl2a((-todaysec+86400)/355/2,					todaysec,57000,16000,15000,-115,-45)
-:	let adj4=	RGBEl4(adjBG1-5,							todaysec,57000,16000,18000,-2,-8,0,1,2)
-:	let adj5=	RGBEl4(adjBG1A-5,							todaysec,57000,16000,18000,-2,-8,0,1,2)
-:	let adj6=	RGBEl4(adjBG2-5,							todaysec,57000,16000,18000,-2,-8,0,1,2)
+:	let adj1=	RGBEl2a((-todaysec+86400)/365/2+66,					todaysec,57000,22000,15000,-122,-45)
+:	let adj2=	RGBEl2a((-todaysec+86400)/365/2+97,					todaysec,57000,22000,15000,-122,-45)
+:	let adj3=	RGBEl2a((-todaysec+86400)/355/2,					todaysec,57000,22000,15000,-122,-45)
+:	let adj4=	RGBEl4(adjBG1-5,							todaysec,57000,22000,18000,-2,-8,0,1,2)
+:	let adj5=	RGBEl4(adjBG1A-5,							todaysec,57000,22000,18000,-2,-8,0,1,2)
+:	let adj6=	RGBEl4(adjBG2-5,							todaysec,57000,22000,18000,-2,-8,0,1,2)
 :	let hE=printf("highlight Identifier guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
 :	let adj1=	RGBEl2((-todaysec+86400)/355/2+97,					todaysec,43000,8000,16000,50)
 :	let adj2=	RGBEl2((-todaysec+86400)/355/2+0,					todaysec,43000,8000,16000,50)
