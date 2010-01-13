@@ -4,9 +4,12 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | WED 13TH JAN 2010:   12.3                                                   |
+" | WED 13TH JAN 2010:   12.4                                                   |
+" |                      Generalised some of the maths by adding ScaleRange()   |
+" |                      function, improved the feel of Constant.               |
+" |                      12.3                                                   |
 " |                      Cosmetic improvements.                                 |
-" | WED 13TH JAN 2010:   12.2                                                   |
+" |                      12.2                                                   |
 " |                      Cosmetic improvements.                                 |
 " | MON 11TH JAN 2010:   12.1                                                   |
 " |                      Changed possible annoying effect to 'off' by default.  |
@@ -22,9 +25,6 @@
 " |                      Further tweaks around Constant and Identifier.         |
 " |                      11.5                                                   |
 " |                      Blended in elements better, improved constrasts more.  |
-" |                      11.4                                                   |
-" |                      Lots of improvements to the contrasts, made cursorline |
-" |                      blend nicely with line number's colour.                |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -106,32 +106,22 @@ endfunction
 :	return adjustedValue
 :endfunction
 
+function ScaleToRange(a,aMin,aMax,rMin,rMax)
+:	let aLocal=a:a-a:aMin
+:	let rangeA=a:aMax-a:aMin
+:	let rangeR=a:rMax-a:rMin
+:	let divAR=rangeA/rangeR
+:	return aLocal/divAR+a:rMin
+endfunction
+
 " +------------------------------------------------------------------------------+
 " | Main RGBEl for Normal (like RGBEl2 but brightens, not darkens - Normal is    |
 " | a bit trickier because it is also where the general background is set        |
 " +------------------------------------------------------------------------------+
 :function RGBEl2a(RGBEl,actBgr,dangerBgr,senDar,senLig,loadj,hiadj)
-:	let localEase = 0
+:	let adjustedValue=a:RGBEl
 :	if a:actBgr>=a:dangerBgr-a:senDar && a:actBgr<=a:dangerBgr+a:senLig
-:		let        progressFrom=a:dangerBgr-a:senDar
-:		let        progressLoHi=a:actBgr-progressFrom
-:		let            diffLoHi=(a:dangerBgr+a:senLig)-(a:dangerBgr-a:senDar)
-:		let     progressPerThou=progressLoHi/(diffLoHi/1000)
-:		let     ourinterestDiff=a:hiadj-a:loadj
-:		let     weareScaleRatio=1000/ourinterestDiff
-:		let            interest=progressPerThou/weareScaleRatio
-:		let           interest2=interest+a:loadj
-:		let       adjustedValue=a:RGBEl+interest2
-:	elseif a:actBgr>=a:dangerBgr-a:senDar-localEase && a:actBgr<a:dangerBgr-a:senDar
-:		let        progressFrom=a:dangerBgr-a:senDar-localEase
-:		let        progressLoHi=a:actBgr-progressFrom
-:		let            diffLoHi=(a:dangerBgr-a:senDar)-(a:dangerBgr-a:senDar-localEase)
-:		let     progressPerThou=progressLoHi/(diffLoHi/1000)
-:		let     ourinterestDiff=a:loadj
-:		let     weareScaleRatio=1000/ourinterestDiff
-:		let            interest=progressPerThou/weareScaleRatio
-:		let           interest2=interest
-:		let       adjustedValue=a:RGBEl+interest2
+:		let adjustedValue=adjustedValue+ScaleToRange(a:actBgr,a:dangerBgr-a:senDar,a:dangerBgr+a:senLig,a:loadj,a:hiadj)
 :	else
 :		let adjustedValue=a:RGBEl
 :	endif
@@ -285,21 +275,79 @@ endfunction
 :	endif
 :	let adjustedValue=a:RGBEl
 :	if a:actBgr>=a:dangerBgr-a:senDar-g:easeArea && a:actBgr<a:dangerBgr-a:senDar
-:		let        progressFrom=a:dangerBgr-a:senDar-g:easeArea
-:		let        progressLoHi=a:actBgr-progressFrom
-:		let            diffLoHi=darkAdjHi-darkAdjLo
-:		let  scaledProgressLoHi=diffLoHi*progressLoHi
-:		let       adjustedValue=a:RGBEl+darkAdjLo+(scaledProgressLoHi/g:easeArea)
+:		let adjustedValue=adjustedValue+ScaleToRange(a:actBgr,a:dangerBgr-a:senDar-g:easeArea,a:dangerBgr-a:senDar,lghtAdjLo,lghtAdjHi)
 :	endif
 :	if a:actBgr>a:dangerBgr+a:senLig && a:actBgr<=a:dangerBgr+a:senLig+g:easeArea
-:		let        progressFrom=a:dangerBgr+a:senLig
-:		let        progressLoHi=a:actBgr-progressFrom
-:		let            diffLoHi=lghtAdjHi-lghtAdjLo
-:		let  scaledProgressLoHi=diffLoHi*progressLoHi
-:		let       adjustedValue=a:RGBEl+lghtAdjLo+(scaledProgressLoHi/g:easeArea)
+:		let adjustedValue=adjustedValue+ScaleToRange(a:actBgr,a:dangerBgr+a:senLig,a:dangerBgr+a:senLig+g:easeArea,lghtAdjLo,lghtAdjHi)
 :	endif
 :	if a:actBgr>=(a:dangerBgr-a:senDar) && a:actBgr<=(a:dangerBgr+a:senLig) && dangerZoneAdj
 :		let adjustedValue=adjustedValue+dangerZoneAdj
+:	endif
+:	if adjustedValue<0
+:		let adjustedValue=0
+:	endif
+:	if adjustedValue>255
+:		let adjustedValue=255
+:	endif
+:	return adjustedValue
+:endfunction
+
+" +------------------------------------------------------------------------------+
+" | Like REGEl4 but adding an additional control for fine-tuning the background  |
+" | at various ranges (instead of one flat rate.)                                |
+" +------------------------------------------------------------------------------+
+:function RGBEl4a(RGBEl,actBgr,dangerBgr,senDar,senLig,darkAdjLo,darkAdjHi,lghtAdjLo,lghtAdjHi,dangerZoneAdj1,dangerZoneAdj2)
+:	let darkAdjLo=a:darkAdjLo
+:	let darkAdjHi=a:darkAdjHi
+:	let lghtAdjLo=a:lghtAdjLo
+:	let lghtAdjHi=a:lghtAdjHi
+:	if a:darkAdjLo==99
+:		let darkAdjLo=11
+:	endif
+:	if a:darkAdjLo==-99
+:		let darkAdjLo=-11
+:	endif
+:	if a:darkAdjHi==99
+:		let darkAdjHi=11
+:	endif
+:	if a:darkAdjHi==-99
+:		let darkAdjHi=-11
+:	endif
+:	if a:lghtAdjLo==99
+:		let lghtAdjLo=11
+:	endif
+:	if a:lghtAdjLo==-99
+:		let lghtAdjLo=-11
+:	endif
+:	if a:lghtAdjHi==99
+:		let lghtAdjHi=11
+:	endif
+:	if a:lghtAdjHi==-99
+:		let lghtAdjHi=-11
+:	endif
+:	let dangerZoneAdj1=a:dangerZoneAdj1
+:	if a:dangerZoneAdj1==99
+:		let dangerZoneAdj1=15
+:	endif
+:	if a:dangerZoneAdj1==-99
+:		let dangerZoneAdj1=-15
+:	endif
+:	let dangerZoneAdj2=a:dangerZoneAdj2
+:	if a:dangerZoneAdj2==99
+:		let dangerZoneAdj2=15
+:	endif
+:	if a:dangerZoneAdj2==-99
+:		let dangerZoneAdj2=-15
+:	endif
+:	let adjustedValue=a:RGBEl
+:	if a:actBgr>=a:dangerBgr-a:senDar-g:easeArea && a:actBgr<a:dangerBgr-a:senDar
+:		let adjustedValue=adjustedValue+ScaleToRange(a:actBgr,a:dangerBgr-a:senDar-g:easeArea,a:dangerBgr-a:senDar,lghtAdjLo,lghtAdjHi)
+:	endif
+:	if a:actBgr>a:dangerBgr+a:senLig && a:actBgr<=a:dangerBgr+a:senLig+g:easeArea
+:		let adjustedValue=adjustedValue+ScaleToRange(a:actBgr,a:dangerBgr+a:senLig,a:dangerBgr+a:senLig+g:easeArea,lghtAdjLo,lghtAdjHi)
+:	endif
+:	if a:actBgr>=(a:dangerBgr-a:senDar) && a:actBgr<=(a:dangerBgr+a:senLig) && (dangerZoneAdj1 || dangerZoneAdj2)
+:		let adjustedValue=adjustedValue+ScaleToRange(a:actBgr,a:dangerBgr-a:senDar,a:dangerBgr+a:senLig,dangerZoneAdj1,dangerZoneAdj2)
 :	endif
 :	if adjustedValue<0
 :		let adjustedValue=0
@@ -478,9 +526,9 @@ let highLowLightToggle=0
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
 :	let adj1=	RGBEl2a((-todaysec+86400)/400/2+27,					todaysec,46500,28000,16000,-117,-50)
 :	let adj2=	RGBEl2a((-todaysec+86400)/400/2+110,					todaysec,46500,28000,16000,-117,-50)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,46500,28000,16000,-5,-10,-3,-2,5)
-:	let adj5=	RGBEl4(adjBG1A,								todaysec,46500,28000,16000,-5,-10,-3,-2,5)
-:	let adj6=	RGBEl4(adjBG2,								todaysec,46500,28000,16000,-5,-10,-3,-2,5)
+:	let adj4=	RGBEl4a(adjBG1,								todaysec,46500,28000,16000,-5,-10,-3,-2,13,0)
+:	let adj5=	RGBEl4a(adjBG1A,							todaysec,46500,28000,16000,-5,-10,-3,-2,13,0)
+:	let adj6=	RGBEl4a(adjBG2,								todaysec,46500,28000,16000,-5,-10,-3,-2,13,0)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj5,adj6)
 :	let hC1=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x",	adj1,adj1,adj2,adj4,adj5,adj6)
 :	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,35000,9600,51400,-137,30)
@@ -620,9 +668,6 @@ let highLowLightToggle=0
 :		execute hS
 :	endif
 :	redraw
-:	if exists("g:mytime") || exists("g:myhour")
-:		echo "WARNING: debug is *on*"
-:	endif
 :endfunction       
 
 " +------------------------------------------------------------------------------+
