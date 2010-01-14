@@ -5,6 +5,8 @@
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
 " | THU 14TH JAN 2010:   12.6                                                   |
+" |                      Type still hard too see. Corrected this a bit more.    |
+" |                      12.6                                                   |
 " |                      Slight correction of Type. (Too pale in places.)       |
 " |                      12.5                                                   |
 " |                      Put the Constant on steroids and tuned up quite a few  |
@@ -23,9 +25,6 @@
 " |                      11.9                                                   |
 " |                      Cosmetic improvements.                                 |
 " |                      11.8                                                   |
-" |                      Cosmetic improvements.                                 |
-" |                      11.7                                                   |
-" |                      Further tweaks around Constant and Identifier.         |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -605,9 +604,9 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2(adjBG1A+15,							todaysec,86399,6000,1,30)
 :	let adj3=	RGBEl2(adjBG2+10,							todaysec,86399,6000,1,30)
 :	let hL=printf("highlight Visual guibg=#%02x%02x%02x",					adj1,adj2,adj3)
-:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+150,					todaysec,60000,8000,13000,-68,-40,-40,-10)
-:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+120,					todaysec,60000,8000,13000,-68,-40,-40,-10)
-:	let adj3=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,60000,8000,13000,-68,-40,-40,-10)
+:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+150,					todaysec,60000,11000,13000,-68,-50,-40,-10)
+:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+120,					todaysec,60000,11000,13000,-68,-50,-40,-10)
+:	let adj3=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,60000,11000,13000,-68,-50,-40,-10)
 :	let hO=printf("highlight Type guifg=#%02x%02x%02x",					adj1,adj2,adj3)
 :	let adj1=RGBEl3(255,									todaysec,80000,0)
 :	let adj2=RGBEl3(255,									todaysec,80000,255)
