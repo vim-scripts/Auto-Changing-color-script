@@ -4,7 +4,9 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | THU 14TH JAN 2010:   12.9                                                   |
+" | THU 14TH JAN 2010:   13.0                                                   |
+" |                      Cosmetic improvements to Identifier.                   |
+" |                      12.9                                                   |
 " |                      Think finally ironed-out visibility issues with Type.  |
 " |                      12.8                                                   |
 " |                      Still a few teething visibility issues with Type.      |
@@ -547,9 +549,9 @@ let highLowLightToggle=0
 :	let adj1=	RGBEl2a((-todaysec+86400)/365/2+66,					todaysec,57000,22000,15000,-122,-30,-6,0)
 :	let adj2=	RGBEl2a((-todaysec+86400)/365/2+97,					todaysec,57000,22000,15000,-122,-30,-6,0)
 :	let adj3=	RGBEl2a((-todaysec+86400)/355/2,					todaysec,57000,22000,15000,-122,-30,-6,0)
-:	let adj4=	RGBEl4(adjBG1-5,							todaysec,57000,22000,15000,-2,-8,0,1,2)
-:	let adj5=	RGBEl4(adjBG1A-5,							todaysec,57000,22000,15000,-2,-8,0,1,2)
-:	let adj6=	RGBEl4(adjBG2-5,							todaysec,57000,22000,15000,-2,-8,0,1,2)
+:	let adj4=	RGBEl4a(adjBG1,								todaysec,57000,22000,15000,3,-3,5,0,7,2,6,-8,-2,-2)
+:	let adj5=	RGBEl4a(adjBG1A,							todaysec,57000,22000,15000,3,-3,5,0,7,2,6,-8,-2,-2)
+:	let adj6=	RGBEl4a(adjBG2,								todaysec,57000,22000,15000,3,-3,5,0,7,2,6,-8,-2,-2)
 :	let hE=printf("highlight Identifier guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
 :	let adj1=	RGBEl2((-todaysec+86400)/355/2+97,					todaysec,43000,8000,16000,50)
 :	let adj2=	RGBEl2((-todaysec+86400)/355/2+0,					todaysec,43000,8000,16000,50)
