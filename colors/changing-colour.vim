@@ -4,7 +4,10 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | THU 14TH JAN 2010:   13.0                                                   |
+" | THU 14TH JAN 2010:   13.1                                                   |
+" |                      Had one final fight with Type to make it visible and   |
+" |                      ironed-out some bugs in Identifier.                    |
+" |                      13.0                                                   |
 " |                      Cosmetic improvements to Identifier.                   |
 " |                      12.9                                                   |
 " |                      Think finally ironed-out visibility issues with Type.  |
@@ -27,8 +30,6 @@
 " |                      Cosmetic improvements.                                 |
 " | MON 11TH JAN 2010:   12.1                                                   |
 " |                      Changed possible annoying effect to 'off' by default.  |
-" | SUN 10TH JAN 2010:   12.0                                                   |
-" |                      Cosmetic improvements.                                 |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -346,7 +347,7 @@ endfunction
 :	endif
 :	let adjustedValue=a:RGBEl
 :	if a:actBgr>=a:dangerBgr-a:senDar-g:easeArea && a:actBgr<a:dangerBgr-a:senDar
-:		let adjustedValue=adjustedValue+ScaleToRange(a:actBgr,a:dangerBgr-a:senDar-g:easeArea,a:dangerBgr-a:senDar,lghtAdjLo,lghtAdjHi)
+:		let adjustedValue=adjustedValue+ScaleToRange(a:actBgr,a:dangerBgr-a:senDar-g:easeArea,a:dangerBgr-a:senDar,darkAdjLo,darkAdjHi)
 :	endif
 :	if a:actBgr>=0 && a:actBgr<a:dangerBgr-a:senDar-g:easeArea
 :		let adjustedValue=adjustedValue+ScaleToRange(a:actBgr,0,a:dangerBgr-a:senDar-g:easeArea,a:ligdown1,a:ligdown2)
@@ -549,9 +550,9 @@ let highLowLightToggle=0
 :	let adj1=	RGBEl2a((-todaysec+86400)/365/2+66,					todaysec,57000,22000,15000,-122,-30,-6,0)
 :	let adj2=	RGBEl2a((-todaysec+86400)/365/2+97,					todaysec,57000,22000,15000,-122,-30,-6,0)
 :	let adj3=	RGBEl2a((-todaysec+86400)/355/2,					todaysec,57000,22000,15000,-122,-30,-6,0)
-:	let adj4=	RGBEl4a(adjBG1,								todaysec,57000,22000,15000,3,-3,5,0,7,2,6,-8,-2,-2)
-:	let adj5=	RGBEl4a(adjBG1A,							todaysec,57000,22000,15000,3,-3,5,0,7,2,6,-8,-2,-2)
-:	let adj6=	RGBEl4a(adjBG2,								todaysec,57000,22000,15000,3,-3,5,0,7,2,6,-8,-2,-2)
+:	let adj4=	RGBEl4a(adjBG1,								todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
+:	let adj5=	RGBEl4a(adjBG1A,							todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
+:	let adj6=	RGBEl4a(adjBG2,								todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
 :	let hE=printf("highlight Identifier guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
 :	let adj1=	RGBEl2((-todaysec+86400)/355/2+97,					todaysec,43000,8000,16000,50)
 :	let adj2=	RGBEl2((-todaysec+86400)/355/2+0,					todaysec,43000,8000,16000,50)
@@ -608,9 +609,9 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2(adjBG1A+15,							todaysec,86399,6000,1,30)
 :	let adj3=	RGBEl2(adjBG2+10,							todaysec,86399,6000,1,30)
 :	let hL=printf("highlight Visual guibg=#%02x%02x%02x",					adj1,adj2,adj3)
-:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+150,					todaysec,60000,11000,13000,-62,-50,-40,-25)
-:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+120,					todaysec,60000,11000,13000,-62,-50,-40,-25)
-:	let adj3=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,60000,11000,13000,-62,-50,-40,-25)
+:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+150,					todaysec,60000,11000,13000,-90,-45,-50,-20)
+:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+120,					todaysec,60000,11000,13000,-90,-45,-50,-20)
+:	let adj3=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,60000,11000,13000,-90,-45,-50,-20)
 :	let hO=printf("highlight Type guifg=#%02x%02x%02x",					adj1,adj2,adj3)
 :	let adj1=RGBEl3(255,									todaysec,80000,0)
 :	let adj2=RGBEl3(255,									todaysec,80000,255)
