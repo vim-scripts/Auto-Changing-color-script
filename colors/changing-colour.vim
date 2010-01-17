@@ -4,6 +4,10 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | SUN 17TH JAN 2010:   13.2                                                   |
+" |                      Sharpened-up PreProc. This is the 'function' keyword   |
+" |                      in e.g. PHP & ActionScript. Was a bit fuzzy in certain |
+" |                      areas.                                                 |
 " | THU 14TH JAN 2010:   13.1                                                   |
 " |                      Had one final fight with Type to make it visible and   |
 " |                      ironed-out some bugs in Identifier.                    |
@@ -28,8 +32,6 @@
 " |                      Cosmetic improvements.                                 |
 " |                      12.2                                                   |
 " |                      Cosmetic improvements.                                 |
-" | MON 11TH JAN 2010:   12.1                                                   |
-" |                      Changed possible annoying effect to 'off' by default.  |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -554,12 +556,12 @@ let highLowLightToggle=0
 :	let adj5=	RGBEl4a(adjBG1A,							todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
 :	let adj6=	RGBEl4a(adjBG2,								todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
 :	let hE=printf("highlight Identifier guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
-:	let adj1=	RGBEl2((-todaysec+86400)/355/2+97,					todaysec,43000,8000,16000,50)
-:	let adj2=	RGBEl2((-todaysec+86400)/355/2+0,					todaysec,43000,8000,16000,50)
-:	let adj3=	RGBEl2((-todaysec+86400)/355/2+137,					todaysec,43000,8000,16000,50)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,43000,8000,16000,-99,-99,0,0,0)
-:	let adj5=	RGBEl4(adjBG1A,								todaysec,43000,8000,16000,-99,-99,0,0,0)
-:	let adj6=	RGBEl4(adjBG2,								todaysec,43000,8000,16000,-99,-99,0,0,0)
+:	let adj1=	RGBEl2a((-todaysec+86400)/355/2+97,					todaysec,43000,14000,19000,-105,-75,0,0)
+:	let adj2=	RGBEl2a((-todaysec+86400)/355/2+0,					todaysec,43000,14000,19000,-105,-75,0,0)
+:	let adj3=	RGBEl2a((-todaysec+86400)/355/2+137,					todaysec,43000,14000,19000,-105,-75,0,0)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,43000,14000,19000,-99,-99,0,0,0)
+:	let adj5=	RGBEl4(adjBG1A,								todaysec,43000,14000,19000,-99,-99,0,0,0)
+:	let adj6=	RGBEl4(adjBG2,								todaysec,43000,14000,19000,-99,-99,0,0,0)
 :	let hF=printf("highlight PreProc guifg=#%02x%02x%02x gui=bold guibg=#%02x%02x%02x",	adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adj1=	RGBEl2a((-todaysec+86400)/600/4+187,					todaysec,57000,22000,15000,-90,-68,0,0)
 :	let adj2=	RGBEl2a((-todaysec+86400)/600/4+95,					todaysec,57000,22000,15000,-90,-68,0,0)
