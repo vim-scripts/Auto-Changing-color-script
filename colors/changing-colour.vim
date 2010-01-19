@@ -4,6 +4,8 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | TUE 19TH JAN 2010:   13.3                                                   |
+" |                      Made Constant a bit brighter so it stands out better.  |
 " | SUN 17TH JAN 2010:   13.2                                                   |
 " |                      Sharpened-up PreProc. This is the 'function' keyword   |
 " |                      in e.g. PHP & ActionScript. Was a bit fuzzy in certain |
@@ -29,8 +31,6 @@
 " |                      Generalised some of the maths by adding ScaleRange()   |
 " |                      function, improved the feel of Constant.               |
 " |                      12.3                                                   |
-" |                      Cosmetic improvements.                                 |
-" |                      12.2                                                   |
 " |                      Cosmetic improvements.                                 |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
@@ -540,9 +540,9 @@ let highLowLightToggle=0
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
 :	let adj1=	RGBEl2a((-todaysec+86400)/400/2+27,					todaysec,46500,28000,16000,-110,-45,0,10)
 :	let adj2=	RGBEl2a((-todaysec+86400)/400/2+110,					todaysec,46500,28000,16000,-110,-45,0,10)
-:	let adj4=	RGBEl4a(adjBG1,								todaysec,46500,28000,16000,-5,-10,-3,-2,20,2,12,6,-4,-5)
-:	let adj5=	RGBEl4a(adjBG1A,							todaysec,46500,28000,16000,-5,-10,-3,-2,20,2,12,6,-4,-5)
-:	let adj6=	RGBEl4a(adjBG2,								todaysec,46500,28000,16000,-5,-10,-3,-2,20,2,12,6,-4,-5)
+:	let adj4=	RGBEl4a(adjBG1,								todaysec,46500,28000,16000,-5,-10,-3,-2,24,2,12,6,-4,-5)
+:	let adj5=	RGBEl4a(adjBG1A,							todaysec,46500,28000,16000,-5,-10,-3,-2,24,2,12,6,-4,-5)
+:	let adj6=	RGBEl4a(adjBG2,								todaysec,46500,28000,16000,-5,-10,-3,-2,24,2,12,6,-4,-5)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj5,adj6)
 :	let hC1=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x",	adj1,adj1,adj2,adj4,adj5,adj6)
 :	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,35000,9600,51400,-137,30,0,8)
