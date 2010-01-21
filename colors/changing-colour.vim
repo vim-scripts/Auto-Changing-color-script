@@ -4,6 +4,10 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | THU 21ST JAN 2010:   13.5                                                   |
+" |                      Made Statement a bit more focussed-looking at darker   |
+" |                      backgrounds. This is typically a keyword such a return,|
+" |                      for, if.. so it's pretty important that it be sharp.   |
 " | WED 20TH JAN 2010:   13.4                                                   |
 " |                      Did a spot of fine-tuning with Special, this is typic- |
 " |                      ally the braces '{' and '}' in most langs, like PHP, C.|
@@ -30,9 +34,6 @@
 " |                      12.5                                                   |
 " |                      Put the Constant on steroids and tuned up quite a few  |
 " |                      others.                                                |
-" | WED 13TH JAN 2010:   12.4                                                   |
-" |                      Generalised some of the maths by adding ScaleRange()   |
-" |                      function, improved the feel of Constant.               |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -526,9 +527,9 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2(adjBG1A,								todaysec,86399,4000,1,40)
 :	let adj3=	RGBEl2(adjBG2+30,							todaysec,86399,4000,1,40)
 :	let hA9=printf("highlight DiffText guibg=#%02x%02x%02x",				adj1,adj2,adj3)
-:	let adj1	=RGBEl2a((-todaysec+86400)/338/4+160,					todaysec,57000,22000,15000,-100,-42,0,0)
-:	let adj2	=RGBEl2a((-todaysec+86400)/338/4+76,					todaysec,57000,22000,15000,-100,-42,0,0)
-:	let adj3	=RGBEl2a((-todaysec+86400)/338/4+23,					todaysec,57000,22000,15000,-100,-42,0,0)
+:	let adj1	=RGBEl2a((-todaysec+86400)/338/4+160,					todaysec,57000,22000,15000,-100,-42,0,12)
+:	let adj2	=RGBEl2a((-todaysec+86400)/338/4+76,					todaysec,57000,22000,15000,-100,-42,0,12)
+:	let adj3	=RGBEl2a((-todaysec+86400)/338/4+23,					todaysec,57000,22000,15000,-100,-42,0,12)
 :	let adj4	=RGBEl4(adjBG1,								todaysec,57000,22000,15000,-4,-11,-2,0,0)
 :	let adj5	=RGBEl4(adjBG1A,							todaysec,57000,22000,15000,-4,-11,-2,0,0)
 :	let adj6	=RGBEl4(adjBG2,								todaysec,57000,22000,15000,-4,-11,-2,0,0)
