@@ -4,6 +4,10 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | SUN 24TH JAN 2010:   13.7                                                   |
+" |                      Strengthened PreProc, which gives colour to keywords   |
+" |                      like 'function' and 'include_once' in php, and         |
+" |                      'function' in other languages like ActionScript 2.0.   |
 " | THU 21ST JAN 2010:   13.6                                                   |
 " |                      Made Constant backgrounds a bit more helpful, so look- |
 " |                      ing at your 'Hello mum' and 58, 99, and #ee will now be|
@@ -35,9 +39,6 @@
 " |                      Type still hard too see. Corrected this a bit more.    |
 " |                      12.6                                                   |
 " |                      Slight correction of Type. (Too pale in places.)       |
-" |                      12.5                                                   |
-" |                      Put the Constant on steroids and tuned up quite a few  |
-" |                      others.                                                |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -562,9 +563,9 @@ let highLowLightToggle=0
 :	let adj5=	RGBEl4a(adjBG1A,							todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
 :	let adj6=	RGBEl4a(adjBG2,								todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
 :	let hE=printf("highlight Identifier guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
-:	let adj1=	RGBEl2a((-todaysec+86400)/355/2+97,					todaysec,43000,14000,19000,-105,-75,0,0)
-:	let adj2=	RGBEl2a((-todaysec+86400)/355/2+0,					todaysec,43000,14000,19000,-105,-75,0,0)
-:	let adj3=	RGBEl2a((-todaysec+86400)/355/2+137,					todaysec,43000,14000,19000,-105,-75,0,0)
+:	let adj1=	RGBEl2a((-todaysec+86400)/355/2+97,					todaysec,43000,14000,19000,-130,-75,0,0)
+:	let adj2=	RGBEl2a((-todaysec+86400)/355/2+0,					todaysec,43000,14000,19000,-130,-75,0,0)
+:	let adj3=	RGBEl2a((-todaysec+86400)/355/2+137,					todaysec,43000,14000,19000,-130,-75,0,0)
 :	let adj4=	RGBEl4(adjBG1,								todaysec,43000,14000,19000,-99,-99,0,0,0)
 :	let adj5=	RGBEl4(adjBG1A,								todaysec,43000,14000,19000,-99,-99,0,0,0)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,43000,14000,19000,-99,-99,0,0,0)
