@@ -4,7 +4,13 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | SUN 24TH JAN 2010:   13.7                                                   |
+" | SUN 24TH JAN 2010:   13.8                                                   |
+" |                      Strengthened Constant, and Normal so things like       |
+" |                      like function names (e.g. CalculateScore()) look       |
+" |                      bright and sharp everywhere now, and Constants like    |
+" |                      $sParent = 'my mum'; <-- now look nice and bright      |
+" |                      everywhere too.                                        |
+" |                      13.7                                                   |
 " |                      Strengthened PreProc, which gives colour to keywords   |
 " |                      like 'function' and 'include_once' in php, and         |
 " |                      'function' in other languages like ActionScript 2.0.   |
@@ -37,8 +43,6 @@
 " |                      Did a few more tweaks. Had got a bit carried away.     |
 " |                      12.7                                                   |
 " |                      Type still hard too see. Corrected this a bit more.    |
-" |                      12.6                                                   |
-" |                      Slight correction of Type. (Too pale in places.)       |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -547,14 +551,14 @@ let highLowLightToggle=0
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
 :	let adj1=	RGBEl2a((-todaysec+86400)/400/2+27,					todaysec,46500,28000,16000,-110,-45,0,10)
 :	let adj2=	RGBEl2a((-todaysec+86400)/400/2+110,					todaysec,46500,28000,16000,-110,-45,0,10)
-:	let adj4=	RGBEl4a(adjBG1,								todaysec,46500,28000,16000,-5,-10,-3,-2,24,2,25,6,-4,-13)
-:	let adj5=	RGBEl4a(adjBG1A,							todaysec,46500,28000,16000,-5,-10,-3,-2,24,2,25,6,-4,-13)
-:	let adj6=	RGBEl4a(adjBG2,								todaysec,46500,28000,16000,-5,-10,-3,-2,24,2,25,6,-4,-13)
+:	let adj4=	RGBEl4a(adjBG1,								todaysec,46500,28000,16000,-5,-10,-3,-2,26,2,25,6,-4,-13)
+:	let adj5=	RGBEl4a(adjBG1A,							todaysec,46500,28000,16000,-5,-10,-3,-2,26,2,25,6,-4,-13)
+:	let adj6=	RGBEl4a(adjBG2,								todaysec,46500,28000,16000,-5,-10,-3,-2,26,2,25,6,-4,-13)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj5,adj6)
 :	let hC1=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x",	adj1,adj1,adj2,adj4,adj5,adj6)
-:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,35000,9600,51400,-137,30,0,8)
-:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+76,					todaysec,35000,0100,51400,-137,30,0,8)
-:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,35000,0100,51400,-137,30,0,8)
+:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,35000,9600,51400,-155,30,0,17)
+:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+76,					todaysec,35000,0100,51400,-155,30,0,17)
+:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,35000,0100,51400,-155,30,0,17)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
 :	let adj1=	RGBEl2a((-todaysec+86400)/365/2+66,					todaysec,57000,22000,15000,-122,-30,-6,0)
 :	let adj2=	RGBEl2a((-todaysec+86400)/365/2+97,					todaysec,57000,22000,15000,-122,-30,-6,0)
