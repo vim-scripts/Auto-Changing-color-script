@@ -4,7 +4,10 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | THU 24TH JAN 2010:   13.9                                                   |
+" | THU 24TH JAN 2010:   14.0                                                   |
+" |                      Spotted a bug with the cursorline/cursorcolumn         |
+" |                      colouring. Fixed now.                                  |
+" |                      13.9                                                   |
 " |                      Made CursorColumn be the same as CursorLine, so if you |
 " |                      happen to make use of CursorColumn at least it blends  |
 " |                      in nicely with the colour scheme.                      |
@@ -510,9 +513,9 @@ let highLowLightToggle=0
 :	else
 :		let g:whiteadd=0
 :	endif
-:	let adjBG3=(adjBG1-32>=32)?adjBG1-6-(g:whiteadd/3):adjBG1+9-(g:whiteadd/3)
-:	let adjBG4=(adjBG1A-32>=32)?adjBG1A-6-(g:whiteadd/3):adjBG1A+9-(g:whiteadd/3)
-:	let adjBG5a=(adjBG2-32>=32)?adjBG2-6-(g:whiteadd/3):adjBG2+9-(g:whiteadd/3)
+:	let adjBG3=(adjBG1-32>=32)?adjBG1-6-(g:whiteadd/3):adjBG1+9
+:	let adjBG4=(adjBG1A-32>=32)?adjBG1A-6-(g:whiteadd/3):adjBG1A+9
+:	let adjBG5a=(adjBG2-32>=32)?adjBG2-6-(g:whiteadd/3):adjBG2+9
 :       let hA=printf("highlight Normal guibg=#%02x%02x%02x",					adjBG1,adjBG1A,adjBG2)
 :	let adj1=	RGBEl2(adjBG1+40,							todaysec,80000,5500,6400,60)
 :	let adj2=	RGBEl2(adjBG1+40,							todaysec,80000,5500,6400,60)
