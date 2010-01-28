@@ -4,7 +4,11 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | THU 27TH JAN 2010:   14.1                                                   |
+" | THU 27TH JAN 2010:   14.2                                                   |
+" |                      Still more visibility glitches with CursorLine and     |
+" |                      CursorColumn. This was around the dark-light boundary. |
+" |                      Fixed now. Looks great all-round now.                  |
+" |                      14.1                                                   |
 " |                      Still some visibility glitches with CursorLine &       |
 " |                      CursorColumn. Fixed and looks awesome now, esp. in     |
 " |                      black backgrounds.                                     |
@@ -517,9 +521,12 @@ let highLowLightToggle=0
 :	else
 :		let g:whiteadd=0
 :	endif
-:	let adjBG3=(adjBG1>=70)?adjBG1-6-(g:whiteadd/3):adjBG1+ScaleToRange(adjBG1,0,70,32,11)
-:	let adjBG4=(adjBG1A>=70)?adjBG1A-6-(g:whiteadd/3):adjBG1A+ScaleToRange(adjBG1A,0,70,32,11)
-:	let adjBG5a=(adjBG2>=70)?adjBG2-6-(g:whiteadd/3):adjBG2+ScaleToRange(adjBG2,0,70,32,11)
+:	let temp1=adjBG1-(g:whiteadd/3)
+:	let temp2=adjBG1A-(g:whiteadd/3)
+:	let temp3=adjBG2-(g:whiteadd/3)
+:	let adjBG3=(adjBG1>=70)?temp1-ScaleToRange(adjBG1,70,255,11,8):adjBG1+ScaleToRange(adjBG1,0,70,32,15)
+:	let adjBG4=(adjBG1A>=70)?temp2-ScaleToRange(adjBG1A,70,255,11,8):adjBG1A+ScaleToRange(adjBG1A,0,70,32,15)
+:	let adjBG5a=(adjBG2>=70)?temp3-ScaleToRange(adjBG2,70,255,11,8):adjBG2+ScaleToRange(adjBG2,0,70,32,15)
 :       let hA=printf("highlight Normal guibg=#%02x%02x%02x",					adjBG1,adjBG1A,adjBG2)
 :	let adj1=	RGBEl2(adjBG1+40,							todaysec,80000,5500,6400,60)
 :	let adj2=	RGBEl2(adjBG1+40,							todaysec,80000,5500,6400,60)
