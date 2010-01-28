@@ -4,6 +4,11 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | THU 24TH JAN 2010:   13.9                                                   |
+" |                      Made CursorColumn be the same as CursorLine, so if you |
+" |                      happen to make use of CursorColumn at least it blends  |
+" |                      in nicely with the colour scheme.                      |
+" |                      $sParent = 'my mum'; <-- now look nice and bright      |
 " | SUN 24TH JAN 2010:   13.8                                                   |
 " |                      Strengthened Constant, and Normal so things like       |
 " |                      like function names (e.g. CalculateScore()) look       |
@@ -513,7 +518,8 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2(adjBG1+40,							todaysec,80000,5500,6400,60)
 :	let adj3=	RGBEl2(adjBG1+40,							todaysec,80000,5500,6400,60)
 :       let hA1=printf("highlight Folded guibg=#%02x%02x%02x guifg=#%02x%02x%02x",		adjBG1,adjBG1,adjBG4,adj1,adj2,adj3)
-:       let hA2=printf("highlight CursorLine guibg=#%02x%02x%02x",				adjBG3,adjBG4,adjBG5a) 
+:       let hA2=printf("highlight CursorColumn guibg=#%02x%02x%02x",				adjBG3,adjBG4,adjBG5a) 
+:       let hA2a=printf("highlight CursorLine guibg=#%02x%02x%02x",				adjBG3,adjBG4,adjBG5a) 
 :       let hA3=printf("highlight NonText guibg=#%02x%02x%02x guifg=#%02x%02x%02x",		adjBG3,adjBG1,adjBG1,adjBG3,adjBG1,adjBG1)  
 :       let hA4=printf("highlight LineNr guibg=#%02x%02x%02x",					adjBG3,adjBG4,adjBG5a)
 :	let adj1=	RGBEl4(adjBG1-30,							todaysec,0,0,10000,20,20,40,20,40)
@@ -658,6 +664,7 @@ let highLowLightToggle=0
 :		execute hA
 :		execute hA1
 :		execute hA2
+:		execute hA2a
 :		execute hA3
 :		execute hA4
 :		execute hA5
