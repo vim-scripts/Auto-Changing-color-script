@@ -4,6 +4,9 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | FRI 28TH JAN 2010:   14.3                                                   |
+" |                      Made some minor corrections to CursorColumn and        |
+" |                      CursorLine so that it doesn't turn 'green' temporarily.|
 " | THU 27TH JAN 2010:   14.2                                                   |
 " |                      Still more visibility glitches with CursorLine and     |
 " |                      CursorColumn. This was around the dark-light boundary. |
@@ -57,8 +60,6 @@
 " |                      12.8                                                   |
 " |                      Still a few teething visibility issues with Type.      |
 " |                      Did a few more tweaks. Had got a bit carried away.     |
-" |                      12.7                                                   |
-" |                      Type still hard too see. Corrected this a bit more.    |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -524,9 +525,9 @@ let highLowLightToggle=0
 :	let temp1=adjBG1-(g:whiteadd/3)
 :	let temp2=adjBG1A-(g:whiteadd/3)
 :	let temp3=adjBG2-(g:whiteadd/3)
-:	let adjBG3=(adjBG1>=70)?temp1-ScaleToRange(adjBG1,70,255,11,8):adjBG1+ScaleToRange(adjBG1,0,70,32,15)
-:	let adjBG4=(adjBG1A>=70)?temp2-ScaleToRange(adjBG1A,70,255,11,8):adjBG1A+ScaleToRange(adjBG1A,0,70,32,15)
-:	let adjBG5a=(adjBG2>=70)?temp3-ScaleToRange(adjBG2,70,255,11,8):adjBG2+ScaleToRange(adjBG2,0,70,32,15)
+:	let adjBG3=(todaysec>=18500)?temp1-ScaleToRange(adjBG1,54,255,9,12):adjBG1+ScaleToRange(adjBG1,0,54,32,26)
+:	let adjBG4=(todaysec>=18500)?temp2-ScaleToRange(adjBG1A,54,255,9,12):adjBG1A+ScaleToRange(adjBG1A,0,54,32,26)
+:	let adjBG5a=(todaysec>=18500)?temp3-ScaleToRange(adjBG2,54,255,9,12):adjBG2+ScaleToRange(adjBG2,0,54,32,26)
 :       let hA=printf("highlight Normal guibg=#%02x%02x%02x",					adjBG1,adjBG1A,adjBG2)
 :	let adj1=	RGBEl2(adjBG1+40,							todaysec,80000,5500,6400,60)
 :	let adj2=	RGBEl2(adjBG1+40,							todaysec,80000,5500,6400,60)
@@ -569,8 +570,8 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+54,					todaysec,44000,8000,20000,100)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2+80,					todaysec,44000,8000,20000,100)
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
-:	let adj1=	RGBEl2a((-todaysec+86400)/400/2+27,					todaysec,46500,28000,16000,-110,-45,0,10)
-:	let adj2=	RGBEl2a((-todaysec+86400)/400/2+110,					todaysec,46500,28000,16000,-110,-45,0,10)
+:	let adj1=	RGBEl2a((-todaysec+86400)/400/2+27,					todaysec,46500,28000,16000,-100,-45,0,10)
+:	let adj2=	RGBEl2a((-todaysec+86400)/400/2+110,					todaysec,46500,28000,16000,-100,-45,0,10)
 :	let adj4=	RGBEl4a(adjBG1,								todaysec,46500,28000,16000,-5,-10,-3,-2,26,2,25,6,-4,-13)
 :	let adj5=	RGBEl4a(adjBG1A,							todaysec,46500,28000,16000,-5,-10,-3,-2,26,2,25,6,-4,-13)
 :	let adj6=	RGBEl4a(adjBG2,								todaysec,46500,28000,16000,-5,-10,-3,-2,26,2,25,6,-4,-13)
