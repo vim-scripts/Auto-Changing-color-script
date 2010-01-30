@@ -4,10 +4,14 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | FRI 28TH JAN 2010:   14.3                                                   |
+" | SAT 30TH JAN 2010:   14.4                                                   |
+" |                      Made some updates to Constant to it blends-in better   |
+" |                      with the new CursorColumn and CursorLine, also looks   |
+" |                      a bit better generally.                                |
+" | FRI 29TH JAN 2010:   14.3                                                   |
 " |                      Made some minor corrections to CursorColumn and        |
 " |                      CursorLine so that it doesn't turn 'green' temporarily.|
-" | THU 27TH JAN 2010:   14.2                                                   |
+" | THU 28TH JAN 2010:   14.2                                                   |
 " |                      Still more visibility glitches with CursorLine and     |
 " |                      CursorColumn. This was around the dark-light boundary. |
 " |                      Fixed now. Looks great all-round now.                  |
@@ -57,9 +61,6 @@
 " |                      Cosmetic improvements to Identifier.                   |
 " |                      12.9                                                   |
 " |                      Think finally ironed-out visibility issues with Type.  |
-" |                      12.8                                                   |
-" |                      Still a few teething visibility issues with Type.      |
-" |                      Did a few more tweaks. Had got a bit carried away.     |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -570,11 +571,11 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+54,					todaysec,44000,8000,20000,100)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2+80,					todaysec,44000,8000,20000,100)
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
-:	let adj1=	RGBEl2a((-todaysec+86400)/400/2+27,					todaysec,46500,28000,16000,-100,-45,0,10)
-:	let adj2=	RGBEl2a((-todaysec+86400)/400/2+110,					todaysec,46500,28000,16000,-100,-45,0,10)
-:	let adj4=	RGBEl4a(adjBG1,								todaysec,46500,28000,16000,-5,-10,-3,-2,26,2,25,6,-4,-13)
-:	let adj5=	RGBEl4a(adjBG1A,							todaysec,46500,28000,16000,-5,-10,-3,-2,26,2,25,6,-4,-13)
-:	let adj6=	RGBEl4a(adjBG2,								todaysec,46500,28000,16000,-5,-10,-3,-2,26,2,25,6,-4,-13)
+:	let adj1=	RGBEl2a((-todaysec+86400)/400/2+27,					todaysec,46500,28000,16000,-135,-45,0,10)
+:	let adj2=	RGBEl2a((-todaysec+86400)/400/2+110,					todaysec,46500,28000,16000,-135,-45,0,10)
+:	let adj4=	RGBEl4a(adjBG1,								todaysec,46500,28000,16000,-5,-10,-3,-2,8,2,25,6,-4,-13)
+:	let adj5=	RGBEl4a(adjBG1A,							todaysec,46500,28000,16000,-5,-10,-3,-2,8,2,25,6,-4,-13)
+:	let adj6=	RGBEl4a(adjBG2,								todaysec,46500,28000,16000,-5,-10,-3,-2,8,2,25,6,-4,-13)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj5,adj6)
 :	let hC1=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x",	adj1,adj1,adj2,adj4,adj5,adj6)
 :	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,35000,9600,51400,-155,30,0,17)
