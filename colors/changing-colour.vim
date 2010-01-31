@@ -4,6 +4,9 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | SUN 31TH JAN 2010:   14.5                                                   |
+" |                      Some more adjustments to the strength of Constant      |
+" |                      ($a = "Hello world\n" <--) so it stands out better.    |
 " | SAT 30TH JAN 2010:   14.4                                                   |
 " |                      Made some updates to Constant to it blends-in better   |
 " |                      with the new CursorColumn and CursorLine, also looks   |
@@ -571,8 +574,8 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+54,					todaysec,44000,8000,20000,100)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2+80,					todaysec,44000,8000,20000,100)
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
-:	let adj1=	RGBEl2a((-todaysec+86400)/400/2+27,					todaysec,46500,28000,16000,-135,-45,0,10)
-:	let adj2=	RGBEl2a((-todaysec+86400)/400/2+110,					todaysec,46500,28000,16000,-135,-45,0,10)
+:	let adj1=	RGBEl2a((-todaysec+86400)/400/2+27,					todaysec,46500,28000,16000,-145,-45,0,10)
+:	let adj2=	RGBEl2a((-todaysec+86400)/400/2+110,					todaysec,46500,28000,16000,-145,-45,0,10)
 :	let adj4=	RGBEl4a(adjBG1,								todaysec,46500,28000,16000,-5,-10,-3,-2,8,2,25,6,-4,-13)
 :	let adj5=	RGBEl4a(adjBG1A,							todaysec,46500,28000,16000,-5,-10,-3,-2,8,2,25,6,-4,-13)
 :	let adj6=	RGBEl4a(adjBG2,								todaysec,46500,28000,16000,-5,-10,-3,-2,8,2,25,6,-4,-13)
