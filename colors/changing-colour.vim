@@ -4,6 +4,9 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | MON  1ST JAN 2010:   14.6                                                   |
+" |                      Made the update frequency a bit less annoying by       |
+" |                      default ~ every 1.5 minutes.                           |
 " | SUN 31TH JAN 2010:   14.5                                                   |
 " |                      Some more adjustments to the strength of Constant      |
 " |                      ($a = "Hello world\n" <--) so it stands out better.    |
@@ -80,9 +83,9 @@ let s:oldactontime=-9999
 " | This variable is used to control how often the script deems it's time to     |
 " | 'progress' the colour (also see above). The higher the value the less often  |
 " | it will do so, the lower the more often it will do so.  2880 is equivalnet   |
-" | to every minute, 5760 every two minutes.                                     |
+" | to every minute, 5760 every two minutes, 4320 is ~ every 1.5 minutes         |
 " +------------------------------------------------------------------------------+
-let g:changefreq=2880
+let g:changefreq=4320
 
 " +------------------------------------------------------------------------------+
 " | The following variable is the size of the area below and above that zone that|
