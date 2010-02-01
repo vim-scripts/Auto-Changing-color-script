@@ -4,7 +4,10 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | MON  1ST JAN 2010:   14.6                                                   |
+" | MON  1ST JAN 2010:   14.7                                                   |
+" |                      Upped the contrast of CursorLine & CursorColumns just  |
+" |                      a tiny bit so it stands out in very light backgrounds. |
+" |                      14.6                                                   |
 " |                      Made the update frequency a bit less annoying by       |
 " |                      default ~ every 1.5 minutes.                           |
 " | SUN 31TH JAN 2010:   14.5                                                   |
@@ -65,8 +68,6 @@
 " |                      ironed-out some bugs in Identifier.                    |
 " |                      13.0                                                   |
 " |                      Cosmetic improvements to Identifier.                   |
-" |                      12.9                                                   |
-" |                      Think finally ironed-out visibility issues with Type.  |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -532,9 +533,9 @@ let highLowLightToggle=0
 :	let temp1=adjBG1-(g:whiteadd/3)
 :	let temp2=adjBG1A-(g:whiteadd/3)
 :	let temp3=adjBG2-(g:whiteadd/3)
-:	let adjBG3=(todaysec>=18500)?temp1-ScaleToRange(adjBG1,54,255,9,12):adjBG1+ScaleToRange(adjBG1,0,54,32,26)
-:	let adjBG4=(todaysec>=18500)?temp2-ScaleToRange(adjBG1A,54,255,9,12):adjBG1A+ScaleToRange(adjBG1A,0,54,32,26)
-:	let adjBG5a=(todaysec>=18500)?temp3-ScaleToRange(adjBG2,54,255,9,12):adjBG2+ScaleToRange(adjBG2,0,54,32,26)
+:	let adjBG3=(todaysec>=18500)?temp1-ScaleToRange(adjBG1,54,255,9,13):adjBG1+ScaleToRange(adjBG1,0,54,32,26)
+:	let adjBG4=(todaysec>=18500)?temp2-ScaleToRange(adjBG1A,54,255,9,13):adjBG1A+ScaleToRange(adjBG1A,0,54,32,26)
+:	let adjBG5a=(todaysec>=18500)?temp3-ScaleToRange(adjBG2,54,255,9,13):adjBG2+ScaleToRange(adjBG2,0,54,32,26)
 :       let hA=printf("highlight Normal guibg=#%02x%02x%02x",					adjBG1,adjBG1A,adjBG2)
 :	let adj1=	RGBEl2(adjBG1+40,							todaysec,80000,5500,6400,60)
 :	let adj2=	RGBEl2(adjBG1+40,							todaysec,80000,5500,6400,60)
