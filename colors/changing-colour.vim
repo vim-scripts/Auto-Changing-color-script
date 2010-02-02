@@ -4,6 +4,9 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | TUE  2ND JAN 2010:   14.8                                                   |
+" |                      Made the dark blue in Constant ($a = "Hello\n";<--this |
+" |                      and b = 9;<--this) more of a 'Navy' blue not just Blue.|
 " | MON  1ST JAN 2010:   14.7                                                   |
 " |                      Upped the contrast of CursorLine & CursorColumns just  |
 " |                      a tiny bit so it stands out in very light backgrounds. |
@@ -66,8 +69,6 @@
 " | THU 14TH JAN 2010:   13.1                                                   |
 " |                      Had one final fight with Type to make it visible and   |
 " |                      ironed-out some bugs in Identifier.                    |
-" |                      13.0                                                   |
-" |                      Cosmetic improvements to Identifier.                   |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -578,8 +579,8 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+54,					todaysec,44000,8000,20000,100)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2+80,					todaysec,44000,8000,20000,100)
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
-:	let adj1=	RGBEl2a((-todaysec+86400)/400/2+27,					todaysec,46500,28000,16000,-145,-45,0,10)
-:	let adj2=	RGBEl2a((-todaysec+86400)/400/2+110,					todaysec,46500,28000,16000,-145,-45,0,10)
+:	let adj1=	RGBEl2a((-todaysec+86400)/400/2+27,					todaysec,46500,28000,16000,-165,-45,0,10)
+:	let adj2=	RGBEl2a((-todaysec+86400)/400/2+110,					todaysec,46500,28000,16000,-165,-45,0,10)
 :	let adj4=	RGBEl4a(adjBG1,								todaysec,46500,28000,16000,-5,-10,-3,-2,8,2,25,6,-4,-13)
 :	let adj5=	RGBEl4a(adjBG1A,							todaysec,46500,28000,16000,-5,-10,-3,-2,8,2,25,6,-4,-13)
 :	let adj6=	RGBEl4a(adjBG2,								todaysec,46500,28000,16000,-5,-10,-3,-2,8,2,25,6,-4,-13)
