@@ -4,6 +4,10 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | WED  3RD JAN 2010:   14.9                                                   |
+" |                      Made an adjustment so that background goes brightest   |
+" |                      at the hour since this seems a bit more consistent with|
+" |                      the way that you think about time (e.g.9AM, 4PM, 8PM..)|
 " | TUE  2ND JAN 2010:   14.8                                                   |
 " |                      Made the dark blue in Constant ($a = "Hello\n";<--this |
 " |                      and b = 9;<--this) more of a 'Navy' blue not just Blue.|
@@ -457,7 +461,7 @@ let highLowLightToggle=0
 " | time into the current hour.                                                  |
 " +------------------------------------------------------------------------------+
 :function SetHighLight(nightorday)
-:	let todaysec=((localtime()%(60*60)))*24
+:	let todaysec=(((localtime()+1800)%(60*60)))*24
 :	if exists("g:mytime")
 :		let todaysec=g:mytime
 :	endif
