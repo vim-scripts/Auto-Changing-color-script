@@ -4,6 +4,11 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | THU 18TH FEB 2010:   15.1                                                   |
+" |                      Finally made Comments highly visible at all lighnesses |
+" |                      also tweaked Constant. Comments look ok now don't      | 
+" |                      get hard-to-read suddenly, and Constants ("Hello"<--)  |
+" |                      are a little better as well.                           |
 " | THU  4TH FEB 2010:   15.0                                                   |
 " |                      Still had to make the Constants ("Hello"<--) more dark.|
 " | WED  3RD FEB 2010:   14.9                                                   |
@@ -68,10 +73,6 @@
 " |                      ally the braces '{' and '}' in most langs, like PHP, C.|
 " | TUE 19TH JAN 2010:   13.3                                                   |
 " |                      Made Constant a bit brighter so it stands out better.  |
-" | SUN 17TH JAN 2010:   13.2                                                   |
-" |                      Sharpened-up PreProc. This is the 'function' keyword   |
-" |                      in e.g. PHP & ActionScript. Was a bit fuzzy in certain |
-" |                      areas.                                                 |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -195,31 +196,23 @@ endfunction
 :		let            diffLoHi=(a:dangerBgr+a:senLig)-(a:dangerBgr-a:senDar)
 :		let     progressPerThou=progressLoHi/(diffLoHi/1000)
 :		if progressPerThou<500
-:			let     ourinterestDiff=a:adjust2-a:adjust1
-:			let     weareScaleRatio=1000/ourinterestDiff
-:			let            interest=progressPerThou/weareScaleRatio
-:			let           interest2=interest+a:adjust1
-:			let      adjustedAdjust=interest2
+:			let adjustedAdjust=ScaleToRange(a:actBgr,a:dangerBgr-a:senDar,((a:dangerBgr-a:senDar)+(a:dangerBgr+a:senLig))/2,a:adjust1,a:adjust2)
 :		else
-:			let     ourinterestDiff=a:adjust3-a:adjust2
-:			let     weareScaleRatio=1000/ourinterestDiff
-:			let            interest=progressPerThou/weareScaleRatio
-:			let           interest2=interest+a:adjust2
-:			let      adjustedAdjust=interest2
+:			let adjustedAdjust=ScaleToRange(a:actBgr,((a:dangerBgr-a:senDar)+(a:dangerBgr+a:senLig))/2,a:dangerBgr+a:senLig,a:adjust2,a:adjust3)
 :		endif
-:		let whatdoyoucallit=a:dangerBgr-a:actBgr
-:		if whatdoyoucallit<0
-:			let whatdoyoucallit=-whatdoyoucallit
+:		let proximity=a:dangerBgr-a:actBgr
+:		if proximity<0
+:			let proximity=-proximity
 :		endif
-:		let whatdoyoucallit=whatdoyoucallit/130
-:		if whatdoyoucallit>255
-:			let whatdoyoucallit=255
+:		let proximity=proximity/130
+:		if proximity>255
+:			let proximity=255
 :		endif
-:		let whatdoyoucallit=-whatdoyoucallit+255
-:		let whatdoyoucallit=whatdoyoucallit*adjustedAdjust
-:		let whatdoyoucallit=whatdoyoucallit/800
-:		let whatdoyoucallit=whatdoyoucallit+65
-:		let adjustedValue=a:RGBEl-whatdoyoucallit
+:		let proximity=-proximity+255
+:		let proximity=proximity*adjustedAdjust
+:		let proximity=proximity/800
+:		let proximity=proximity+65
+:		let adjustedValue=a:RGBEl-proximity
 :	else
 :		let adjustedValue=a:RGBEl
 :	endif
@@ -582,8 +575,8 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+54,					todaysec,44000,8000,20000,100)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2+80,					todaysec,44000,8000,20000,100)
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
-:	let adj1=	RGBEl2a((-todaysec+86400)/400/2+27,					todaysec,46500,28000,16000,-175,-45,0,10)
-:	let adj2=	RGBEl2a((-todaysec+86400)/400/2+110,					todaysec,46500,28000,16000,-175,-45,0,10)
+:	let adj1=	RGBEl2a((-todaysec+86400)/400/2+27,					todaysec,46500,28000,16000,-190,-45,0,10)
+:	let adj2=	RGBEl2a((-todaysec+86400)/400/2+110,					todaysec,46500,28000,16000,-190,-45,0,10)
 :	let adj4=	RGBEl4a(adjBG1,								todaysec,46500,28000,16000,-5,-10,-3,-2,8,2,25,6,-4,-13)
 :	let adj5=	RGBEl4a(adjBG1A,							todaysec,46500,28000,16000,-5,-10,-3,-2,8,2,25,6,-4,-13)
 :	let adj6=	RGBEl4a(adjBG2,								todaysec,46500,28000,16000,-5,-10,-3,-2,8,2,25,6,-4,-13)
@@ -622,12 +615,12 @@ let highLowLightToggle=0
 :	let adj5=	RGBEl4(adjBG1A,								todaysec,47000,3000,14000,-99,-99,-99,-99,99)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,47000,3000,14000,-99,-99,-99,-99,99)
 :       let hH=printf("highlight Title guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
-:	let adj1=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,5000,22000,40,0,-300)
-:	let adj2=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,5000,22000,40,0,-300)
-:	let adj3=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,5000,22000,40,0,-300)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,50000,5000,22000,-5,-18,0,0,-3)
-:	let adj5=	RGBEl4(adjBG1A,								todaysec,50000,5000,22000,-5,-18,0,0,-3)
-:	let adj6=	RGBEl4(adjBG2,								todaysec,50000,5000,22000,-5,-18,0,0,-3)
+:	let adj1=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,12000,22000,150,0,-300)
+:	let adj2=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,12000,22000,150,0,-300)
+:	let adj3=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,12000,22000,150,0,-300)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,50000,12000,22000,-8,-18,0,0,-3)
+:	let adj5=	RGBEl4(adjBG1A,								todaysec,50000,12000,22000,-8,-18,0,0,-3)
+:	let adj6=	RGBEl4(adjBG2,								todaysec,50000,12000,22000,-8,-18,0,0,-3)
 :	let hI=printf("highlight Comment guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let hI1=printf("highlight htmlComment guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	let hI2=printf("highlight htmlCommentPart guifg=#%02x%02x%02x guibg=#%02x%02x%02x",	adj1,adj2,adj3,adj4,adj5,adj6)
