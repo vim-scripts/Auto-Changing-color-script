@@ -4,7 +4,10 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | FRI 19TH FEB 2010:   15.3                                                   |
+" | FRI 19TH FEB 2010:   15.4                                                   |
+" |                      Made CursorColumn and CursorLine less aggressive to    |
+" |                      help keep text under it visible.                       |
+" |                      15.3                                                   |
 " |                      Made Comments stronger still.                          |
 " |                      15.2                                                   |
 " |                      Made Comments stronger.                                |
@@ -72,9 +75,6 @@
 " |                      Made Statement a bit more focussed-looking at darker   |
 " |                      backgrounds. This is typically a keyword such a return,|
 " |                      for, if.. so it's pretty important that it be sharp.   |
-" | WED 20TH JAN 2010:   13.4                                                   |
-" |                      Did a spot of fine-tuning with Special, this is typic- |
-" |                      ally the braces '{' and '}' in most langs, like PHP, C.|
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -532,9 +532,9 @@ let highLowLightToggle=0
 :	let temp1=adjBG1-(g:whiteadd/3)
 :	let temp2=adjBG1A-(g:whiteadd/3)
 :	let temp3=adjBG2-(g:whiteadd/3)
-:	let adjBG3=(todaysec>=18500)?temp1-ScaleToRange(adjBG1,54,255,9,13):adjBG1+ScaleToRange(adjBG1,0,54,32,26)
-:	let adjBG4=(todaysec>=18500)?temp2-ScaleToRange(adjBG1A,54,255,9,13):adjBG1A+ScaleToRange(adjBG1A,0,54,32,26)
-:	let adjBG5a=(todaysec>=18500)?temp3-ScaleToRange(adjBG2,54,255,9,13):adjBG2+ScaleToRange(adjBG2,0,54,32,26)
+:	let adjBG3=(todaysec>=18500)?temp1-ScaleToRange(adjBG1,54,255,4,17):adjBG1+ScaleToRange(adjBG1,0,54,32,26)
+:	let adjBG4=(todaysec>=18500)?temp2-ScaleToRange(adjBG1A,54,255,4,17):adjBG1A+ScaleToRange(adjBG1A,0,54,32,26)
+:	let adjBG5a=(todaysec>=18500)?temp3-ScaleToRange(adjBG2,54,255,4,17):adjBG2+ScaleToRange(adjBG2,0,54,32,26)
 :       let hA=printf("highlight Normal guibg=#%02x%02x%02x",					adjBG1,adjBG1A,adjBG2)
 :	let adj1=	RGBEl2(adjBG1+40,							todaysec,80000,5500,6400,60)
 :	let adj2=	RGBEl2(adjBG1+40,							todaysec,80000,5500,6400,60)
