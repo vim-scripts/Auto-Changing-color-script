@@ -4,6 +4,8 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | FRI 19TH FEB 2010:   15.2                                                   |
+" |                      Made Comments stronger.                                |
 " | THU 18TH FEB 2010:   15.1                                                   |
 " |                      Finally made Comments highly visible at all lighnesses |
 " |                      also tweaked Constant. Comments look ok now don't      | 
@@ -71,8 +73,6 @@
 " | WED 20TH JAN 2010:   13.4                                                   |
 " |                      Did a spot of fine-tuning with Special, this is typic- |
 " |                      ally the braces '{' and '}' in most langs, like PHP, C.|
-" | TUE 19TH JAN 2010:   13.3                                                   |
-" |                      Made Constant a bit brighter so it stands out better.  |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -615,9 +615,9 @@ let highLowLightToggle=0
 :	let adj5=	RGBEl4(adjBG1A,								todaysec,47000,3000,14000,-99,-99,-99,-99,99)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,47000,3000,14000,-99,-99,-99,-99,99)
 :       let hH=printf("highlight Title guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
-:	let adj1=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,12000,22000,150,0,-300)
-:	let adj2=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,12000,22000,150,0,-300)
-:	let adj3=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,12000,22000,150,0,-300)
+:	let adj1=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,12000,22000,170,140,-300)
+:	let adj2=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,12000,22000,170,140,-300)
+:	let adj3=	RGBEl2b((-todaysec+86400)/338/4+110,					todaysec,50000,12000,22000,170,140,-300)
 :	let adj4=	RGBEl4(adjBG1,								todaysec,50000,12000,22000,-8,-18,0,0,-3)
 :	let adj5=	RGBEl4(adjBG1A,								todaysec,50000,12000,22000,-8,-18,0,0,-3)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,50000,12000,22000,-8,-18,0,0,-3)
