@@ -4,6 +4,9 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | TUE 23RD FEB 2010:   15.6                                                   |
+" |                      Made some improvements to Special ('<?php .. ?>, also  |
+" |                      bracket) looked a bit poor in dark background.         |
 " | SAT 20TH FEB 2010:   15.5                                                   |
 " |                      Still more strong on Comment.                          |
 " | FRI 19TH FEB 2010:   15.4                                                   |
@@ -73,10 +76,6 @@
 " |                      Made Constant backgrounds a bit more helpful, so look- |
 " |                      ing at your 'Hello mum' and 58, 99, and #ee will now be|
 " |                      a lot more fun in all languages supported by vim.      |
-" |                      13.5                                                   |
-" |                      Made Statement a bit more focussed-looking at darker   |
-" |                      backgrounds. This is typically a keyword such a return,|
-" |                      for, if.. so it's pretty important that it be sharp.   |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -590,9 +589,9 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2a((-todaysec+86400)/338/2+76,					todaysec,35000,0100,51400,-155,30,0,17)
 :	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,35000,0100,51400,-155,30,0,17)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
-:	let adj1=	RGBEl2a((-todaysec+86400)/365/2+66,					todaysec,57000,22000,15000,-122,-30,-6,0)
-:	let adj2=	RGBEl2a((-todaysec+86400)/365/2+97,					todaysec,57000,22000,15000,-122,-30,-6,0)
-:	let adj3=	RGBEl2a((-todaysec+86400)/355/2,					todaysec,57000,22000,15000,-122,-30,-6,0)
+:	let adj1=	RGBEl2a((-todaysec+86400)/365/2+66,					todaysec,57000,22000,15000,-128,-30,-6,0)
+:	let adj2=	RGBEl2a((-todaysec+86400)/365/2+97,					todaysec,57000,22000,15000,-128,-30,-6,0)
+:	let adj3=	RGBEl2a((-todaysec+86400)/355/2,					todaysec,57000,22000,15000,-128,-30,-6,0)
 :	let adj4=	RGBEl4a(adjBG1,								todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
 :	let adj5=	RGBEl4a(adjBG1A,							todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
 :	let adj6=	RGBEl4a(adjBG2,								todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
@@ -604,9 +603,9 @@ let highLowLightToggle=0
 :	let adj5=	RGBEl4(adjBG1A,								todaysec,43000,14000,19000,-99,-99,0,0,0)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,43000,14000,19000,-99,-99,0,0,0)
 :	let hF=printf("highlight PreProc guifg=#%02x%02x%02x gui=bold guibg=#%02x%02x%02x",	adj1,adj2,adj3,adj4,adj5,adj6)
-:	let adj1=	RGBEl2a((-todaysec+86400)/600/4+187,					todaysec,57000,22000,15000,-96,-68,0,0)
-:	let adj2=	RGBEl2a((-todaysec+86400)/600/4+95,					todaysec,57000,22000,15000,-96,-68,0,0)
-:	let adj3=	RGBEl2a((-todaysec+86400)/600/4+155,					todaysec,57000,22000,15000,-96,-68,0,0)
+:	let adj1=	RGBEl2a((-todaysec+86400)/600/4+187,					todaysec,57000,22000,15000,-156,-68,0,0)
+:	let adj2=	RGBEl2a((-todaysec+86400)/600/4+95,					todaysec,57000,22000,15000,-156,-68,0,0)
+:	let adj3=	RGBEl2a((-todaysec+86400)/600/4+155,					todaysec,57000,22000,15000,-156,-68,0,0)
 :	let adj4=	RGBEl4(adjBG1,								todaysec,57000,22000,15000,-2,-5,-5,-2,0)
 :	let adj5=	RGBEl4(adjBG1A,								todaysec,57000,22000,15000,-2,-5,-5,-2,0)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,57000,22000,15000,-2,-5,-5,-2,0)
