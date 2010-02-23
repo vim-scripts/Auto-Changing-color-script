@@ -4,8 +4,12 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | TUE 23RD FEB 2010:   15.6                                                   |
-" |                      Made some improvements to Special ('<?php .. ?>, also  |
+" | TUE 23RD FEB 2010:   15.7                                                   |
+" |                      Darkened Constant ('Hi Mum'<--) and Identifier         |
+" |                      (--> $sName = 'Paul') so it gives a nice balanced look |
+" |                      in the darker schemes.                                 |
+" |                      15.6                                                   |
+" |                      Made some improvements to Special ('<?php .. ?>, als   |
 " |                      bracket) looked a bit poor in dark background.         |
 " | SAT 20TH FEB 2010:   15.5                                                   |
 " |                      Still more strong on Comment.                          |
@@ -72,10 +76,6 @@
 " |                      Strengthened PreProc, which gives colour to keywords   |
 " |                      like 'function' and 'include_once' in php, and         |
 " |                      'function' in other languages like ActionScript 2.0.   |
-" | THU 21ST JAN 2010:   13.6                                                   |
-" |                      Made Constant backgrounds a bit more helpful, so look- |
-" |                      ing at your 'Hello mum' and 58, 99, and #ee will now be|
-" |                      a lot more fun in all languages supported by vim.      |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -578,8 +578,8 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+54,					todaysec,44000,8000,20000,100)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2+80,					todaysec,44000,8000,20000,100)
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
-:	let adj1=	RGBEl2a((-todaysec+86400)/400/2+27,					todaysec,46500,28000,16000,-190,-45,0,10)
-:	let adj2=	RGBEl2a((-todaysec+86400)/400/2+110,					todaysec,46500,28000,16000,-190,-45,0,10)
+:	let adj1=	RGBEl2a((-todaysec+86400)/400/2+27,					todaysec,46500,28000,16000,-210,-45,0,10)
+:	let adj2=	RGBEl2a((-todaysec+86400)/400/2+110,					todaysec,46500,28000,16000,-210,-45,0,10)
 :	let adj4=	RGBEl4a(adjBG1,								todaysec,46500,28000,16000,-5,-10,-3,-2,8,2,25,6,-4,-13)
 :	let adj5=	RGBEl4a(adjBG1A,							todaysec,46500,28000,16000,-5,-10,-3,-2,8,2,25,6,-4,-13)
 :	let adj6=	RGBEl4a(adjBG2,								todaysec,46500,28000,16000,-5,-10,-3,-2,8,2,25,6,-4,-13)
@@ -589,9 +589,9 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2a((-todaysec+86400)/338/2+76,					todaysec,35000,0100,51400,-155,30,0,17)
 :	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,35000,0100,51400,-155,30,0,17)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
-:	let adj1=	RGBEl2a((-todaysec+86400)/365/2+66,					todaysec,57000,22000,15000,-128,-30,-6,0)
-:	let adj2=	RGBEl2a((-todaysec+86400)/365/2+97,					todaysec,57000,22000,15000,-128,-30,-6,0)
-:	let adj3=	RGBEl2a((-todaysec+86400)/355/2,					todaysec,57000,22000,15000,-128,-30,-6,0)
+:	let adj1=	RGBEl2a((-todaysec+86400)/365/2+66,					todaysec,57000,22000,15000,-168,-30,-6,0)
+:	let adj2=	RGBEl2a((-todaysec+86400)/365/2+97,					todaysec,57000,22000,15000,-168,-30,-6,0)
+:	let adj3=	RGBEl2a((-todaysec+86400)/355/2,					todaysec,57000,22000,15000,-168,-30,-6,0)
 :	let adj4=	RGBEl4a(adjBG1,								todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
 :	let adj5=	RGBEl4a(adjBG1A,							todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
 :	let adj6=	RGBEl4a(adjBG2,								todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
