@@ -1,9 +1,13 @@
 " +-----------------------------------------------------------------------------+
-" | CHANGING COLOR SCRIPT                                                      |
+" | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | FRI 17TH SEP 2010:   15.9                                                   |
+" |                      Made FoldedColumn look the same as LineNr.             |
+" |                      Obviously it was not looking good as a static-style    |
+" |                      color scheme.  It blends in at least.                  |
 " | FRI 26TH FEB 2010:   15.8                                                   |
 " |                      Improved Constant. Now it goes in sync with other      |
 " |                      elements.                                              |
@@ -14,67 +18,6 @@
 " |                      15.6                                                   |
 " |                      Made some improvements to Special ('<?php .. ?>, als   |
 " |                      bracket) looked a bit poor in dark background.         |
-" | SAT 20TH FEB 2010:   15.5                                                   |
-" |                      Still more strong on Comment.                          |
-" | FRI 19TH FEB 2010:   15.4                                                   |
-" |                      Made CursorColumn and CursorLine less aggressive to    |
-" |                      help keep text under it visible.                       |
-" |                      15.3                                                   |
-" |                      Made Comments stronger still.                          |
-" |                      15.2                                                   |
-" |                      Made Comments stronger.                                |
-" | THU 18TH FEB 2010:   15.1                                                   |
-" |                      Finally made Comments highly visible at all lighnesses |
-" |                      also tweaked Constant. Comments look ok now don't      | 
-" |                      get hard-to-read suddenly, and Constants ("Hello"<--)  |
-" |                      are a little better as well.                           |
-" | THU  4TH FEB 2010:   15.0                                                   |
-" |                      Still had to make the Constants ("Hello"<--) more dark.|
-" | WED  3RD FEB 2010:   14.9                                                   |
-" |                      Made an adjustment so that background goes brightest   |
-" |                      at the hour since this seems a bit more consistent with|
-" |                      the way that you think about time (e.g.9AM, 4PM, 8PM..)|
-" | TUE  2ND FEB 2010:   14.8                                                   |
-" |                      Made the dark blue in Constant ($a = "Hello\n";<--this |
-" |                      and b = 9;<--this) more of a 'Navy' blue not just Blue.|
-" | MON  1ST FEB 2010:   14.7                                                   |
-" |                      Upped the contrast of CursorLine & CursorColumns just  |
-" |                      a tiny bit so it stands out in very light backgrounds. |
-" |                      14.6                                                   |
-" |                      Made the update frequency a bit less annoying by       |
-" |                      default ~ every 1.5 minutes.                           |
-" | SUN 31TH JAN 2010:   14.5                                                   |
-" |                      Some more adjustments to the strength of Constant      |
-" |                      ($a = "Hello world\n" <--) so it stands out better.    |
-" | SAT 30TH JAN 2010:   14.4                                                   |
-" |                      Made some updates to Constant to it blends-in better   |
-" |                      with the new CursorColumn and CursorLine, also looks   |
-" |                      a bit better generally.                                |
-" | FRI 29TH JAN 2010:   14.3                                                   |
-" |                      Made some minor corrections to CursorColumn and        |
-" |                      CursorLine so that it doesn't turn 'green' temporarily.|
-" | THU 28TH JAN 2010:   14.2                                                   |
-" |                      Still more visibility glitches with CursorLine and     |
-" |                      CursorColumn. This was around the dark-light boundary. |
-" |                      Fixed now. Looks great all-round now.                  |
-" |                      14.1                                                   |
-" |                      Still some visibility glitches with CursorLine &       |
-" |                      CursorColumn. Fixed and looks awesome now, esp. in     |
-" |                      black backgrounds.                                     |
-" |                      14.0                                                   |
-" |                      Spotted a bug with the cursorline/cursorcolumn         |
-" |                      colouring. Fixed now.                                  |
-" |                      13.9                                                   |
-" |                      Made CursorColumn be the same as CursorLine, so if you |
-" |                      happen to make use of CursorColumn at least it blends  |
-" |                      in nicely with the colour scheme.                      |
-" |                      $sParent = 'my mum'; <-- now look nice and bright      |
-" | SUN 24TH JAN 2010:   13.8                                                   |
-" |                      Strengthened Constant, and Normal so things like       |
-" |                      like function names (e.g. CalculateScore()) look       |
-" |                      bright and sharp everywhere now, and Constants like    |
-" |                      $sParent = 'my mum'; <-- now look nice and bright      |
-" |                      everywhere too.                                        |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -544,6 +487,7 @@ let highLowLightToggle=0
 :       let hA2a=printf("highlight CursorLine guibg=#%02x%02x%02x",				adjBG3,adjBG4,adjBG5a) 
 :       let hA3=printf("highlight NonText guibg=#%02x%02x%02x guifg=#%02x%02x%02x",		adjBG3,adjBG1,adjBG1,adjBG3,adjBG1,adjBG1)  
 :       let hA4=printf("highlight LineNr guibg=#%02x%02x%02x",					adjBG3,adjBG4,adjBG5a)
+:       let hA4a=printf("highlight FoldColumn guibg=#%02x%02x%02x",				adjBG3,adjBG4,adjBG5a)
 :	let adj1=	RGBEl4(adjBG1-30,							todaysec,0,0,10000,20,20,40,20,40)
 :	let adj2=	RGBEl4(adjBG1A-10,							todaysec,0,0,10000,20,20,40,20,40)
 :	let adj3=	RGBEl4(adjBG2+10,							todaysec,0,0,10000,20,20,40,20,40)
@@ -689,6 +633,7 @@ let highLowLightToggle=0
 :		execute hA2a
 :		execute hA3
 :		execute hA4
+:		execute hA4a
 :		execute hA5
 :		execute hA6
 :		execute hA7
