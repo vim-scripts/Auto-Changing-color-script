@@ -4,6 +4,12 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | SAT 18TH SEP 2010:   16.0                                                   | 
+" |                      Forgot to update the foreground in FoldColumn so in    |
+" |                      practice it remained like a non-moving color scheme.   |
+" |                      Now updates using the same color scheme as LineNr,     |
+" |                      both background and foreground. Sorry about that, it   | 
+" |                      was a strain to see at times!!                         |
 " | FRI 17TH SEP 2010:   15.9                                                   |
 " |                      Made FoldedColumn look the same as LineNr.             |
 " |                      Obviously it was not looking good as a static-style    |
@@ -521,6 +527,7 @@ let highLowLightToggle=0
 :	let adj2=	RGBEl2((-todaysec+86400)/338/2+54,					todaysec,44000,8000,20000,100)
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2+80,					todaysec,44000,8000,20000,100)
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
+:       let hB2a=printf("highlight FoldColumn guifg=#%02x%02x%02x",				adj1,adj2,adj3)  
 :	let adj1=	RGBEl2a((-todaysec+86400)/400/2+27,					todaysec,57000,22000,15000,-140,-45,0,10)
 :	let adj2=	RGBEl2a((-todaysec+86400)/400/2+110,					todaysec,57000,22000,15000,-140,-45,0,10)
 :	let adj4=	RGBEl4a(adjBG1,								todaysec,57000,22000,15000,-10,-19,-3,-2,8,2,25,-8,-4,-13)
@@ -642,6 +649,7 @@ let highLowLightToggle=0
 :		execute hB
 :		execute hB1
 :		execute hB2
+:		execute hB2a
 :		execute hC
 :		execute hC1
 :		execute hD
