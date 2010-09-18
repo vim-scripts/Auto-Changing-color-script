@@ -4,7 +4,12 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
-" | SAT 18TH SEP 2010:   16.0                                                   | 
+" | SAT 18TH SEP 2010:   16.1                                                   |
+" |                      Made Folded look exactly the same as LineNr and        |
+" |                      Foldcolumn.  This makes code 'extra' stuff on the      |
+" |                      screen look different but the same.  Makes it look     |
+" |                      a bit more professional.                               |
+" |                      16.0                                                   | 
 " |                      Forgot to update the foreground in FoldColumn so in    |
 " |                      practice it remained like a non-moving color scheme.   |
 " |                      Now updates using the same color scheme as LineNr,     |
@@ -488,7 +493,7 @@ let highLowLightToggle=0
 :	let adj1=	RGBEl2(adjBG1+40,							todaysec,80000,5500,6400,60)
 :	let adj2=	RGBEl2(adjBG1+40,							todaysec,80000,5500,6400,60)
 :	let adj3=	RGBEl2(adjBG1+40,							todaysec,80000,5500,6400,60)
-:       let hA1=printf("highlight Folded guibg=#%02x%02x%02x guifg=#%02x%02x%02x",		adjBG1,adjBG1,adjBG4,adj1,adj2,adj3)
+:       let hA1=printf("highlight Folded guibg=#%02x%02x%02x",					adjBG3,adjBG4,adjBG5a)
 :       let hA2=printf("highlight CursorColumn guibg=#%02x%02x%02x",				adjBG3,adjBG4,adjBG5a) 
 :       let hA2a=printf("highlight CursorLine guibg=#%02x%02x%02x",				adjBG3,adjBG4,adjBG5a) 
 :       let hA3=printf("highlight NonText guibg=#%02x%02x%02x guifg=#%02x%02x%02x",		adjBG3,adjBG1,adjBG1,adjBG3,adjBG1,adjBG1)  
@@ -528,6 +533,7 @@ let highLowLightToggle=0
 :	let adj3=	RGBEl2((-todaysec+86400)/338/2+80,					todaysec,44000,8000,20000,100)
 :       let hB2=printf("highlight LineNr guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
 :       let hB2a=printf("highlight FoldColumn guifg=#%02x%02x%02x",				adj1,adj2,adj3)  
+:       let hB2b=printf("highlight Folded guifg=#%02x%02x%02x",					adj1,adj2,adj3)  
 :	let adj1=	RGBEl2a((-todaysec+86400)/400/2+27,					todaysec,57000,22000,15000,-140,-45,0,10)
 :	let adj2=	RGBEl2a((-todaysec+86400)/400/2+110,					todaysec,57000,22000,15000,-140,-45,0,10)
 :	let adj4=	RGBEl4a(adjBG1,								todaysec,57000,22000,15000,-10,-19,-3,-2,8,2,25,-8,-4,-13)
@@ -650,6 +656,7 @@ let highLowLightToggle=0
 :		execute hB1
 :		execute hB2
 :		execute hB2a
+:		execute hB2b
 :		execute hC
 :		execute hC1
 :		execute hD
