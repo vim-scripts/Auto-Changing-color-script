@@ -1,9 +1,21 @@
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
+" | Changes syntax highlight colors gradually every little while to reflect the |
+" | passing by of the hour.  Note: this script needs the Timer script in order  |
+" | to work properly.  You should have that in your _vimrc.  Download it from   |
+" | here: http://www.vim.org/scripts/script.php?script_id=3244                  |
+" +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | SUN 19TH SEP 2010:   16.2                                                   |
+" |                      Removed the timer function from here and made it into a|
+" |                      separate script.  This script needs that script in     |
+" |                      to work properly, so you should install that in your   |
+" |                      _vimrc if you have not already done so.                |
+" |                      Download it from here:                                 |
+" |                      http://www.vim.org/scripts/script.php?script_id=3244   |
 " | SAT 18TH SEP 2010:   16.1                                                   |
 " |                      Made Folded look exactly the same as LineNr and        |
 " |                      Foldcolumn.  This makes code 'extra' stuff on the      |
@@ -63,19 +75,6 @@ let g:easeArea=8200
 "debug
 "let g:mytime=16000
 "let g:myhour=0
-
-" +------------------------------------------------------------------------------+
-" | The following routine causes a non-printing keypress to be generated when    |
-" | the cursor has been idle, hence causing a kind of 'timer' function.  Replaces|
-" | previous 'cusor-movement' based one that hacked around with the cursor but   |
-" | causes too many problems. Courtesey of Yukihiro Nakadaira. Source:-          |
-" | http://old.nabble.com/timer-revisited-td8816391.html.                        |
-" +------------------------------------------------------------------------------+
-let g:K_IGNORE = "\x80\xFD\x35"   " internal key code that is ignored
-autocmd CursorHold * call Timer()
-function! Timer()
-  call feedkeys(g:K_IGNORE)
-endfunction 
 
 " +------------------------------------------------------------------------------+
 " | Main RGBEl function, used to work out amount to offset RGB value by to avoid |
