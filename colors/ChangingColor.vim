@@ -9,6 +9,10 @@
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
 " | REVISONS:                                                                   |
+" | FRI 1ST OCT 2010:    16.3                                                   |
+" |                      Made Javascript a bit more sharp dressed by removing   |
+" |                      some of the background artefacts to Identifier and     |
+" |                      Special.                                               |
 " | SUN 19TH SEP 2010:   16.2                                                   |
 " |                      Removed the timer function from here and made it into a|
 " |                      separate script.  This script needs that script in     |
@@ -34,13 +38,6 @@
 " | FRI 26TH FEB 2010:   15.8                                                   |
 " |                      Improved Constant. Now it goes in sync with other      |
 " |                      elements.                                              |
-" | TUE 23RD FEB 2010:   15.7                                                   |
-" |                      Darkened Constant ('Hi Mum'<--) and Identifier         |
-" |                      (--> $sName = 'Paul') so it gives a nice balanced look |
-" |                      in the darker schemes.                                 |
-" |                      15.6                                                   |
-" |                      Made some improvements to Special ('<?php .. ?>, als   |
-" |                      bracket) looked a bit poor in dark background.         |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -547,9 +544,9 @@ let highLowLightToggle=0
 :	let adj1=	RGBEl2a((-todaysec+86400)/365/2+66,					todaysec,57000,22000,15000,-168,-30,-6,0)
 :	let adj2=	RGBEl2a((-todaysec+86400)/365/2+97,					todaysec,57000,22000,15000,-168,-30,-6,0)
 :	let adj3=	RGBEl2a((-todaysec+86400)/355/2,					todaysec,57000,22000,15000,-168,-30,-6,0)
-:	let adj4=	RGBEl4a(adjBG1,								todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
-:	let adj5=	RGBEl4a(adjBG1A,							todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
-:	let adj6=	RGBEl4a(adjBG2,								todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
+:	let adj4=	RGBEl4a(adjBG1,								todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,0,0)
+:	let adj5=	RGBEl4a(adjBG1A,							todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,0,0)
+:	let adj6=	RGBEl4a(adjBG2,								todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,0,0)
 :	let hE=printf("highlight Identifier guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
 :	let adj1=	RGBEl2a((-todaysec+86400)/355/2+97,					todaysec,43000,14000,19000,-130,-75,0,0)
 :	let adj2=	RGBEl2a((-todaysec+86400)/355/2+0,					todaysec,43000,14000,19000,-130,-75,0,0)
@@ -561,9 +558,9 @@ let highLowLightToggle=0
 :	let adj1=	RGBEl2a((-todaysec+86400)/600/4+187,					todaysec,57000,22000,15000,-156,-68,0,0)
 :	let adj2=	RGBEl2a((-todaysec+86400)/600/4+95,					todaysec,57000,22000,15000,-156,-68,0,0)
 :	let adj3=	RGBEl2a((-todaysec+86400)/600/4+155,					todaysec,57000,22000,15000,-156,-68,0,0)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,57000,22000,15000,-2,-5,-5,-2,0)
-:	let adj5=	RGBEl4(adjBG1A,								todaysec,57000,22000,15000,-2,-5,-5,-2,0)
-:	let adj6=	RGBEl4(adjBG2,								todaysec,57000,22000,15000,-2,-5,-5,-2,0)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,57000,22000,15000,-2,-5,0,0,0)
+:	let adj5=	RGBEl4(adjBG1A,								todaysec,57000,22000,15000,-2,-5,0,0,0)
+:	let adj6=	RGBEl4(adjBG2,								todaysec,57000,22000,15000,-2,-5,0,0,0)
 :	let hG=printf("highlight Special guifg=#%02x%02x%02x gui=bold guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
 :	let hG1=printf("highlight JavaScriptParens guifg=#%02x%02x%02x gui=bold guibg=#%02x%02x%02x",	adj1,adj2,adj3,adj4,adj5,adj6) 
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2+120,					todaysec,47000,3000,14000,64)
@@ -712,4 +709,3 @@ au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOUR SCRIPT                                                      |
 " +-----------------------------------------------------------------------------+
-
