@@ -1,5 +1,5 @@
 " +-----------------------------------------------------------------------------+
-" | CHANGING COLOUR SCRIPT                                                      |
+" | CHANGING COLOR SCRIPT                                                       |
 " +-----------------------------------------------------------------------------+
 " | Changes syntax highlight colors gradually every little while to reflect the |
 " | passing by of the hour.  Note: this script needs the Timer script in order  |
@@ -8,11 +8,11 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
-" | REVISONS:                                                                   |
-" | FRI 1ST OCT 2010:    16.3                                                   |
-" |                      Made Javascript a bit more sharp dressed by removing   |
-" |                      some of the background artefacts to Identifier and     |
-" |                      Special.                                               |
+" | FRI  8TH OCT 2010:   16.3                                                   |
+" |                      Cleared out a lot of the junk, like removing the       |
+" |                      two levels of calls to the main fnunction, now         |
+" |                      there's one, and no parameter, and pulled out all      |
+" |                      the logic for a gimicky effect based on this param.    |                            |
 " | SUN 19TH SEP 2010:   16.2                                                   |
 " |                      Removed the timer function from here and made it into a|
 " |                      separate script.  This script needs that script in     |
@@ -38,6 +38,13 @@
 " | FRI 26TH FEB 2010:   15.8                                                   |
 " |                      Improved Constant. Now it goes in sync with other      |
 " |                      elements.                                              |
+" | TUE 23RD FEB 2010:   15.7                                                   |
+" |                      Darkened Constant ('Hi Mum'<--) and Identifier         |
+" |                      (--> $sName = 'Paul') so it gives a nice balanced look |
+" |                      in the darker schemes.                                 |
+" |                      15.6                                                   |
+" |                      Made some improvements to Special ('<?php .. ?>, als   |
+" |                      bracket) looked a bit poor in dark background.         |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -396,68 +403,56 @@ endfunction
 :endfunction
 
 " +------------------------------------------------------------------------------+
-" | This variable allows highlight to be inverted, i.e higher time = darker      |
-" +------------------------------------------------------------------------------+
-let highLowLightToggle=0
-
-" +------------------------------------------------------------------------------+
 " | Muscle function, calls vim highlight command for each element based on the   |
 " | time into the current hour.                                                  |
 " +------------------------------------------------------------------------------+
-:function SetHighLight(nightorday)
+:function SetHighLight()
 :	let todaysec=(((localtime()+1800)%(60*60)))*24
 :	if exists("g:mytime")
 :		let todaysec=g:mytime
 :	endif
-: 	let nightorday=a:nightorday
-:	if nightorday==1
-:		if todaysec<43199
-:			let todaysec=-todaysec*2+86399
-:			let dusk=0
-:		else
-:			let todaysec=(todaysec-43200)*2
-:			let dusk=1
-:		endif
+:	if s:oldactontime/g:changefreq==todaysec/g:changefreq
+:		return
+:	endif
+:	let s:oldactontime=todaysec
+:	if todaysec<43199
+:		let todaysec=todaysec*2
+:		let dusk=0
 :	else
-:		if todaysec<43199
-:			let todaysec=todaysec*2
-:			let dusk=0
-:		else
-:			let todaysec=-todaysec*2+172799
-:			let dusk=1
-:		endif
+:		let todaysec=-todaysec*2+172799
+:		let dusk=1
 :	endif
 :	if exists("g:myhour")
 :		let myhour=g:myhour
 :	else
 :		let myhour=(localtime()/(60*60))%3
 :	endif
-:	if (myhour==0 && dusk==0 && nightorday==0) || (myhour==2 && dusk==1 && nightorday==1)
+:	if (myhour==0 && dusk==0)
 :		let adjBG1=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG1A=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG2=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :	endif
-:	if (myhour==0 && dusk==1 && nightorday==0) || (myhour==0 && dusk==0 && nightorday==1)
+:	if (myhour==0 && dusk==1)
 :		let adjBG1=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :		let adjBG1A=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG2=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :	endif
-:	if (myhour==1 && dusk==0 && nightorday==0) || (myhour==0 && dusk==1 && nightorday==1)
+:	if (myhour==1 && dusk==0)
 :		let adjBG1=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG1A=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :		let adjBG2=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :	endif
-:	if (myhour==1 && dusk==1 && nightorday==0) || (myhour==1 && dusk==0 && nightorday==1)
+:	if (myhour==1 && dusk==1)
 :		let adjBG1=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :		let adjBG1A=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :		let adjBG2=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :	endif
-:	if (myhour==2 && dusk==0 && nightorday==0) || (myhour==1 && dusk==1 && nightorday==1)
+:	if (myhour==2 && dusk==0)
 :		let adjBG1=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :		let adjBG1A=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG2=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :	endif
-:	if (myhour==2 && dusk==1 && nightorday==0) || (myhour==2 && dusk==0 && nightorday==1)
+:	if (myhour==2 && dusk==1)
 :		let adjBG1=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
 :		let adjBG1A=(todaysec<67000)?todaysec/420:(todaysec-43200)/271+80
 :		let adjBG2=(todaysec<67000)?todaysec/380:(todaysec-43200)/271+96
@@ -544,9 +539,9 @@ let highLowLightToggle=0
 :	let adj1=	RGBEl2a((-todaysec+86400)/365/2+66,					todaysec,57000,22000,15000,-168,-30,-6,0)
 :	let adj2=	RGBEl2a((-todaysec+86400)/365/2+97,					todaysec,57000,22000,15000,-168,-30,-6,0)
 :	let adj3=	RGBEl2a((-todaysec+86400)/355/2,					todaysec,57000,22000,15000,-168,-30,-6,0)
-:	let adj4=	RGBEl4a(adjBG1,								todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,0,0)
-:	let adj5=	RGBEl4a(adjBG1A,							todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,0,0)
-:	let adj6=	RGBEl4a(adjBG2,								todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,0,0)
+:	let adj4=	RGBEl4a(adjBG1,								todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
+:	let adj5=	RGBEl4a(adjBG1A,							todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
+:	let adj6=	RGBEl4a(adjBG2,								todaysec,57000,22000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
 :	let hE=printf("highlight Identifier guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
 :	let adj1=	RGBEl2a((-todaysec+86400)/355/2+97,					todaysec,43000,14000,19000,-130,-75,0,0)
 :	let adj2=	RGBEl2a((-todaysec+86400)/355/2+0,					todaysec,43000,14000,19000,-130,-75,0,0)
@@ -558,9 +553,9 @@ let highLowLightToggle=0
 :	let adj1=	RGBEl2a((-todaysec+86400)/600/4+187,					todaysec,57000,22000,15000,-156,-68,0,0)
 :	let adj2=	RGBEl2a((-todaysec+86400)/600/4+95,					todaysec,57000,22000,15000,-156,-68,0,0)
 :	let adj3=	RGBEl2a((-todaysec+86400)/600/4+155,					todaysec,57000,22000,15000,-156,-68,0,0)
-:	let adj4=	RGBEl4(adjBG1,								todaysec,57000,22000,15000,-2,-5,0,0,0)
-:	let adj5=	RGBEl4(adjBG1A,								todaysec,57000,22000,15000,-2,-5,0,0,0)
-:	let adj6=	RGBEl4(adjBG2,								todaysec,57000,22000,15000,-2,-5,0,0,0)
+:	let adj4=	RGBEl4(adjBG1,								todaysec,57000,22000,15000,-2,-5,-5,-2,0)
+:	let adj5=	RGBEl4(adjBG1A,								todaysec,57000,22000,15000,-2,-5,-5,-2,0)
+:	let adj6=	RGBEl4(adjBG2,								todaysec,57000,22000,15000,-2,-5,-5,-2,0)
 :	let hG=printf("highlight Special guifg=#%02x%02x%02x gui=bold guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6) 
 :	let hG1=printf("highlight JavaScriptParens guifg=#%02x%02x%02x gui=bold guibg=#%02x%02x%02x",	adj1,adj2,adj3,adj4,adj5,adj6) 
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2+120,					todaysec,47000,3000,14000,64)
@@ -634,78 +629,54 @@ let highLowLightToggle=0
 :	let adj5=	RGBEl4(adjBG1A,								todaysec,66000,8000,8000,-5,-5,10,3,5)
 :	let adj6=	RGBEl4(adjBG2,								todaysec,66000,8000,8000,-5,-5,10,3,5)
 :	let hS=printf("highlight Directory guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
-:	if todaysec/g:changefreq!=s:oldactontime/g:changefreq || exists("g:mytime")
-:		let s:oldactontime=todaysec
-:		execute hA
-:		execute hA1
-:		execute hA2
-:		execute hA2a
-:		execute hA3
-:		execute hA4
-:		execute hA4a
-:		execute hA5
-:		execute hA6
-:		execute hA7
-:		execute hA8
-:		execute hA9
-:		execute hB
-:		execute hB1
-:		execute hB2
-:		execute hB2a
-:		execute hB2b
-:		execute hC
-:		execute hC1
-:		execute hD
-:		execute hE
-:		execute hF
-:		execute hG
-:		execute hG1
-:		execute hH
-:		execute hI
-:		execute hI1
-:		execute hI2
-:		execute hJ
-:		execute hK
-:		execute hL
-:		execute hM
-:		execute hN
-:		execute hO
-:		execute hP
-:		execute hP1
-:		execute hQ
-:		execute hR
-:		execute hR1
-:		execute hS
-:	endif
+:	execute hA
+:	execute hA1
+:	execute hA2
+:	execute hA2a
+:	execute hA3
+:	execute hA4
+:	execute hA4a
+:	execute hA5
+:	execute hA6
+:	execute hA7
+:	execute hA8
+:	execute hA9
+:	execute hB
+:	execute hB1
+:	execute hB2
+:	execute hB2a
+:	execute hB2b
+:	execute hC
+:	execute hC1
+:	execute hD
+:	execute hE
+:	execute hF
+:	execute hG
+:	execute hG1
+:	execute hH
+:	execute hI
+:	execute hI1
+:	execute hI2
+:	execute hJ
+:	execute hK
+:	execute hL
+:	execute hM
+:	execute hN
+:	execute hO
+:	execute hP
+:	execute hP1
+:	execute hQ
+:	execute hR
+:	execute hR1
+:	execute hS
 :	redraw
 :endfunction       
 
-" +------------------------------------------------------------------------------+
-" | Wrapper function takes into account 'invert' global variable, used for doing |
-" | an 'invert' effect when you enter/leave Insert. In case this was annoying    |
-" | I left this off, but if you wanted to try it out simply change the second    |
-" | call to SetHighLight() so that it calls it with 1 rather than 0.             |
-" +------------------------------------------------------------------------------+
-:function ExtraSetHighLight()
-:	if g:highLowLightToggle==0
-:		call SetHighLight(0)
-:	else
-:		call SetHighLight(0)
-:	endif
-:endfunction
-
-au CursorHold * call ExtraSetHighLight()
-au CursorHoldI * call ExtraSetHighLight()
-
-" +------------------------------------------------------------------------------+
-" | The following lines provide a invert when you go into and out of insert      |
-" | mode. If you don't like this effect, just comment these two lines out!       |
-" +------------------------------------------------------------------------------+
-au InsertEnter * let g:highLowLightToggle=1 | call ExtraSetHighLight()
-au InsertLeave * let g:highLowLightToggle=0 | call ExtraSetHighLight()
+au CursorHold * call SetHighLight()
+au CursorHoldI * call SetHighLight()
 
 " +-----------------------------------------------------------------------------+
 " | END                                                                         |
 " +-----------------------------------------------------------------------------+
-" | CHANGING COLOUR SCRIPT                                                      |
+" | CHANGING COLOR SCRIPT                                                       |
 " +-----------------------------------------------------------------------------+
