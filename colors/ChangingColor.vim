@@ -8,11 +8,19 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
+" | WED  24TH NOV 2010:  16.4                                                   |
+" |                      Made improvements to visibility adjustments of Normal  |
+" |                      because it's very important it remains strong.         |
+" |                      The default 'color change' frequency is now ~15        |
+" |                      seconds, not 1.5 mins.  I thought it was a bit more    |
+" |                      exciting and seems to work ok.  Have been testing it   |
+" |                      for months on four computers running XP. Made Cursor  |
+" |                      a bit more visible too.                                |
 " | FRI  8TH OCT 2010:   16.3                                                   |
 " |                      Cleared out a lot of the junk, like removing the       |
-" |                      two levels of calls to the main fnunction, now         |
+" |                      two levels of calls to the main function, now          |
 " |                      there's one, and no parameter, and pulled out all      |
-" |                      the logic for a gimicky effect based on this param.    |                            |
+" |                      the logic for a gimicky effect based on this param.    |
 " | SUN 19TH SEP 2010:   16.2                                                   |
 " |                      Removed the timer function from here and made it into a|
 " |                      separate script.  This script needs that script in     |
@@ -63,7 +71,7 @@ let s:oldactontime=-9999
 " | it will do so, the lower the more often it will do so.  2880 is equivalnet   |
 " | to every minute, 5760 every two minutes, 4320 is ~ every 1.5 minutes         |
 " +------------------------------------------------------------------------------+
-let g:changefreq=4320
+let g:changefreq=720
 
 " +------------------------------------------------------------------------------+
 " | The following variable is the size of the area below and above that zone that|
@@ -532,9 +540,9 @@ endfunction
 :	let adj6=	RGBEl4a(adjBG2,								todaysec,57000,22000,15000,-10,-19,-3,-2,8,2,25,-8,-4,-13)
 :	let hC=printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj1,adj2,adj4,adj5,adj6)
 :	let hC1=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x",	adj1,adj1,adj2,adj4,adj5,adj6)
-:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,35000,9600,51400,-155,30,0,17)
-:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+76,					todaysec,35000,0100,51400,-155,30,0,17)
-:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,35000,0100,51400,-155,30,0,17)
+:	let adj1=	RGBEl2a((-todaysec+86400)/338/2+110,					todaysec,35000,9600,51400,-285,30,0,17)
+:	let adj2=	RGBEl2a((-todaysec+86400)/338/2+76,					todaysec,35000,0100,51400,-285,30,0,17)
+:	let adj3=	RGBEl2a((-todaysec+86400)/338/2,					todaysec,35000,0100,51400,-285,30,0,17)
 :	let hD=printf("highlight Normal guifg=#%02x%02x%02x gui=NONE",				adj1,adj2,adj3)
 :	let adj1=	RGBEl2a((-todaysec+86400)/365/2+66,					todaysec,57000,22000,15000,-168,-30,-6,0)
 :	let adj2=	RGBEl2a((-todaysec+86400)/365/2+97,					todaysec,57000,22000,15000,-168,-30,-6,0)
@@ -602,9 +610,9 @@ endfunction
 :	let adj2=	RGBEl2a((-todaysec+86400)/338/2+120,					todaysec,60000,11000,13000,-90,-45,-50,-20)
 :	let adj3=	RGBEl2a((-todaysec+86400)/338/2+0,					todaysec,60000,11000,13000,-90,-45,-50,-20)
 :	let hO=printf("highlight Type guifg=#%02x%02x%02x",					adj1,adj2,adj3)
-:	let adj1=RGBEl3(255,									todaysec,80000,0)
-:	let adj2=RGBEl3(255,									todaysec,80000,255)
-:	let adj3=RGBEl3(0,									todaysec,80000,0)
+:	let adj1=RGBEl3(255,									todaysec,74000,0)
+:	let adj2=RGBEl3(255,									todaysec,74000,255)
+:	let adj3=RGBEl3(0,									todaysec,74000,0)
 :	let hP=printf("highlight Cursor guibg=#%02x%02x%02x",					adj1,adj2,adj3)
 :	let hP1=printf("highlight MatchParen guibg=#%02x%02x%02x",				adj1,adj2,adj3)
 :	let adj1=	RGBEl2((-todaysec+86400)/338/2+100,					todaysec,44000,10000,26000,40)
@@ -680,3 +688,5 @@ au CursorHoldI * call SetHighLight()
 " +-----------------------------------------------------------------------------+
 " | CHANGING COLOR SCRIPT                                                       |
 " +-----------------------------------------------------------------------------+
+
+
