@@ -8,3 +8,6 @@ Benefits of script are:
 * reduce boredom by stimulating right side of the brain
 
 Only affects GVIM. Nothing happens in VIM.
+
+WARNING: running this script uses many Windows resources. Remember GDI % readings on Win98? XP has vastly more of these but they are still limited (*). Because of the way Vim works, a new GDI resources are guzzled when the script 'changes color'.  You may not notice this but that's what happens because VIM creates a new font every update of a color so the script ends up taking many resources it does not need.  You may notice glitches in Windows. If so then this might be the cause. Sorry I couldn't do a better job.  :/
+* if anything they use memory
