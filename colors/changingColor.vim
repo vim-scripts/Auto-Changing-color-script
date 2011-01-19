@@ -8,6 +8,11 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
+" | WED  19TH JAN 2011:  16.6                                                   |
+" |                      Removed what appears to be a glitch at lighter end of  |
+" |                      the background spectrum.  This affected selections     |
+" |                      of text done at the very lightest background, they     |
+" |                      were invisible.  It now works as it should.            |
 " | MON   3RD NOV 2010:  16.5                                                   |
 " |                      Revved up the visibility of PreProc. PreProc is the    |
 " |                      'function' keyword in php so it now brightens nicer    |
@@ -101,7 +106,7 @@ let g:easeArea=8200
 " | it clashing with the background colour.                                      |
 " | Return value is modified or otherwise value (not modified if no clash).      |
 " +------------------------------------------------------------------------------+
-:function Rgb2(Rgb,actBgr,dangerBgr,senDar,senLig,adjust)
+:function Rgb2(Rgb, actBgr, dangerBgr, senDar, senLig, adjust)
 :	if a:actBgr>=a:dangerBgr-a:senDar && a:actBgr<=a:dangerBgr+a:senLig
 :		let whatdoyoucallit=a:dangerBgr-a:actBgr
 :		if whatdoyoucallit<0
@@ -119,7 +124,6 @@ let g:easeArea=8200
 :	else
 :		let adjustedValue=a:Rgb
 :	endif
-:	let adjustedValue=adjustedValue-g:whiteadd
 :	if adjustedValue<0
 :		let adjustedValue=0
 :	endif
