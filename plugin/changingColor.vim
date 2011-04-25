@@ -8,6 +8,10 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
+" | MON  25TH APR 2011:  16.8                                                   |
+" |                      Unconfused mixup with fg and bg for Search             |
+" |                      and Visual, i got fg and bg wrong way.  Fixed and seems|
+" |                      ok now.                                                |
 " | SUN  24TH APR 2011:  16.7                                                   |
 " |                      Collated temporary variables into one single variable  |
 " |                      and used this.  Tweaked poor contrast of Search and    |
@@ -542,12 +546,12 @@ endfunction
 :	let adj6 = Rgb4(adjBG2+10, todaysec, 0, 0, 10000, 20, 20, 40, 20, 40)
 :	let highlCmd = printf("highlight Normal guifg=#%02x%02x%02x gui=NONE", adj1, adj2, adj3)
 :	execute highlCmd
-:       let highlCmd=printf("highlight Search guibg=#%02x%02x%02x guifg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6) 
+:       let highlCmd=printf("highlight Search guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6) 
 :	execute highlCmd
-:	let adj1 = Rgb2(adjBG1+40, todaysec, 86399, 6000, 1, 30)
-:	let adj2 = Rgb2(adjBG1A+15, todaysec, 86399, 6000, 1, 30)
-:	let adj3 = Rgb2(adjBG2+10, todaysec, 86399, 6000, 1, 30)
-:	let highlCmd = printf("highlight Visual guibg=#%02x%02x%02x guifg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
+:	let adj4 = Rgb2(adjBG1+40, todaysec, 86399, 6000, 1, 30)
+:	let adj5 = Rgb2(adjBG1A+15, todaysec, 86399, 6000, 1, 30)
+:	let adj6 = Rgb2(adjBG2+10, todaysec, 86399, 6000, 1, 30)
+:	let highlCmd = printf("highlight Visual guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
 :	execute highlCmd
 :	let adj1 = Rgb2a((-todaysec+86400)/365/2+66, todaysec, 57000, 10000, 15000, -168, -30, -6, 33)
 :	let adj2 = Rgb2a((-todaysec+86400)/365/2+97, todaysec, 57000, 10000, 15000, -168, -30, -6, 33)
