@@ -8,6 +8,8 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
+" | TUE  26TH APR 2011:  16.9                                                   |
+" |                      Brightened up Special an Identifier under low light    |
 " | MON  25TH APR 2011:  16.8                                                   |
 " |                      Unconfused mixup with fg and bg for Search             |
 " |                      and Visual, i got fg and bg wrong way.  Fixed and seems|
@@ -30,14 +32,6 @@
 " |                      means the variables. Not sure if its used in other     |
 " |                      languages but at least if you use PHP it now looks nice|
 " |                      and strong.                                            |
-" | WED  24TH NOV 2010:  16.4                                                   |
-" |                      Made improvements to visibility adjustments of Normal  |
-" |                      and Constant because it is very important that they    |
-" |                      remain strong. The default 'color change' frequency is |
-" |                      now ~15 seconds, not 1.5 mins.  I thought it was a bit |
-" |                      more exciting and seems to work ok. Have been testing  |
-" |                      it for months on four computers running XP. Made Cursor|
-" |                      a bit more visible too.                                |
 " |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
@@ -509,9 +503,9 @@ endfunction
 :	let adj3 = Rgb2(adjBG2+30, todaysec, 86399, 4000, 1, 40)
 :	let highlCmd = printf("highlight DiffText guibg=#%02x%02x%02x", adj1, adj2, adj3)
 :	execute highlCmd
-:	let adj1 = Rgb2a((-todaysec+86400)/338/4+160, todaysec, 57000, 16000, 15000, -100, -42, 0, 12)
-:	let adj2 = Rgb2a((-todaysec+86400)/338/4+76, todaysec, 57000, 16000, 15000, -100, -42, 0, 12)
-:	let adj3 = Rgb2a((-todaysec+86400)/338/4+23, todaysec, 57000, 16000, 15000, -100, -42, 0, 12)
+:	let adj1 = Rgb2a((-todaysec+86400)/338/4+160, todaysec, 57000, 16000, 23000, -100, -42, 0, 12)
+:	let adj2 = Rgb2a((-todaysec+86400)/338/4+76, todaysec, 57000, 16000, 23000, -100, -42, 0, 12)
+:	let adj3 = Rgb2a((-todaysec+86400)/338/4+23, todaysec, 57000, 16000, 23000, -100, -42, 0, 12)
 :	let adj4 = Rgb4(adjBG1, todaysec, 57000, 16000, 15000, -4, -11, -2, 0, 0)
 :	let adj5 = Rgb4(adjBG1A, todaysec, 57000, 16000, 15000, -4, -11, -2, 0, 0)
 :	let adj6 = Rgb4(adjBG2, todaysec, 57000, 16000, 15000, -4, -11, -2, 0, 0)
@@ -553,9 +547,9 @@ endfunction
 :	let adj6 = Rgb2(adjBG2+10, todaysec, 86399, 6000, 1, 30)
 :	let highlCmd = printf("highlight Visual guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
 :	execute highlCmd
-:	let adj1 = Rgb2a((-todaysec+86400)/365/2+66, todaysec, 57000, 10000, 15000, -168, -30, -6, 33)
-:	let adj2 = Rgb2a((-todaysec+86400)/365/2+97, todaysec, 57000, 10000, 15000, -168, -30, -6, 33)
-:	let adj3 = Rgb2a((-todaysec+86400)/365/2, todaysec, 57000, 10000, 15000, -168, -30, -6, 33)
+:	let adj1 = Rgb2a((-todaysec+86400)/365/2+66, todaysec, 57000, 10000, 23000, -168, -30, -6, 33)
+:	let adj2 = Rgb2a((-todaysec+86400)/365/2+97, todaysec, 57000, 10000, 23000, -168, -30, -6, 33)
+:	let adj3 = Rgb2a((-todaysec+86400)/365/2, todaysec, 57000, 10000, 23000, -168, -30, -6, 33)
 :	let adj4 = Rgb4a(adjBG1, todaysec, 57000, 10000, 15000, -8, -12, 5, 0, 7,3,6,-8,-2,-2)
 :	let adj5 = Rgb4a(adjBG1A, todaysec,57000,10000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
 :	let adj6 = Rgb4a(adjBG2, todaysec,57000,10000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
@@ -569,9 +563,9 @@ endfunction
 :	let adj6 = Rgb4(adjBG2,	 todaysec, 43000, 2000, 19000, -99, -99, 0, 0, 0)
 :	let highlCmd = printf("highlight PreProc guifg=#%02x%02x%02x gui=bold guibg=#%02x%02x%02x",	adj1,adj2,adj3,adj4,adj5,adj6)
 :	execute highlCmd
-:	let adj1 = Rgb2a((-todaysec+86400)/600/4+187, todaysec, 57000, 10000, 15000, -156, -68, 0, 10)
-:	let adj2 = Rgb2a((-todaysec+86400)/600/4+95, todaysec, 57000, 10000, 15000, -156, -68, 0, 10)
-:	let adj3 = Rgb2a((-todaysec+86400)/600/4+155, todaysec, 57000, 10000, 15000, -156, -68, 0, 10)
+:	let adj1 = Rgb2a((-todaysec+86400)/600/4+187, todaysec, 57000, 10000, 23000, -156, -68, 0, 10)
+:	let adj2 = Rgb2a((-todaysec+86400)/600/4+95, todaysec, 57000, 10000, 23000, -156, -68, 0, 10)
+:	let adj3 = Rgb2a((-todaysec+86400)/600/4+155, todaysec, 57000, 10000, 23000, -156, -68, 0, 10)
 :	let adj4 = Rgb4(adjBG1, todaysec, 57000, 10000, 15000, -2, -5, -5, -2, 0)
 :	let adj5 = Rgb4(adjBG1A, todaysec, 57000, 10000, 15000, -2, -5, -5, -2, 0)
 :	let adj6 = Rgb4(adjBG2, todaysec, 57000, 10000, 15000, -2, -5, -5, -2, 0)
