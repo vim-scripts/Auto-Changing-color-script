@@ -8,6 +8,9 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
+" | TUE  17TH MAY 2011:  17.2                                                   |
+" |                      Made foreground NonText color same as that of Constant |
+" |                      (prettier, not like that of ugly Normal, as I had b4)  |
 " | TUE  17TH MAY 2011:  17.1                                                   |
 " |                      You can now see the NonText character, before I had    |
 " |                      it so that you couldn't                                |
@@ -535,6 +538,8 @@ endfunction
 :	let adj6 = Rgb4a(adjBG2, todaysec, 57000, 22000, 14500, -26, -28, -3, -2, 8, 2, 25, -20, -4, -13)
 :	let highlCmd = printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj1, adj2, adj4, adj5, adj6)
 :	execute highlCmd
+:       let highlCmd = printf("highlight NonText guibg=#%02x%02x%02x guifg=#%02x%02x%02x", adjBG3, adjBG1, adjBG1, adj1, adj1, adj2)  
+:	execute highlCmd
 :	let highlCmd=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj1, adj2, adj4, adj5, adj6)
 :	execute highlCmd
 :	let adj1 = Rgb2a((-todaysec+86400)/338/2+110, todaysec, 35000, 9600, 40000, -285, 30, 0, 17)
@@ -544,8 +549,6 @@ endfunction
 :	let adj5 = Rgb4(adjBG1A-10, todaysec, 0, 0, 10000, 20, 20, 40, 20, 40)
 :	let adj6 = Rgb4(adjBG2+10, todaysec, 0, 0, 10000, 20, 20, 40, 20, 40)
 :	let highlCmd = printf("highlight Normal guifg=#%02x%02x%02x gui=NONE", adj1, adj2, adj3)
-:	execute highlCmd
-:       let highlCmd = printf("highlight NonText guibg=#%02x%02x%02x guifg=#%02x%02x%02x", adjBG3, adjBG1, adjBG1, adj1, adj2, adj3)  
 :	execute highlCmd
 :       let highlCmd=printf("highlight Search guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6) 
 :	execute highlCmd
