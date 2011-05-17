@@ -8,7 +8,10 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
-" | TUE  17TH MAY 2011:  17.0                                                   |
+" | TUE  17TH MAY 2011:  17.1                                                   |
+" |                      You can now see the NonText character, before I had    |
+" |                      it so that you couldn't                                |
+" |                      17.0                                                   |
 " |                      Stopped Question and MoreMsg becoming invisible;       |
 " |                      visibility tweaks to NonText.                          |
 " | TUE  26TH APR 2011:  16.9                                                   |
@@ -481,8 +484,6 @@ endfunction
 :	execute highlCmd
 :       let highlCmd = printf("highlight CursorLine guibg=#%02x%02x%02x", adjBG3,adjBG4,adjBG5a) 
 :	execute highlCmd
-:       let highlCmd = printf("highlight NonText guibg=#%02x%02x%02x guifg=#%02x%02x%02x", adjBG3, adjBG1, adjBG1, adjBG3, adjBG1, adjBG1)  
-:	execute highlCmd
 :       let highlCmd = printf("highlight LineNr guibg=#%02x%02x%02x", adjBG3, adjBG4, adjBG5a)
 :	execute highlCmd
 :       let highlCmd = printf("highlight FoldColumn guibg=#%02x%02x%02x", adjBG3, adjBG4, adjBG5a)
@@ -543,6 +544,8 @@ endfunction
 :	let adj5 = Rgb4(adjBG1A-10, todaysec, 0, 0, 10000, 20, 20, 40, 20, 40)
 :	let adj6 = Rgb4(adjBG2+10, todaysec, 0, 0, 10000, 20, 20, 40, 20, 40)
 :	let highlCmd = printf("highlight Normal guifg=#%02x%02x%02x gui=NONE", adj1, adj2, adj3)
+:	execute highlCmd
+:       let highlCmd = printf("highlight NonText guibg=#%02x%02x%02x guifg=#%02x%02x%02x", adjBG3, adjBG1, adjBG1, adj1, adj2, adj3)  
 :	execute highlCmd
 :       let highlCmd=printf("highlight Search guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6) 
 :	execute highlCmd
