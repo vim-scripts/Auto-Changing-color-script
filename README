@@ -5,11 +5,12 @@ Tested and works well with Java, Javascript, HTML, CSS, PHP, ActionScript (with 
 Benefits:
 + reduces user 'freezing' symptoms
 + improves space/time-awareness
-+ recruits right side of brain brain cells
++ recruits right side of brain
++ easy to install/uninstall
 
 Disadvantages:
-- Under Windows GUI resources are wasted over time due to how VIM changes colors
-- Off-putting flicker occurs when color changes
+- Unfortunately some Windows GUI resources are wasted over time
+- Some off-putting flicker
 
 Affects only GVIM. Nothing happens in VIM.
 

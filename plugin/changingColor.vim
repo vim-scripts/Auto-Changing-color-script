@@ -8,6 +8,9 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
+" | TUE  17TH MAY 2011:  17.0                                                   |
+" |                      Stopped Question and MoreMsg becoming invisible;       |
+" |                      visibility tweaks to NonText.                          |
 " | TUE  26TH APR 2011:  16.9                                                   |
 " |                      Brightened up Special an Identifier under low light    |
 " | MON  25TH APR 2011:  16.8                                                   |
@@ -99,6 +102,7 @@ let g:easeArea=8200
 :	return adjustedValue
 :endfunction
 
+" takes a within range aMin,aMin outputs a mapped to rMin, rMin
 function ScaleToRange(a,aMin,aMax,rMin,rMax)
 :	let aLocal=a:a-a:aMin
 :	let rangeA=a:aMax-a:aMin
@@ -463,7 +467,7 @@ endfunction
 :	let temp1 = adjBG1-(g:whiteadd/3)
 :	let temp2 = adjBG1A-(g:whiteadd/3)
 :	let temp3 = adjBG2-(g:whiteadd/3)
-:	let adjBG3 = (todaysec>=18500)?temp1-ScaleToRange(adjBG1,54,255,4,17):adjBG1+ScaleToRange(adjBG1,0,54,32,26)
+:	let adjBG3 = (todaysec>=18500)?temp1-ScaleToRange(adjBG1,54,255,4,17):adjBG1+ScaleToRange(adjBG1,0,54,32,12)
 :	let adjBG4 = (todaysec>=18500)?temp2-ScaleToRange(adjBG1A,54,255,4,17):adjBG1A+ScaleToRange(adjBG1A,0,54,32,26)
 :	let adjBG5a = (todaysec>=18500)?temp3-ScaleToRange(adjBG2,54,255,4,17):adjBG2+ScaleToRange(adjBG2,0,54,32,26)
 :       let highlCmd = printf("highlight Normal guibg=#%02x%02x%02x", adjBG1,adjBG1A,adjBG2)
@@ -541,6 +545,13 @@ endfunction
 :	let highlCmd = printf("highlight Normal guifg=#%02x%02x%02x gui=NONE", adj1, adj2, adj3)
 :	execute highlCmd
 :       let highlCmd=printf("highlight Search guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6) 
+:	execute highlCmd
+:	let adj4 = Rgb4(adjBG1, todaysec, 77000, 10000, 26000, -99, -99, -99, -99, 99)
+:	let adj5 = Rgb4(adjBG1A, todaysec, 77000,10000,26000,-99,-99,-99,-99,99)
+:	let adj6 = Rgb4(adjBG2, todaysec, 77000, 10000, 26000, -99, -99, -99, -99, 99)
+:	let highlCmd = printf("highlight Question guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
+:	execute highlCmd
+:	let highlCmd=printf("highlight MoreMsg guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
 :	execute highlCmd
 :	let adj4 = Rgb2(adjBG1+40, todaysec, 86399, 6000, 1, 30)
 :	let adj5 = Rgb2(adjBG1A+15, todaysec, 86399, 6000, 1, 30)
@@ -636,16 +647,6 @@ endfunction
 :	let adj5 = Rgb4(adjBG1A, todaysec, 44000, 10000, 26000, -99, -99, -99, -99, 99)
 :	let adj6 = Rgb4(adjBG2, todaysec, 44000, 10000, 26000, -99, -99, -99, -99, 99)
 :	let highlCmd = printf("highlight htmlLink guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
-:	execute highlCmd
-:	let adj1 = Rgb2((-todaysec+86400)/338/2+220, todaysec, 77000, 10000, 26000, 70)
-:	let adj2 = Rgb2((-todaysec+86400)/338/2+220, todaysec, 77000, 10000, 26000, 70)
-:	let adj3 = Rgb2((-todaysec+86400)/338/2+0, todaysec, 77000, 10000, 26000, 70)
-:	let adj4 = Rgb4(adjBG1, todaysec, 77000, 10000, 26000, -99, -99, -99, -99, 99)
-:	let adj5 = Rgb4(adjBG1A, todaysec, 77000,10000,26000,-99,-99,-99,-99,99)
-:	let adj6 = Rgb4(adjBG2, todaysec, 77000, 10000, 26000, -99, -99, -99, -99, 99)
-:	let highlCmd = printf("highlight Question guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2,adj3,adj4,adj5,adj6)
-:	execute highlCmd
-:	let highlCmd=printf("highlight MoreMsg guifg=#%02x%02x%02x guibg=#%02x%02x%02x",		adj1,adj2,adj3,adj4,adj5,adj6)
 :	execute highlCmd
 :	let adj1 = Rgb2((-todaysec+86400)/338/2+100, todaysec, 66000, 8000, 8000, 95)
 :	let adj2 = Rgb2((-todaysec+86400)/338/2+160, todaysec, 66000, 8000, 8000, 95)
