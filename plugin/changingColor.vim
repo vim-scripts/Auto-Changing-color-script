@@ -667,3 +667,5 @@ endfunction
 
 au CursorHold * call SetHighLight()
 au CursorHoldI * call SetHighLight()
+au InsertEnter * colorscheme delek
+au VimEnter * colorscheme delek
