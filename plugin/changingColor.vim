@@ -665,8 +665,10 @@ endfunction
 :	redraw
 :endfunction       
 
-au CursorHold * call SetHighLight()
-au CursorHoldI * call SetHighLight()
-au InsertEnter * colorscheme delek
-au VimEnter * colorscheme delek
-au CursorMoved * colorscheme delek
+let g:malset=1
+
+au CursorHold * let g:malset=0 | call SetHighLight()
+au CursorHoldI * let g:malset=0 | call SetHighLight()
+au InsertEnter * if g:malset==0 | let g:malset=1 | colorscheme delek | endif
+au VimEnter * if g:malset==0 | let g:malset=1 | colorscheme delek | endif
+au CursorMoved * if g:malset==0 | let g:malset=1 | colorscheme delek | endif
