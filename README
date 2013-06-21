@@ -1,27 +1,23 @@
 This is a mirror of http://www.vim.org/scripts/script.php?script_id=2658
 
-Tested and works well with Java, Javascript, HTML, CSS, PHP, ActionScript (with 'actionscript.vim', available elsewhere in Vim.org), AutoIt and AutoHotKey.  Gradually changes changing syntax colours over the hour.
+Tested Java, Javascript, HTML, CSS, PHP, ActionScript (with 'actionscript.vim', available elsewhere in Vim.org), AutoIt and AutoHotKey.  Gradually changes changing syntax colours over the hour.
 
-The idea is taken from an old Atari 8-bit screen saver back in the days when they used to sell computers as "cool programming machines"' is to make you look cool while typing in programs.   This script I've tried sitting with hip kids in MacDonalds restaurants in particular, state-of-the art coolness if ever there was one, and while you sit there debugging your software makes you feel like you were in a movie.
+Borrowed idea from old Atari 8-bit screen saver that used to change screen colors when no input activity detected.
 
-On the MAC, when you scroll around using gestures, the "gradual" "screen-saver" mode stays in until you type something or issue movement command with the keyboard.  This is a nice benefit I did not expect, and look quite nice!  Haven't tested on Windows yet though :/ 
+On Windows, VIM is not as native and gets a slight flicker when color changes.  MAC it's really smooth.  
 
-Ego aside:
-
-Pro:
-+ minimises 'freezing' symptoms with funky effects
-+ improves space/time-awareness
-+ recruits more of the right side of brain
+Pros:
++ keeps you awake
++ improves spacial awareness
++ stimulating, even more so on the MAC
 + easy to install/uninstall
 
 Cons:
-- some Windows GUI resources are wasted over time
-- you may experience a little flicker
+- on Windows, not MAC, GUI resources consumed
+- on Windows (mentioned above)  slight flicker
 
-When you open to edit a file the color scheme will be some normal color scheme, this can be changed by editing the bottom few lines of changingColor.vim by the way.  (*)  After a while, maybe because you've just finished editing some code and you're thinking about what it meant, or you moved to a different area of the file and you're trying to work out what's going on, the gradual effect will come in changing the syntax coloring gradually, light at the end of of the hour and dark in the middle of the hour, in three stylish tints depending on whether it's hour 1, 2, or 3.  Then, as soon as you move, change file you're editing, or go into insert mode the scheme will go back to that normal one, which can be set to your taste.
-* The changingColor.vim file gets parked in <userdir>/.vim/vimfiles/plugin on the mac, and <userdir>/vimfiles/plugin in Windows 7.  Simply edit this if you don't like the standard color scheme, it's set on the bottom three lines, it will be obvious.
-** in my script's time, not real time, as in hour 1, 2, or 3 of my script's time.
+The way it works is at the turn of the hour the colors look brightest, and at the half hour they look dark.  So it's like light-dark, but either way they still remain visible on the screen.  Plus there are three versions of the "Bright" mode, a light pink, light yellow, and light green.  When you move the cursor on Windows, the screen changes into the default color scheme for a while, and then goes back to changing.  On MAC it's the same except the MAC allows you to move the cursor as well.  Only when you edit the default color comes in.  And the MAC is very smooth when changing the colors too.  If you don't like the default "non-gradual" color scheme, you can change it.  Simply add a line to your vimrc like this: let g:changingColorStop = "XXXX" where XXXX is your choice of color scheme.  It can be any color scheme in vim, or any you download later.
 
-Affects only GVIM. Nothing happens in VIM.
+Happy vim-ing!! :)
 
-Cursor may blink irregular but simply play with UPDATETIME to correct this.  See demo: http://www.youtube.com/watch?v=I1R_W0qTwBc
+Please don't forget to vote.
