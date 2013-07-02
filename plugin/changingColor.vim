@@ -8,6 +8,10 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
+" | TUE   2ND JUL 2013:  17.3                                                   |
+" |                      Made sure this is the same version that includes the   |
+" |                      user-settable g:changingColorStop variable checks      |
+" |                      I had it inconsistently before.                        |
 " | TUE  17TH MAY 2011:  17.2                                                   |
 " |                      Made foreground NonText color same as that of Constant |
 " |                      (prettier, not like that of ugly Normal, as I had b4)  |
@@ -669,6 +673,6 @@ let g:malset=1
 
 au CursorHold * let g:malset=0 | call SetHighLight()
 au CursorHoldI * let g:malset=0 | call SetHighLight()
-au InsertEnter * if g:malset==0 | let g:malset=1 | colorscheme delek | endif
-au VimEnter * if g:malset==0 | let g:malset=1 | colorscheme delek | endif
-au CursorMoved * if g:malset==0 | let g:malset=1 | colorscheme delek | endif
+au InsertEnter * if g:malset==0 | let g:malset=1 | if exists("g:changingColorStop") | execute "colorscheme ".g:changingColorStop | else | colorscheme darkblue | endif | endif
+au VimEnter * if g:malset==0 | let g:malset=1 | if exists("g:changingColorStop") | execute "colorscheme ".g:changingColorStop | else | colorscheme darkblue | endif | endif
+au CursorMoved * if g:malset==0 | let g:malset=1 | if exists("g:changingColorStop") | execute "colorscheme ".g:changingColorStop | else | colorscheme darkblue | endif | endif
