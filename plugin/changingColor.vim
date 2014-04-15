@@ -480,192 +480,163 @@ endfunction
 :	let adjBG3 = (todaysec>=18500)?temp1-ScaleToRange(adjBG1,54,255,4,17):adjBG1+ScaleToRange(adjBG1,0,54,32,12)
 :	let adjBG4 = (todaysec>=18500)?temp2-ScaleToRange(adjBG1A,54,255,4,17):adjBG1A+ScaleToRange(adjBG1A,0,54,32,26)
 :	let adjBG5a = (todaysec>=18500)?temp3-ScaleToRange(adjBG2,54,255,4,17):adjBG2+ScaleToRange(adjBG2,0,54,32,26)
-:       let highlCmd = printf("highlight Normal guibg=#%02x%02x%02x", adjBG1,adjBG1A,adjBG2)
-:	execute highlCmd
+:       let highlCmdNormal = printf("highlight Normal guibg=#%02x%02x%02x", adjBG1,adjBG1A,adjBG2)
 :	let adj1 = Rgb2(adjBG1+40, todaysec, 80000, 5500, 6400, 60)
 :	let adj2 = Rgb2(adjBG1+40, todaysec, 80000, 5500, 6400, 60)
 :	let adj3 = Rgb2(adjBG1+40, todaysec, 80000, 5500, 6400, 60)
-:       let highlCmd = printf("highlight Folded guibg=#%02x%02x%02x", adjBG3, adjBG4, adjBG5a)
-:	execute highlCmd
-:       let highlCmd = printf("highlight CursorColumn guibg=#%02x%02x%02x", adjBG3, adjBG4, adjBG5a) 
-:	execute highlCmd
-:       let highlCmd = printf("highlight CursorLine guibg=#%02x%02x%02x", adjBG3,adjBG4,adjBG5a) 
-:	execute highlCmd
-:       let highlCmd = printf("highlight LineNr guibg=#%02x%02x%02x", adjBG3, adjBG4, adjBG5a)
-:	execute highlCmd
-:       let highlCmd = printf("highlight FoldColumn guibg=#%02x%02x%02x", adjBG3, adjBG4, adjBG5a)
-:	execute highlCmd
+:       let highlCmdFolded = printf("highlight Folded guibg=#%02x%02x%02x", adjBG3, adjBG4, adjBG5a)
+:       let highlCmdCursorColumn = printf("highlight CursorColumn guibg=#%02x%02x%02x", adjBG3, adjBG4, adjBG5a) 
+:       let highlCmdCursorLine = printf("highlight CursorLine guibg=#%02x%02x%02x", adjBG3,adjBG4,adjBG5a) 
+:       let highlCmdLineNr = printf("highlight LineNr guibg=#%02x%02x%02x", adjBG3, adjBG4, adjBG5a)
+:       let highlCmdFoldColumn = printf("highlight FoldColumn guibg=#%02x%02x%02x", adjBG3, adjBG4, adjBG5a)
 :	let adj1 = Rgb2(adjBG1,	todaysec, 86399, 4000, 1, 40)
 :	let adj2 = Rgb2(adjBG1A+30, todaysec,86399,4000,1,40)
 :	let adj3 = Rgb2(adjBG2,	todaysec,86399,4000,1,40)
-:	let highlCmd = printf("highlight DiffAdd guibg=#%02x%02x%02x", adj1, adj2, adj3)
-:	execute highlCmd
+:	let highlCmdDiffAdd = printf("highlight DiffAdd guibg=#%02x%02x%02x", adj1, adj2, adj3)
 :	let adj1 = Rgb2(adjBG1+30, todaysec, 86399, 4000, 1, 40)
 :	let adj2 = Rgb2(adjBG1A, todaysec, 86399, 4000, 1, 40)
 :	let adj3 = Rgb2(adjBG2,	todaysec, 86399, 4000, 1, 40)
-:	let highlCmd = printf("highlight DiffDelete guibg=#%02x%02x%02x", adj1, adj2, adj3)
-:	execute highlCmd
+:	let highlCmdDiffDelete = printf("highlight DiffDelete guibg=#%02x%02x%02x", adj1, adj2, adj3)
 :	let adj1 = Rgb2(adjBG1+30, todaysec, 86399, 4000, 1, 40)
 :	let adj2 = Rgb2(adjBG1A+30, todaysec, 86399,4000,1,40)
 :	let adj3 = Rgb2(adjBG2, todaysec, 86399, 4000, 1, 40)
-:	let highlCmd = printf("highlight DiffChange guibg=#%02x%02x%02x", adj1,adj2,adj3)
-:	execute highlCmd
+:	let highlCmdDiffChange = printf("highlight DiffChange guibg=#%02x%02x%02x", adj1,adj2,adj3)
 :	let adj1 = Rgb2(adjBG1,	todaysec, 86399, 4000, 1, 40)
 :	let adj2 = Rgb2(adjBG1A, todaysec, 86399, 4000, 1, 40)
 :	let adj3 = Rgb2(adjBG2+30, todaysec, 86399, 4000, 1, 40)
-:	let highlCmd = printf("highlight DiffText guibg=#%02x%02x%02x", adj1, adj2, adj3)
-:	execute highlCmd
+:	let highlCmdDiffText = printf("highlight DiffText guibg=#%02x%02x%02x", adj1, adj2, adj3)
 :	let adj1 = Rgb2a((-todaysec+86400)/338/4+160, todaysec, 57000, 16000, 23000, -100, -42, 0, 12)
 :	let adj2 = Rgb2a((-todaysec+86400)/338/4+76, todaysec, 57000, 16000, 23000, -100, -42, 0, 12)
 :	let adj3 = Rgb2a((-todaysec+86400)/338/4+23, todaysec, 57000, 16000, 23000, -100, -42, 0, 12)
 :	let adj4 = Rgb4(adjBG1, todaysec, 57000, 16000, 15000, -4, -11, -2, 0, 0)
 :	let adj5 = Rgb4(adjBG1A, todaysec, 57000, 16000, 15000, -4, -11, -2, 0, 0)
 :	let adj6 = Rgb4(adjBG2, todaysec, 57000, 16000, 15000, -4, -11, -2, 0, 0)
-:	let highlCmd = printf("highlight Statement guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
-:	execute highlCmd
+:	let highlCmdStatement = printf("highlight Statement guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
 :	let adjBG5 = (todaysec<43200)?todaysec/338/2:todaysec/450+63
-:	let highlCmd = printf("highlight VertSplit guifg=#%02x%02x%02x", adjBG3, adjBG3, adjBG5)
-:	execute highlCmd
+:	let highlCmdVertSplit = printf("highlight VertSplit guifg=#%02x%02x%02x", adjBG3, adjBG3, adjBG5)
 :	let adj1 = Rgb2((-todaysec+86400)/338/2+40, todaysec, 44000, 8000, 20000, 100)
 :	let adj2 = Rgb2((-todaysec+86400)/338/2+54, todaysec, 44000,8000,20000,100)
 :	let adj3 = Rgb2((-todaysec+86400)/338/2+80, todaysec, 44000, 8000, 20000, 100)
-:       let highlCmd = printf("highlight LineNr guifg=#%02x%02x%02x", adj1, adj2, adj3)  
-:	execute highlCmd
-:       let highlCmd = printf("highlight FoldColumn guifg=#%02x%02x%02x", adj1, adj2, adj3)  
-:	execute highlCmd
-:       let highlCmd = printf("highlight Folded guifg=#%02x%02x%02x", adj1, adj2, adj3)  
-:	execute highlCmd
+:       let highlCmdLineNr2 = printf("highlight LineNr guifg=#%02x%02x%02x", adj1, adj2, adj3)  
+:       let highlCmdFoldColumn2 = printf("highlight FoldColumn guifg=#%02x%02x%02x", adj1, adj2, adj3)  
+:       let highlCmdFolded2 = printf("highlight Folded guifg=#%02x%02x%02x", adj1, adj2, adj3)  
 :	let adj1 = Rgb2a((-todaysec+86400)/400/2+27, todaysec, 57000, 22000, 14500, -140, -45, 0, 25)
 :	let adj2 = Rgb2a((-todaysec+86400)/400/2+110, todaysec, 57000, 22000, 14500, -140, -45, 0, 25)
 :	let adj4 = Rgb4a(adjBG1, todaysec, 57000, 22000, 14500, -26, -28, -3, -2, 8, 2, 25, -20, -4, -13)
 :	let adj5 = Rgb4a(adjBG1A, todaysec, 57000, 22000, 14500, -26, -28, -3, -2, 8, 2, 25, -20, -4, -13)
 :	let adj6 = Rgb4a(adjBG2, todaysec, 57000, 22000, 14500, -26, -28, -3, -2, 8, 2, 25, -20, -4, -13)
-:	let highlCmd = printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj1, adj2, adj4, adj5, adj6)
-:	execute highlCmd
-:       let highlCmd = printf("highlight NonText guibg=#%02x%02x%02x guifg=#%02x%02x%02x", adjBG3, adjBG1, adjBG1, adj1, adj1, adj2)  
-:	execute highlCmd
-:	let highlCmd=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj1, adj2, adj4, adj5, adj6)
-:	execute highlCmd
+:	let highlCmdConstant = printf("highlight Constant guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj1, adj2, adj4, adj5, adj6)
+:       let highlCmdNonText = printf("highlight NonText guibg=#%02x%02x%02x guifg=#%02x%02x%02x", adjBG3, adjBG1, adjBG1, adj1, adj1, adj2)  
+:	let highlCmdJavaScriptValue=printf("highlight JavaScriptValue guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj1, adj2, adj4, adj5, adj6)
 :	let adj1 = Rgb2a((-todaysec+86400)/338/2+110, todaysec, 35000, 9600, 40000, -285, 30, 0, 17)
 :	let adj2 = Rgb2a((-todaysec+86400)/338/2+76, todaysec, 35000, 0100, 40000, -285, 30, 0, 17)
 :	let adj3 = Rgb2a((-todaysec+86400)/338/2, todaysec, 35000, 0100, 40000, -285, 30, 0, 17)
 :	let adj4 = Rgb4(adjBG1-30, todaysec, 0, 0, 10000, 20, 20, 40, 20, 40)
 :	let adj5 = Rgb4(adjBG1A-10, todaysec, 0, 0, 10000, 20, 20, 40, 20, 40)
 :	let adj6 = Rgb4(adjBG2+10, todaysec, 0, 0, 10000, 20, 20, 40, 20, 40)
-:	let highlCmd = printf("highlight Normal guifg=#%02x%02x%02x gui=NONE", adj1, adj2, adj3)
-:	execute highlCmd
-:       let highlCmd=printf("highlight Search guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6) 
-:	execute highlCmd
+:	let highlCmdNormal2 = printf("highlight Normal guifg=#%02x%02x%02x gui=NONE", adj1, adj2, adj3)
+:       let highlCmdSearch=printf("highlight Search guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6) 
 :	let adj4 = Rgb4(adjBG1, todaysec, 77000, 10000, 26000, -99, -99, -99, -99, 99)
 :	let adj5 = Rgb4(adjBG1A, todaysec, 77000,10000,26000,-99,-99,-99,-99,99)
 :	let adj6 = Rgb4(adjBG2, todaysec, 77000, 10000, 26000, -99, -99, -99, -99, 99)
-:	let highlCmd = printf("highlight Question guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
-:	execute highlCmd
-:	let highlCmd=printf("highlight MoreMsg guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
-:	execute highlCmd
+:	let highlCmdQuestion = printf("highlight Question guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
+:	let highlCmdMoreMsg=printf("highlight MoreMsg guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
 :	let adj4 = Rgb2(adjBG1+40, todaysec, 86399, 6000, 1, 30)
 :	let adj5 = Rgb2(adjBG1A+15, todaysec, 86399, 6000, 1, 30)
 :	let adj6 = Rgb2(adjBG2+10, todaysec, 86399, 6000, 1, 30)
-:	let highlCmd = printf("highlight Visual guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
-:	execute highlCmd
+:	let highlCmdVisual = printf("highlight Visual guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
 :	let adj1 = Rgb2a((-todaysec+86400)/365/2+66, todaysec, 57000, 10000, 23000, -168, -30, -6, 33)
 :	let adj2 = Rgb2a((-todaysec+86400)/365/2+97, todaysec, 57000, 10000, 23000, -168, -30, -6, 33)
 :	let adj3 = Rgb2a((-todaysec+86400)/365/2, todaysec, 57000, 10000, 23000, -168, -30, -6, 33)
 :	let adj4 = Rgb4a(adjBG1, todaysec, 57000, 10000, 15000, -8, -12, 5, 0, 7,3,6,-8,-2,-2)
 :	let adj5 = Rgb4a(adjBG1A, todaysec,57000,10000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
 :	let adj6 = Rgb4a(adjBG2, todaysec,57000,10000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
-:	let highlCmd = printf("highlight Identifier guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6) 
-:	execute highlCmd
+:	let highlCmdIdentifier = printf("highlight Identifier guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6) 
 :	let adj1 = Rgb2a((-todaysec+86400)/355/2+97, todaysec, 43000, 2000, 19000, -130, -75, 0, 30)
 :	let adj2 = Rgb2a((-todaysec+86400)/355/2+0, todaysec, 43000, 2000, 19000, -130, -75, 0, 30)
 :	let adj3 = Rgb2a((-todaysec+86400)/355/2+137, todaysec, 43000, 2000, 19000, -130, -75, 0, 30)
 :	let adj4 = Rgb4(adjBG1, todaysec, 43000, 2000, 19000, -99, -99, 0, 0, 0)
 :	let adj5 = Rgb4(adjBG1A, todaysec, 43000, 2000, 19000, -99, -99, 0, 0, 0)
 :	let adj6 = Rgb4(adjBG2,	 todaysec, 43000, 2000, 19000, -99, -99, 0, 0, 0)
-:	let highlCmd = printf("highlight PreProc guifg=#%02x%02x%02x gui=bold guibg=#%02x%02x%02x",	adj1,adj2,adj3,adj4,adj5,adj6)
-:	execute highlCmd
+:	let highlCmdPreProc = printf("highlight PreProc guifg=#%02x%02x%02x gui=bold guibg=#%02x%02x%02x",	adj1,adj2,adj3,adj4,adj5,adj6)
 :	let adj1 = Rgb2a((-todaysec+86400)/600/4+187, todaysec, 57000, 10000, 23000, -156, -68, 0, 10)
 :	let adj2 = Rgb2a((-todaysec+86400)/600/4+95, todaysec, 57000, 10000, 23000, -156, -68, 0, 10)
 :	let adj3 = Rgb2a((-todaysec+86400)/600/4+155, todaysec, 57000, 10000, 23000, -156, -68, 0, 10)
 :	let adj4 = Rgb4(adjBG1, todaysec, 57000, 10000, 15000, -2, -5, -5, -2, 0)
 :	let adj5 = Rgb4(adjBG1A, todaysec, 57000, 10000, 15000, -2, -5, -5, -2, 0)
 :	let adj6 = Rgb4(adjBG2, todaysec, 57000, 10000, 15000, -2, -5, -5, -2, 0)
-:	let highlCmd = printf("highlight Special guifg=#%02x%02x%02x gui=bold guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6) 
-:	execute highlCmd
-:	let highlCmd = printf("highlight JavaScriptParens guifg=#%02x%02x%02x gui=bold guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6) 
-:	execute highlCmd
+:	let highlCmdSpecial = printf("highlight Special guifg=#%02x%02x%02x gui=bold guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6) 
+:	let highlCmdJavaScriptParens = printf("highlight JavaScriptParens guifg=#%02x%02x%02x gui=bold guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6) 
 :	let adj1 = Rgb2((-todaysec+86400)/338/2+120, todaysec, 47000, 3000, 14000, 64)
 :	let adj2 = Rgb2((-todaysec+86400)/338/2+10, todaysec, 47000, 3000, 14000, 64)
 :	let adj3 = Rgb2((-todaysec+86400)/338/2+80, todaysec, 47000, 3000, 14000, 64)
 :	let adj4 = Rgb4(adjBG1, todaysec, 47000, 3000, 14000, -99, -99, -99, -99, 99)
 :	let adj5 = Rgb4(adjBG1A, todaysec, 47000, 3000, 14000, -99, -99, -99, -99, 99)
 :	let adj6 = Rgb4(adjBG2, todaysec, 47000, 3000, 14000, -99, -99, -99, -99, 99)
-:       let highlCmd = printf("highlight Title guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6) 
-:	execute highlCmd
+:       let highlCmdTitle = printf("highlight Title guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6) 
 :	let adj1 = Rgb2b((-todaysec+86400)/338/4+110, todaysec, 50000, 12000, 22000, 220, 140, -300)
 :	let adj2 = Rgb2b((-todaysec+86400)/338/4+110, todaysec, 50000, 12000, 22000, 220, 140, -300)
 :	let adj3 = Rgb2b((-todaysec+86400)/338/4+110, todaysec, 50000, 12000, 22000, 220, 140, -300)
 :	let adj4 = Rgb4(adjBG1,	todaysec, 50000, 12000, 22000, -8, -18, 0, 0, -3)
 :	let adj5 = Rgb4(adjBG1A, todaysec, 50000, 12000, 22000, -8, -18, 0, 0, -3)
 :	let adj6 = Rgb4(adjBG2,	todaysec, 50000, 12000, 22000, -8, -18, 0, 0, -3)
-:	let highlCmd = printf("highlight Comment guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
-:	execute highlCmd
-:	let highlCmd = printf("highlight htmlComment guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
-:	execute highlCmd
-:	let highlCmd = printf("highlight htmlCommentPart guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
-:	execute highlCmd
+:	let highlCmdComment = printf("highlight Comment guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
+:	let highlCmdhtmlComment = printf("highlight htmlComment guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
+:	let highlCmdhtmlCommentPart = printf("highlight htmlCommentPart guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
 :	let adj1 = Rgb6(todaysec/338+70)
 :	let adj2 = Rgb6(todaysec/338+30)
 :	let adj3 = Rgb6(todaysec/338-100)
 :	let adj4 = Rgb2a((-todaysec+86400)/338/2+70, todaysec, 35000, 15000, 14000, 60, 120, 0, 0)
 :	let adj5 = Rgb2a((-todaysec+86400)/338/2+60, todaysec, 35000, 15000, 14000, 60, 120, 0, 0)
 :	let adj6 = Rgb2a((-todaysec+86400)/338/2+0, todaysec, 35000, 15000, 14000, 60, 120, 0, 0)
-:	let highlCmd = printf("highlight StatusLine guibg=#%02x%02x%02x guifg=#%02x%02x%02x gui=bold", adj1, adj2, adj3, adj4, adj5, adj6)
-:	execute highlCmd
+:	let highlCmdStatusLine = printf("highlight StatusLine guibg=#%02x%02x%02x guifg=#%02x%02x%02x gui=bold", adj1, adj2, adj3, adj4, adj5, adj6)
 :	let adj1 = Rgb6(todaysec/338+70)
 :	let adj2 = Rgb6(todaysec/338+60)
 :	let adj3 = Rgb6(todaysec/338-100)
 :	let adj4 = Rgb2a((-todaysec+86400)/338/2+70, todaysec, 20000, 10000, 14000, 40, 120, 0, 0)
 :	let adj5 = Rgb2a((-todaysec+86400)/338/2+0, todaysec, 20000, 10000, 14000, 40, 120, 0, 0)
 :	let adj6 = Rgb2a((-todaysec+86400)/338/2+0, todaysec, 20000, 10000, 14000, 40, 120, 0, 0)
-:	let highlCmd = printf("highlight StatusLineNC guibg=#%02x%02x%02x guifg=#%02x%02x%02x gui=bold", adj1, adj2, adj3, adj4, adj5, adj6)
-:	execute highlCmd
+:	let highlCmdStatusLineNC = printf("highlight StatusLineNC guibg=#%02x%02x%02x guifg=#%02x%02x%02x gui=bold", adj1, adj2, adj3, adj4, adj5, adj6)
 :	let adj1 = Rgb2((-todaysec+86400)/338/2, todaysec, 37000, 27000, 20000, 40)
 :	let adj2 = Rgb2((-todaysec+86400)/338/2+20, todaysec, 37000, 27000, 20000, 40)
 :	let adj3 = Rgb2((-todaysec+86400)/338/2+80, todaysec, 37000, 27000, 20000, 40)
 :	let adjBG6 = (adjBG5-32>=0)?adjBG5-32:0
-:	let highlCmd = printf("highlight PMenu guibg=#%02x%02x%02x", adjBG3, adjBG3, adjBG1)
-:	execute highlCmd
-:	let highlCmd = "highlight PMenuSel guibg=Yellow guifg=Blue"
-:	execute highlCmd
+:	let highlCmdPMenu = printf("highlight PMenu guibg=#%02x%02x%02x", adjBG3, adjBG3, adjBG1)
+:	let highlCmdPMenuSel = "highlight PMenuSel guibg=Yellow guifg=Blue"
 :	let adj1 = Rgb2a((-todaysec+86400)/338/2+150, todaysec, 60000, 11000, 13000, -90, -45, -50, -20)
 :	let adj2 = Rgb2a((-todaysec+86400)/338/2+120, todaysec, 60000, 11000, 13000, -90, -45, -50, -20)
 :	let adj3 = Rgb2a((-todaysec+86400)/338/2+0, todaysec, 60000, 11000, 13000, -90, -45, -50, -20)
-:	let highlCmd = printf("highlight Type guifg=#%02x%02x%02x", adj1, adj2, adj3)
-:	execute highlCmd
+:	let highlCmdType = printf("highlight Type guifg=#%02x%02x%02x", adj1, adj2, adj3)
 :	let adj1 = Rgb3(255, todaysec, 80000, 0)
 :	let adj2 = Rgb3(255, todaysec, 80000, 255)
 :	let adj3 = Rgb3(0, todaysec, 80000, 0)
-:	let highlCmd = printf("highlight Cursor guibg=#%02x%02x%02x", adj1, adj2, adj3)
-:	execute highlCmd
-:	let highlCmd = printf("highlight MatchParen guibg=#%02x%02x%02x", adj1, adj2, adj3)
-:	execute highlCmd
+:	let highlCmdCursor = printf("highlight Cursor guibg=#%02x%02x%02x", adj1, adj2, adj3)
+:	let highlCmdMatchParen = printf("highlight MatchParen guibg=#%02x%02x%02x", adj1, adj2, adj3)
 :	let adj1 = Rgb2((-todaysec+86400)/338/2+100, todaysec, 44000, 10000, 26000, 40)
 :	let adj2 = Rgb2((-todaysec+86400)/338/2+0, todaysec, 44000, 10000, 26000, 40)
 :	let adj3 = Rgb2((-todaysec+86400)/338/2+180, todaysec, 44000, 10000, 26000, 40)
 :	let adj4 = Rgb4(adjBG1,	todaysec, 44000, 10000, 26000, -99, -99, -99, -99, 99)
 :	let adj5 = Rgb4(adjBG1A, todaysec, 44000, 10000, 26000, -99, -99, -99, -99, 99)
 :	let adj6 = Rgb4(adjBG2, todaysec, 44000, 10000, 26000, -99, -99, -99, -99, 99)
-:	let highlCmd = printf("highlight htmlLink guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
-:	execute highlCmd
+:	let highlCmdhtmlLink = printf("highlight htmlLink guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
 :	let adj1 = Rgb2((-todaysec+86400)/338/2+100, todaysec, 66000, 8000, 8000, 95)
 :	let adj2 = Rgb2((-todaysec+86400)/338/2+160, todaysec, 66000, 8000, 8000, 95)
 :	let adj3 = Rgb2((-todaysec+86400)/338/2+0, todaysec, 66000, 8000, 8000, 95)
 :	let adj4 = Rgb4(adjBG1,	todaysec, 66000, 8000, 8000, -5, -5, 10, 3, 5)
 :	let adj5 = Rgb4(adjBG1A, todaysec, 66000, 8000, 8000, -5, -5, 10, 3, 5)
 :	let adj6 = Rgb4(adjBG2,	todaysec, 66000, 8000, 8000, -5, -5, 10, 3, 5)
-:	let highlCmd = printf("highlight Directory guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
-:	execute highlCmd
+:	let highlCmdDirectory = printf("highlight Directory guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
+:	let total = highlCmdNormal . " | " . highlCmdFolded . " | " . highlCmdCursorColumn . " | " . highlCmdCursorLine . " | "
+:	let total .= highlCmdLineNr . " | " . highlCmdFoldColumn . " | " . highlCmdDiffAdd . " | " . highlCmdDiffDelete . " | "
+:	let total .= highlCmdDiffChange . " | " . highlCmdDiffText . " | " . highlCmdStatement . " | " . highlCmdVertSplit . " | "
+:	let total .= highlCmdLineNr2 . " | " . highlCmdFoldColumn2 . " | " . highlCmdFolded2 . " | " . highlCmdConstant . " | "
+:	let total .= highlCmdNonText . " | " . highlCmdJavaScriptValue . " | " . highlCmdNormal2 . " | " . highlCmdSearch . " | "
+:	let total .= highlCmdQuestion . " | "  . highlCmdMoreMsg . " | " . highlCmdVisual . " | " . highlCmdIdentifier . " | "
+:	let total .= highlCmdPreProc . " | " . highlCmdSpecial . " | " . highlCmdJavaScriptParens . " | " . highlCmdTitle . " | "
+:	let total .= highlCmdComment . " | " . highlCmdhtmlComment . " | " . highlCmdhtmlCommentPart . " | " . highlCmdStatusLine . " | "
+:	let total .= highlCmdStatusLineNC . " | " . highlCmdPMenu . " | " . highlCmdPMenuSel . " | " . highlCmdType . " | "
+:	let total .= highlCmdCursor . " | " . highlCmdMatchParen . " | " . highlCmdhtmlLink . " | " . highlCmdDirectory
+:	execute total
 :	redraw
 :endfunction       
 

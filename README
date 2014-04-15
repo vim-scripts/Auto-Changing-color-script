@@ -2,19 +2,18 @@ This is a mirror of http://www.vim.org/scripts/script.php?script_id=2658
 
 Tested Java, Javascript, HTML, CSS, PHP, ActionScript (with 'actionscript.vim', available elsewhere in Vim.org), AutoIt and AutoHotKey.  Gradually changes changing syntax colours over the hour.
 
-Borrowed idea from old Atari 8-bit screen saver that used to change screen colors when no input activity detected.
+Borrowed idea from classic Atari 400, 800 changes colors at command prompt when detected not being used.
 
-On Windows, VIM is not as native and gets a slight flicker when color changes.  MAC it's really smooth.  
+On Windows there is just a tiny flicker, it's not perfectly smooth, but it's small.  I thnk it's pretty decent now.  It's better than it was.  On MACVim it's very smooth.  
 
 Pros:
-+ keeps you awake
-+ improves spacial awareness
-+ stimulating, even more so on the MAC
++ improves time awareness
++ visually stimulates
 + easy to install/uninstall
 
 Cons:
-- on Windows, not MAC, GUI resources consumed
-- on Windows (mentioned above)  slight flicker
+- on Windows GUI resources consumed, after 10 hours might have to shutdown vim
+- on Windows tiny and much improved flicker while the colors change ~ 20 secs
 
 The way it works is at the turn of the hour the colors look brightest, and at the half hour they look dark.  So it's like light-dark, but either way they still remain visible on the screen.  Plus there are three versions of the "Bright" mode, a light pink, light yellow, and light green.  When you move the cursor on Windows, the screen changes into the default color scheme for a while, and then goes back to changing.  On MAC it's the same except the MAC allows you to move the cursor as well.  Only when you edit the default color comes in.  And the MAC is very smooth when changing the colors too.  If you don't like the default "non-gradual" color scheme, you can change it.  Simply add a line to your vimrc like this: let g:changingColorStop = "XXXX" where XXXX is your choice of color scheme.  It can be any color scheme in vim, or any you download later.
 
