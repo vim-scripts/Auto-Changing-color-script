@@ -8,6 +8,19 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
+" | THU  24TH APR 2014:  18.0                                                   |
+" |                      Made time passing effect co-operate with when you      |
+" |                      finish writing your changes vs. just browsing around   |
+" |                      text without editing it.  This latter now uses the     |
+" |                      more intuitively named 'permanent' color scheme.       |
+" |                      If you want to change it the variable is called        |
+" |                      g:permanentColorScheme.  Simply set that to the string |
+" |                      equalling the name of your favorite color scheme in    |
+" |                      your _vimrc, e.g. "koehler", or "morning".             |
+" |                      e.g. let g:permanentColorScheme = "keohler"            |
+" |                      Note: this used to be referred to unintuitively as     |
+" |                      'g:changingColorStop' in previous versions of this     |
+" |                      script.                                                |
 " | TUE   2ND JUL 2013:  17.3                                                   |
 " |                      Made sure this is the same version that includes the   |
 " |                      user-settable g:changingColorStop variable checks      |
@@ -406,13 +419,15 @@ endfunction
 " | Muscle function, calls vim highlight command for each element based on the   |
 " | time into the current hour.                                                  |
 " +------------------------------------------------------------------------------+
-:function SetHighLight()
+:function SetHighLight(forceUpdate)
 :	let todaysec=(((localtime()+1800)%(60*60)))*24
 :	if exists("g:mytime")
 :		let todaysec=g:mytime
 :	endif
-:	if s:oldactontime/g:changefreq==todaysec/g:changefreq
-:		return
+:	if (!a:forceUpdate)
+:		if s:oldactontime/g:changefreq==todaysec/g:changefreq
+:			return
+:		endif
 :	endif
 :	let s:oldactontime=todaysec
 :	if todaysec<43199
@@ -637,13 +652,28 @@ endfunction
 :	let total .= highlCmdStatusLineNC . " | " . highlCmdPMenu . " | " . highlCmdPMenuSel . " | " . highlCmdType . " | "
 :	let total .= highlCmdCursor . " | " . highlCmdMatchParen . " | " . highlCmdhtmlLink . " | " . highlCmdDirectory
 :	execute total
-:	redraw
 :endfunction       
 
-let g:malset=1
+" holds the name of the permanent color scheme
+let g:permanentColorScheme = "darkblue"
 
-au CursorHold * let g:malset=0 | call SetHighLight()
-au CursorHoldI * let g:malset=0 | call SetHighLight()
-au InsertEnter * if g:malset==0 | let g:malset=1 | if exists("g:changingColorStop") | execute "colorscheme ".g:changingColorStop | else | colorscheme darkblue | endif | endif
-au VimEnter * if g:malset==0 | let g:malset=1 | if exists("g:changingColorStop") | execute "colorscheme ".g:changingColorStop | else | colorscheme darkblue | endif | endif
-au CursorMoved * if g:malset==0 | let g:malset=1 | if exists("g:changingColorStop") | execute "colorscheme ".g:changingColorStop | else | colorscheme darkblue | endif | endif
+" this prevents repeated calls to activate the permanent color scheme
+let g:bIveSetTheNonMovingScheme = 0
+
+:func HandleTextChanged()
+:	if &modified == 1 && g:bIveSetTheNonMovingScheme == 0
+:		exe "colorscheme ".g:permanentColorScheme
+:		let g:bIveSetTheNonMovingScheme = 1
+:	endif
+:endfunction
+
+:func GetTheTimeEffectMoving()
+:	call SetHighLight(1)
+:	let g:bIveSetTheNonMovingScheme = 0
+:endfunc
+
+au CursorHold * if &modified==0 | call SetHighLight(0) | endif
+au CursorHoldI * if &modified==0 | call SetHighLight(0) | endif
+au CursorMoved * call HandleTextChanged()
+au CursorMovedI * call HandleTextChanged()
+au BufWritePost * call GetTheTimeEffectMoving()
