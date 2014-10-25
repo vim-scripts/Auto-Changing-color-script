@@ -3,11 +3,14 @@
 " +-----------------------------------------------------------------------------+
 " | Changes syntax highlight colors gradually every little while to reflect the |
 " | passing by of the hour.  Note: this script needs the Timer script in order  |
-" | to work properly, Timer should be installed alongside.  Use Vimball if you  |
-" | are not sure, as Vimball installs Timer.                                    |
+" | to work properly, but Timer should be installed automatically if you use    |
+" | :source %  as it comes included in the package.                             |
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
+" | SAT  25TH OCT 2014:  18.1                                                   |
+" |                      Bug fix.  Accidentally overwrote user's choice of      |
+" |                      color scheme did not check if it was already set. Fixed|
 " | THU  24TH APR 2014:  18.0                                                   |
 " |                      Made time passing effect co-operate with when you      |
 " |                      finish writing your changes vs. just browsing around   |
@@ -76,7 +79,7 @@ let s:oldactontime=-9999
 " | it will do so, the lower the more often it will do so.  2880 is equivalnet   |
 " | to every minute, 5760 every two minutes, 4320 is ~ every 1.5 minutes         |
 " +------------------------------------------------------------------------------+
-let g:changefreq=720
+let g:changefreq=360
 
 " +------------------------------------------------------------------------------+
 " | The following variable is the size of the area below and above that zone that|
@@ -654,8 +657,11 @@ endfunction
 :	execute total
 :endfunction       
 
-" holds the name of the permanent color scheme
-let g:permanentColorScheme = "darkblue"
+" name of permanent color scheme
+" but check in case user already has one
+if !exists("permanentColorScheme")
+	let g:permanentColorScheme = "darkblue"
+endif
 
 " this prevents repeated calls to activate the permanent color scheme
 let g:bIveSetTheNonMovingScheme = 0

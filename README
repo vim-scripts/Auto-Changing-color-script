@@ -1,44 +1,8 @@
 This is a mirror of http://www.vim.org/scripts/script.php?script_id=2658
 
-Thanks to my revolutionary plugin, with it's completely off-the-wall vision
-the world, the world of editing code got a trip of LSD right into your editing.
-And it's perfectly legal.  Inspired by a former girlfriend of mine who was
-editing music on a spiralling, moving, scrolling colorful note editing package
-I thought to myself why should music composition packages be the beneficiary of high
-power graphics cards and not the people who make the software.   So I set
-about trying to do the same things. 
+Inspired by an ex (no pun intended) of mine who was good at producing music . 
 
-What's clearly not happening from this perspective is that the same old
-color scheme all do basically one thing.  They color code one color.  All
-Contants look this, all Statements look that, yawn.  Actually what I done here
-is break away from normal and open new boundaries.   This is the mind's power.
-The creation of new space.  When you're creating new space you're also
-creating possibilities.  The universe is the world of possibility
-Possibility is only made possible if there is space enough to create it.
+Colors chemes are all one color.  But why? That's boring so let's make it creative.
 
-Current schemes are currently stiff and boring, they allow you to change your
-decor once and that's it.  The real world is dynamic and this kind of defeats
-the object.  It's sad and one sided.  This is my bid to remedy the situation.
+But you don't have to get rid of your beloved color scheme, it  just gives it "A Sharp Kick to the Third Eye" (tm).
 
-But the nice thing is you don't have to get rid of your old beloved
-color scheme.  On the contrary.  It gives your old color scheme spurs and
-kicks it back into life.  It becomes active when you're stuck in editing, and
-as soon as you finish your edit as you do :w -rite the world in motion becomes
-rule again and to help you in motion it is coded, with light colors to signify
-o'clock side of the hour, and dark colors to signify half hours, with
-everything in between smoothly blended.  
-
-	It's easy to un-install and try.  On MacVIM it's extremely smooth, the
-color blending is perfect.  On Windows it's a tiny bit flickery but it works
-if you try.  Not a patch on the Mac version though, but usable.
-
-	If you wanna set your own permanent color scheme just insert this
-line in your _vimrc file.
-		let g:permanentColorScheme = <XXX_WHATEVER_XXX>
-	where
-		XXX_WHATEVER_XXX is your choice of color scheme.
-	So like
-		let g:permanentColorScheme = "blue"
-	will change away the permanent color scheme from "darkblue" that
-changingColor.vba sets when you first install it to "blue", or "delek", or
-"koehler" or anything else you might prefer.
