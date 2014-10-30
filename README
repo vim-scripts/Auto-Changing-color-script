@@ -4,5 +4,11 @@ Inspired by an ex (no pun intended) of mine who was good at producing music .
 
 Colors chemes are all one color.  But why? That's boring so let's make it creative.
 
-But you don't have to get rid of your beloved color scheme, it  just gives it "A Sharp Kick to the Third Eye" (tm).
+And you don't have to get rid of your beloved color scheme, it  just gives it "A Sharp Kick to the Third Eye" ().
 
+NEW!!  Help file added.  Please be patient, only some function parameters explained.  I will get around to doing more. 
+
+To try it just open the changingColor.vim e.g.
+  :e .vim/plugin/changingColor.vim
+
+then try Ctrl-] over the parameters for function Rgb2a().  It's even in the familiar vim help colours
