@@ -1,10 +1,15 @@
 Rgb	changingColorHelp.txt	/| The rgb parameter |
+Rgb2a	changingColor.vim	/function Rgb2a
+ScaleToRange	changingColorHelp.txt	/| ScaleToRange |
 actBgr	changingColorHelp.txt	/| actBgr |
+adjVal	changingColorHelp.txt	/| adjVal |
 background	changingColorHelp.txt	/| actBgr |
 dngBgr	changingColorHelp.txt	/| dngBgr |
-hiadj	changingColorHelp.txt	/| low adjustment peppering, seasoning to taste |
+hiadj	changingColorHelp.txt	/| high adjustment peppering, seasoning to taste |
 hourScale	changingColorHelp.txt	/| hourScale |
 loadj	changingColorHelp.txt	/| low adjustment peppering, seasoning to taste |
+lotail1	changingColorHelp.txt	/| lotail1 |
+lotail2	changingColorHelp.txt	/| lotail2 |
 more	changingColorHelp.txt	/| squeezing the hour into two half hours |
 ramp	changingColorHelp.txt	/| visibility ramps |
 ramps	changingColorHelp.txt	/| visibility ramps |

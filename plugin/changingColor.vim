@@ -9,6 +9,13 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
+" | FRI  14TH NOV 2014:  19.1                                                   |
+" |                      Massive adjustment to fix visibility of Normal         |
+" |                      added context help for Rgb2a()                         |
+" |                      Now you can just press Ctrl-] over anywhere you see    |
+" |                      Rgb2a() to jump straight to its definition.            |
+" |                      From there you can get help on all its arguments.      |
+" |                      This is finally starting to look damn good.            |
 " | THU  30TH OCT 2014:  19.0                                                   |
 " |                      Fix visibility of normal                               |
 " |                      New! Some help available on SOME of the paremeters.    |
@@ -146,8 +153,9 @@ function ScaleToRange(a,aMin,aMax,rMin,rMax)
 endfunction
 
 " +------------------------------------------------------------------------------+
-" | Main Rgb for Normal (like Rgb2 but brightens, not darkens - Normal is    |
+" | Main Rgb for Normal (like Rgb2 but brightens, not darkens - Normal is        |
 " | a bit trickier because it is also where the general background is set        |
+" | Help is available on each paremeter.  Press Ctrl-]                           |
 " +------------------------------------------------------------------------------+
 function Rgb2a(Rgb,actBgr,dngBgr,senDar,senLig,loadj,hiadj,lotail1,lotail2)
 	let adjVal=a:Rgb
@@ -557,9 +565,9 @@ function SetHighLight(forceUpdate)
 "	let adj1 = Rgb2a((-todaysec+86400)/338/2+110, todaysec, 35000, 9600, 40000, -285, 30, 0, 17) --thought these 
 "	let adj2 = Rgb2a((-todaysec+86400)/338/2+76, todaysec, 35000, 0100, 40000, -285, 30, 0, 17)  --make normal
 "	let adj3 = Rgb2a((-todaysec+86400)/338/2, todaysec, 35000, 0100, 40000, -285, 30, 0, 17)     --too hard to see
-	let adj1 = Rgb2a((-todaysec+86400)/338/2+110, todaysec, 35000, 9600, 40000, -420, 30, 0, 17)
-	let adj2 = Rgb2a((-todaysec+86400)/338/2+98, todaysec, 35000, 0100, 40000, -420, 30, 0, 17)
-	let adj3 = Rgb2a((-todaysec+86400)/338/2, todaysec, 35000, 0100, 40000, -420, 30, 0, 17)
+	let adj1 = Rgb2a((-todaysec+86400)/338/2+110, todaysec, 55000, 11000, 20000, -420, 30, 0, 17)
+	let adj2 = Rgb2a((-todaysec+86400)/338/2+98, todaysec, 55000, 11000, 20000, -420, 30, 0, 17)
+	let adj3 = Rgb2a((-todaysec+86400)/338/2, todaysec, 55000, 11000, 20000, -420, 30, 0, 17)
 	let adj4 = Rgb4(adjBG1-30, todaysec, 0, 0, 10000, 20, 20, 40, 20, 40)
 	let adj5 = Rgb4(adjBG1A-10, todaysec, 0, 0, 10000, 20, 20, 40, 20, 40)
 	let adj6 = Rgb4(adjBG2+10, todaysec, 0, 0, 10000, 20, 20, 40, 20, 40)
