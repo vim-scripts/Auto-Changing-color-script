@@ -9,6 +9,14 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
+" | WED   3RD DEC 2014:  19.3                                                   |
+" |                      Tweaked visibility of Normal, edge case.  It appears   |
+" |                      that due to a calibration issue I was having with my   |
+" |                      monitor I'd got this wrong previously.  I had thought  |
+" |                      that it was massively out but it was a "Power Saving"  |
+" |                      feature of my EeePC that made it look hard to read.    |
+" |                      Not generally applicable in most cases.  Fixed to be   |
+" |                      similar to what it was in 19.0.                        |
 " | TUE  18TH NOV 2014:  19.2                                                   |
 " |                      Tweaked visibility of Normal, edge case.  Better now   |
 " | FRI  14TH NOV 2014:  19.1                                                   |
@@ -567,9 +575,9 @@ function SetHighLight(forceUpdate)
 "	let adj1 = Rgb2a((-todaysec+86400)/338/2+110, todaysec, 35000, 9600, 40000, -285, 30, 0, 17) --thought these 
 "	let adj2 = Rgb2a((-todaysec+86400)/338/2+76, todaysec, 35000, 0100, 40000, -285, 30, 0, 17)  --make normal
 "	let adj3 = Rgb2a((-todaysec+86400)/338/2, todaysec, 35000, 0100, 40000, -285, 30, 0, 17)     --too hard to see
-	let adj1 = Rgb2a((-todaysec+86400)/338/2+110, todaysec, 55000, 18000, 20000, -420, 30, 0, 17)
-	let adj2 = Rgb2a((-todaysec+86400)/338/2+98, todaysec, 55000, 18000, 20000, -420, 30, 0, 17)
-	let adj3 = Rgb2a((-todaysec+86400)/338/2, todaysec, 55000, 18000, 20000, -420, 30, 0, 17)
+	let adj1 = Rgb2a((-todaysec+86400)/338/2+110, todaysec, 55000, 11000, 20000, -420, 30, 0, 17)
+	let adj2 = Rgb2a((-todaysec+86400)/338/2+98, todaysec, 55000, 11000, 20000, -420, 30, 0, 17)
+	let adj3 = Rgb2a((-todaysec+86400)/338/2, todaysec, 55000, 11000, 20000, -420, 30, 0, 17)
 	let adj4 = Rgb4(adjBG1-30, todaysec, 0, 0, 10000, 20, 20, 40, 20, 40)
 	let adj5 = Rgb4(adjBG1A-10, todaysec, 0, 0, 10000, 20, 20, 40, 20, 40)
 	let adj6 = Rgb4(adjBG2+10, todaysec, 0, 0, 10000, 20, 20, 40, 20, 40)
