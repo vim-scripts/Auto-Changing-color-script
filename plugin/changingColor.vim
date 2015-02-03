@@ -9,7 +9,12 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
-" | TUE   3RD FEB 2014:  20.0                                                   |
+" | TUE   3RD FEB 2014:  20.1                                                   |
+" |                      Had a look at it and decided ~25% was still too low    |
+" |                      and there were still some murky shades too difficult to|
+" |                      see.  I didn't want to cut too much of the continuity  |
+" |                      but I think 30% is a necessary step towards improvement|
+" |                      20.0                                                   |
 " |                      After careful consideration have decided that some of  |
 " |                      the shades in my script are too difficult to see.      |
 " |                      I was trying to have one smooth continuum between light|
@@ -437,10 +442,10 @@ endfunction
 function UpTheGamma(todaysec)
 	let result = a:todaysec
 	if result>=43199
-		let result = result * 0.75
-		let result = result + 21600
+		let result = result * 0.70
+		let result = result + 25919
 	else
-		let result = result * 0.75
+		let result = result * 0.70
 	endif
 	let result = float2nr(result)
 	return result
