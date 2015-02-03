@@ -9,6 +9,17 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
+" | TUE   3RD FEB 2014:  20.0                                                   |
+" |                      After careful consideration have decided that some of  |
+" |                      the shades in my script are too difficult to see.      |
+" |                      I was trying to have one smooth continuum between light|
+" |                      and dark but the exact middle point is always making   |
+" |                      me strain to read no matter what I do, and this looks  |
+" |                      poor compared to other color schemes so I decided to   |
+" |                      create a ramped "jump over" the exact mid-point.       |
+" |                      You will still see constant changes but when it gets   |
+" |                      to a certain mid point it will jump about 20% of the   |
+" |                      murky shades to the next point after that.             |
 " | WED   3RD DEC 2014:  19.3                                                   |
 " |                      Tweaked visibility of Normal, edge case.  It appears   |
 " |                      that due to a calibration issue I was having with my   |
@@ -62,31 +73,6 @@
 " |                      17.0                                                   |
 " |                      Stopped Question and MoreMsg becoming invisible;       |
 " |                      visibility tweaks to NonText.                          |
-" | TUE  26TH APR 2011:  16.9                                                   |
-" |                      Brightened up Special an Identifier under low light    |
-" | MON  25TH APR 2011:  16.8                                                   |
-" |                      Unconfused mixup with fg and bg for Search             |
-" |                      and Visual, i got fg and bg wrong way.  Fixed and seems|
-" |                      ok now.                                                |
-" | SUN  24TH APR 2011:  16.7                                                   |
-" |                      Collated temporary variables into one single variable  |
-" |                      and used this.  Tweaked poor contrast of Search and    |
-" |                      Visual syntax elements.  Made code formatting more     |
-" |                      normal.                                                |
-" | WED  19TH JAN 2011:  16.6                                                   |
-" |                      Removed what appears to be a glitch at lighter end of  |
-" |                      the background spectrum.  This affected selections     |
-" |                      of text done at the very lightest background, they     |
-" |                      were invisible.  It now works as it should.            |
-" | MON   3RD NOV 2010:  16.5                                                   |
-" |                      Revved up the visibility of PreProc. PreProc is the    |
-" |                      'function' keyword in php so it now brightens nicer    |
-" |                      and doesn't become hard-to-see. Similarly with         |
-" |                      Identifier, and Special.  Identifier in PHP obviously  |
-" |                      means the variables. Not sure if its used in other     |
-" |                      languages but at least if you use PHP it now looks nice|
-" |                      and strong.                                            |
-" |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
 
@@ -158,6 +144,7 @@ function ScaleToRange(a,aMin,aMax,rMin,rMax)
 	let aLocal=a:a-a:aMin
 	let rangeA=a:aMax-a:aMin
 	let rangeR=a:rMax-a:rMin
+	let rangeA=rangeA*1000|let rangeR=rangeR*1000
 	let divAR=rangeA/rangeR
 	return aLocal/divAR+a:rMin
 endfunction
@@ -444,6 +431,21 @@ function Rgb6(Rgb)
 	return result
 endfunction
 
+" +----------------------------------------+
+" | try to increase the low contrast areas |
+" +----------------------------------------+
+function UpTheGamma(todaysec)
+	let result = a:todaysec
+	if result>=43199
+		let result = result * 0.75
+		let result = result + 21600
+	else
+		let result = result * 0.75
+	endif
+	let result = float2nr(result)
+	return result
+endfunction
+
 " +------------------------------------------------------------------------------+
 " | Muscle function, calls vim highlight command for each element based on the   |
 " | time into the current hour.                                                  |
@@ -466,6 +468,7 @@ function SetHighLight(forceUpdate)
 		let todaysec=-todaysec*2+172799
 		let dusk=1
 	endif
+	let todaysec=UpTheGamma(todaysec)
 	if exists("g:myhour")
 		let myhour=g:myhour
 	else
