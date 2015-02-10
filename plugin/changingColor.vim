@@ -9,7 +9,13 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
-" | TUE   3RD FEB 2014:  20.1                                                   |
+" | TUE  10TH FEB 2015:  20.2                                                   |
+" |                      Had a third look and decided about 33% should do it.   |
+" |                      That is about 33% of the shades are no good.           |
+" |                      That's roughly 1/3 so sounds about right.  They are    |
+" |                      just to "in the grey area" to be clear highlight.      |
+" |                      They need to be removed.                               |
+" | TUE   3RD FEB 2015:  20.1                                                   |
 " |                      Had a look at it and decided ~25% was still too low    |
 " |                      and there were still some murky shades too difficult to|
 " |                      see.  I didn't want to cut too much of the continuity  |
@@ -69,15 +75,7 @@
 " |                      Made sure this is the same version that includes the   |
 " |                      user-settable g:changingColorStop variable checks      |
 " |                      I had it inconsistently before.                        |
-" | TUE  17TH MAY 2011:  17.2                                                   |
-" |                      Made foreground NonText color same as that of Constant |
-" |                      (prettier, not like that of ugly Normal, as I had b4)  |
-" | TUE  17TH MAY 2011:  17.1                                                   |
-" |                      You can now see the NonText character, before I had    |
-" |                      it so that you couldn't                                |
-" |                      17.0                                                   |
-" |                      Stopped Question and MoreMsg becoming invisible;       |
-" |                      visibility tweaks to NonText.                          |
+" |                      ...                                                    |
 " | WED 27TH MAY 2009: o VER 1.00                                               |
 " +-----------------------------------------------------------------------------+
 
@@ -442,10 +440,10 @@ endfunction
 function UpTheGamma(todaysec)
 	let result = a:todaysec
 	if result>=43199
-		let result = result * 0.70
-		let result = result + 25919
+		let result = result * 0.666
+		let result = result + 28857
 	else
-		let result = result * 0.70
+		let result = result * 0.666
 	endif
 	let result = float2nr(result)
 	return result
