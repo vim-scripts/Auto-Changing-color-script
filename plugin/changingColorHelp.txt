@@ -1,0 +1,305 @@
+changingColorTags	For Vim version 7.3	Last change: 2014 Oct 30
+
+vim:tags=changingColorTags filetype=help autochdir scrolloff=6 foldcolumn=1
+
++-------------------+~
+| The rgb parameter |~
++-------------------+~
+
+the main guts is the R,G,B parameter.  The calling end tries each R, g, then b
+paremeter at once.   The function then adjusts this individual R, g, b as
+necessary and passes it is a result of the function.
+
+See |hourScale|.  The parameters are the creative brain of the musician trying
+to use all his intuition to try and create groove looking elements and these
+intuitions are curbed with: 
+
+a. considering the background: |actBgr|
+
+b. the "perceived" horrible parts where color is similar to background:
+|dngBgr|,
+
+c. how thick is the "horrible" area going towards dark: |senDar|
+
+d. how thick is the "horrible" area going towards light: |senLig|
+
+
++--------+--------------------------+~
+| senDar | SENitivity |TO| DARkness |~
++--------+--------------------------+~
+this parameter could be anything between *0* - *86399* . At *86399* it means
+sensitive to everything.  The key to this is |hourScale|.  See also |dngBgr|.
+|senDar| specifies the thickness amount relative to |dngBgr|.  This is in
+relation to |ramps|.  The higher it is the more artificial compensation is done
+to maintain visibility
+
+Putting *10000* , *12000* 
+
+means something like *13* - *16* % grey offset towards black from |dngBgr| so
+if background is within
+
+*13* - *16* % of |dngBgr| compensation will be applied
+
++--------+---------------------------+~
+| senLig | SENitivity |TO| LIGhtness | ~
++--------+---------------------------+~
+same as |senDar| but from the light end not the dark end.  If you're wondering
+what I mean the whole thing is based on a smoothly brightening background, and
+points within that brightness have to be defined to prevent clashes ocurring.
+See |shading| and |ramps|.  See also |senDar|
+
++--------+~
+| dngBgr |~
++--------+~
+the "dangerous" area where text is hard to read.  It is a shade *0* - *86399*
+as determined by myself looking at it how easy it is to read across varous
+brightnesses.  This I feel is it it's worst.  E.g. let's say I found this item
+hard to read at *21000* .  That is around *26* - *28* % in the background
+grey.  This might be because a text is quite dark color anyway, maybe a dark
+red or something.  Let's say I found particular text hard to read at around
+*70000* or around *85* % mark.  This might be quite a bright letter, maybe a
+pink or similar, where the background is tending to be light as well
+
++-----------+~
+| hourScale |~
++-----------+~
+The basic thing this plugin does is constantly force the background to change
+progressing the shade but doing it in such a way so as the |syntax| elements
+and the |shading| do not clash and hence cause interfere with the display of
+code.  The |hourScale| and |shading| in reality are the same because depending
+on what point of the hour you are at the shading should be a certain shade
+
+from *0* % to *100* %, or black - white
+
+that the script has reached.  Conveniently it is mapped to an hour so it
+appears to progress, although you see it as two hours squeezed into one |more|
+on that later. 
+
++----------------------------------------+~
+| squeezing the hour into two half hours |~
++----------------------------------------+~
+To make things useful I thought I'd just take a "second" hour and "press it"
+into a second half of the hour, with the first hour being pressed into the
+first half hour with the second hour reversed so that the |shading| appears to
+be smoothly going up then down.  But note as far as all the shading of
+|syntax| elements and the |background| is concerned internally there *is* only
+one hour, *0* to *86399* .  It does not affect the way |syntax| elements are
+colored inside.  I just did some creative arithmetic to squeeze the first and
+second hour into one hour 1st half, 2nd half respectively but reversing the
+|shading| so that it appears smooth
+
++--------+-----------------------------------------------------------+~
+| actBgr | continually updating background, gets lighter and darker  |~
++--------+-----------------------------------------------------------+~
+See also |hourScale|
+
+Every ~10 secs the system calls back the main guts function of changing color
+and this causes every element of the syntax to be creatively recolored  
+
+|actBgr| is always slightly more / less than before.
+
+|actBgr| is the overall "brightness" at this instance of the main call that
+takes place approx. ~10 secs
+
+For each syntax element, the R, G, and B parameter is creatively recolored.
+See [|creatively_recoloring_syntax_elements|] based on |actBgr| for this
+~10 secs. call to the main function.
+
+|actBgr| has a range of *0* - *86399* with *0* = black, *86399* = white.
+
+I added a hack so that the *0* - *86399* black to white progression happens
+twice, the second time in reverse direction.   see |this|.  It doesn't really
+affect the way syntax elements are recolor though, |actBgr| gets manipulated
+just actually before the call to recolor all the elements.  They think it's
+*0* - *86399* .
+
+Actually there is another hack to remove some of the *33%* of horrible grey
+shades in between, but again the "creative coloring" parts don't know about
+this.  They think it's *0* - *86399* .
+
+Also I did think should this |actBgr| really be a "global" variable.
+[|should_actBgr_be_global|] 
+
++------------------------------------------+~
+| the idea of shade to illustrate progress |~
++------------------------------------------+~
+The whole idea is to every ~10 secs recolor every syntax element creatively
+slightly progressed shade of a general color.
+
+The idea is you sit there and you watch beautifully recoloring syntax elements
+dancing before your eyes.
+
+That was the theory anyway.
+
+I don't know if the practice ended up quite so great but some people seem to
+like it.
+
+I think it depends on what platform you're running Vim on.  Vim on Windows is
+a bit rough around the ears.  Linux/Mac seems to be it's native platform, and
+the Mac version "MacVim" is very nicely finished!
+
+The effect on that indeed looks impressive!!
+
+The main parameter of this is that of |actBgr| which starts at *0* and is
+updated automatically to *86399* .  At the same time all the syntax elements
+are updated with a shade based on this percentage ( *0* - *86399* ).
+
+This would be brilliant apart from a certain |shading| of |actBgr| are going
+to make syntax elements useless as they are too hard to see at the original
+range.
+
+Remember also that |they|, the |syntax| elements are also being "progressed" so
+you can see there is really quite a lot going on.  So to try to keep all this
+under control the |actBgr| and |dngBgr| were introduced.  Related to this are
+|senDar| and |senLig|.  Basically they help create little color ramps to allow
+them to jump "over one another" to avoid clash.
+
++------------------+~
+| visibility ramps |~
++------------------+~
+The problem is that |actBgr| while it does make a great job of smoothly moving
+a lighter and lighter shades of background, it gets such a lot of tiny little
+shades in that it makes the text very difficult to see.  This is where
+visibility |ramps| come in.  Basically |ramps| allow you to specify a certain
+amount to be added to each *R,G,B* element of the syntax highlight to stop it
+becoming invisible by the oncoming |actBgr| which eventually covers all the
+shades from *black* to *white* .  I sat there and studied how hard they became
+to read as the |actBgr| moved along and set |dngBgr| appropriately and set up
+ramps so they wouldn't clash.  |dngBgr|, |senDar| and |senLig| are the main
+ones I used.  These model the |ramps|.  It's not that sophisticated yet works
+extremely well.  The other parameters you might see like *loadj* , *hiadj*
+are just hints to the *RgbXxxxx()* function(s) on how to change, or |ramp| the
+colour's *RGB* settings, each one treated singly, litereally *R* , *G* , and
+then *B* .  That's why the |Rgb| parameter is only one integer
+
++----------------------------------------------+~
+| low adjustment peppering, seasoning to taste |~
++----------------------------------------------+~
+I know this is starting to sound funky, but I wanted to get through a flavour
+of what it was rather than appear too technical, because it's not really
+clever... no really it's just the flavouring done to the colour when it's
+close to that of |dngBgr|.  This is at the low end, that is the dark color
+end.  The hiadj is just the same done at the bright end.  
+
+Basically when |actBgr| is close or at |dngBgr| remembering that |actBgr| is a
+forced continuation bright |shading| that goes on over time, exactly how close
+is determined by |senDar| or |senLig| in the |hiadj| case, then this is the
+amount of flavouring that is done to bring out the color a bit more to keep it
+visible.  See?  Simple really
+
++-----------------------------------------------+~
+| high adjustment peppering, seasoning to taste |~
++-----------------------------------------------+~
+Just the same as |loadj| but for the bright part
+
++---------------------+~
+| The syntax elements |~
++---------------------+~
+The syntax elements in VIM are all updated dynamically throughout the
+|hourScale| by the script.  As far as I know everything is included.  The good
+thing is that the syntax elements remain quite constant, no matter what
+language you're using.  This is what makes this script work for languages as
+diverse as PHP, AutoIT, ActionScript, JavaScript and still works.  Syntax
+elements can all be listed with: >
+	:highlight   
+<
+As you can see there's quite a few.  The main ones are: *Normal* , *Comment* ,
+*Statement* , *Constant* , *Special* , *Identifier* , and *Type* and I think
+there's a few others but these are important.  
+
++---------+~
+| lotail1 |~
++---------+~
+To be honest I can't even remember what this means.  It was done during a
+bleak period when I was unemployed and had the Job Centre on my case and I was
+desperately trying to seem clever.  Check back in a few months I might have
+remembered by then
+
++---------+~
+| lotail2 |~
++---------+~
+Something to do with |lotail1| I suppose.  Can't even remember my own code. :(
+
++--------------+~
+| ScaleToRange |~
++--------------+~
+This is just something I "borrowed" from the web.  The basic idea is it takes
+a number in a range extent e.g. r1 .. r2 and then "maps" it to a different
+range e.g. s1 .. s2, while still keeping it in the same proportion
+
++--------+~
+| adjVal |~
++--------+~
+this is is in fact just the original |rgb| parameter being "adjusted" by
+the function.  But a temporary name for it.
+
+
++------------------------------+~
+| General Explanation of Rgb2a |~
++------------------------------+~
+A system generated callback causes the |actBgr| to be recalculated about every
+~10 seconds. See |hourScale|
+
+What the user of this function is trying to do is trying to creatively recolor
+each element, but is running it by this function saying "that's pretty, can
+you check in case it's difficult to see please?"
+
+The |actBgr| parameter no.2 is the "actual Background" shade.  This gets
+compared with the |rgb| parameter no.1 for brightness and the *result* is an
+adjusted |rgb| parameter if that brightness would make |rgb| difficult to see.   
+
+
++---------------------------------------+~
+| Creatively Recoloring Syntax Elements |~
++---------------------------------------+~
+We call the artists at this stage.
+
+They produce some great sounding paths, chords, rhymths well colors actually
+and they do it with these "helper" functions such as |Rgb2a|().  The purpose
+of the call is to check if the R, G, or B are causing the coloring to become
+difficult to see.
+
+Depending on the syntax element, the artist calls different "helper" function.
+
+This is because the "helper" functions don't just "check" and try to do the
+number crunching based on the creative parameters of the caller.  
+
+The creativity is thus down to the caller.  The different helpers such as
+|Rgb2a|() are the number crunchers that represent different effects, such as
+Whah Whah pedals, Echo chambers etc.
+
+Plus they check for harmotic distortions, or volume checks.  (to use a Cubase
+analogy.)
+
+
++-------------------------+~
+| Should actBgr be Global |~
++-------------------------+~
+
+Because the same value for |actBgr| is used about 500 times every ~10 secs
+when the main function is called, and yet it's the same value each ~10 sec
+call, what is the point in messing around passing it to helper functions so
+much?  
+
+See the problem is there's no context in VimScript.
+
+If I put had |actBgr| in global variable, instead of requiring it to be passed
+many times to helper functions,  it would improve efficiency but at the
+sacrifice of clarity.  |actBgr| would just become another orphaned global
+variable.
+
+You might have many plugins your Vim.  Some of these guys are greedy about
+their use of global memory space.  Some are amazing but I have seen some who
+just like taking up VimSpace, directories, global memory areas.. no names.
+
+So that's why in the end I decided to not use global memory variables and
+that's why |actBgr| gets passed every time per every R, G, and B of each
+syntax element to be recolored to avoid clash with helper functions such as
+Rgb2a().
+
+Of course I'm probably too stupid and should have realised that VimScript
+provides exactly this and I ignorantly carry on thinking I'm right.  But that
+is how you are meant to learn if you're me.  What can I do.  I suck.  I'm
+sorry. 
+
+

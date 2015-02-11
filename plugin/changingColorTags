@@ -1,0 +1,24 @@
+General_Rgb2a	changingColorHelp.txt	/| General Explanation of Rgb2a |
+Rgb2a	changingColor.vim	/function Rgb2a
+ScaleToRange	changingColorHelp.txt	/| ScaleToRange |
+actBgr	changingColorHelp.txt	/| actBgr |
+adjVal	changingColorHelp.txt	/| adjVal |
+background	changingColorHelp.txt	/| actBgr |
+creatively_recoloring_syntax_elements	changingColorHelp.txt	/| Creatively Recoloring Syntax Elements |
+dngBgr	changingColorHelp.txt	/| dngBgr |
+hiadj	changingColorHelp.txt	/| high adjustment peppering, seasoning to taste |
+hourScale	changingColorHelp.txt	/| hourScale |
+loadj	changingColorHelp.txt	/| low adjustment peppering, seasoning to taste |
+lotail1	changingColorHelp.txt	/| lotail1 |
+lotail2	changingColorHelp.txt	/| lotail2 |
+more	changingColorHelp.txt	/| squeezing the hour into two half hours |
+ramp	changingColorHelp.txt	/| visibility ramps |
+ramps	changingColorHelp.txt	/| visibility ramps |
+rgb	changingColorHelp.txt	/| The rgb parameter |
+senDar	changingColorHelp.txt	/| senDar |
+senLig	changingColorHelp.txt	/| senLig |
+shading	changingColorHelp.txt	/| the idea of shade to illustrate progress |
+should_actBgr_be_global	changingColorHelp.txt	/| Should actBgr be Global |
+syntax	changingColorHelp.txt	/| The syntax elements |
+they	changingColorHelp.txt	/| The syntax elements |
+this	changingColorHelp.txt	/| squeezing the hour into two half hours |

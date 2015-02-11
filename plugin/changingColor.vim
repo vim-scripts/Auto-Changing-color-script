@@ -9,6 +9,14 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
+" | WED  11TH FEB 2015:  20.3                                                   |
+" |                      I forgot the vital tags files, only really useful if   |
+" |                      you wanna see help on it.  This does not affect the    |
+" |                      scripts at all.  If you've previously installed it     |
+" |                      just make sure you run :RmVimball changingColor        |
+" |                      and just re-install it by loading changingColor.vba and|
+" |                      doing :so %                                            |
+" |                      That will get rid of any rubbish.                      |
 " | TUE  10TH FEB 2015:  20.2                                                   |
 " |                      Had a third look and decided about 33% should do it.   |
 " |                      That is about 33% of the shades are no good.           |
@@ -155,10 +163,10 @@ endfunction
 " +------------------------------------------------------------------------------+
 " | Main Rgb for Normal (like Rgb2 but brightens, not darkens - Normal is        |
 " | a bit trickier because it is also where the general background is set        |
-" | Help is available on each paremeter.  Press Ctrl-]                           |
+" | To see help on each paremeter, press Ctrl-].                 [General_Rgb2a] |
 " +------------------------------------------------------------------------------+
-function Rgb2a(Rgb,actBgr,dngBgr,senDar,senLig,loadj,hiadj,lotail1,lotail2)
-	let adjVal=a:Rgb
+function Rgb2a(rgb,actBgr,dngBgr,senDar,senLig,loadj,hiadj,lotail1,lotail2)
+	let adjVal=a:rgb
 	if a:actBgr>=a:dngBgr-a:senDar && a:actBgr<=a:dngBgr+a:senLig
 		let adjVal+=ScaleToRange(a:actBgr,a:dngBgr-a:senDar,a:dngBgr+a:senLig,a:loadj,a:hiadj)
 	endif
