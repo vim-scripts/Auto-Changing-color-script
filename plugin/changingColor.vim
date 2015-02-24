@@ -9,6 +9,9 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
+" | TUE  24TH FEB 2015:  20.6                                                   |
+" |                      Further gave tweaks to Comment because there were      |
+" |                      effects that were making it worse.  Cleaned it up.     |
 " | TUE  24TH FEB 2015:  20.5                                                   |
 " |                      Gave Comment a tweak at high brightness backgrounds    |
 " |                      because it looked to much like Normal in this.         |
@@ -643,13 +646,10 @@ function SetHighLight(forceUpdate)
 	let adj5 = Rgb4(adjBG1A, todaysec, 47000, 3000, 14000, -99, -99, -99, -99, 99)
 	let adj6 = Rgb4(adjBG2, todaysec, 47000, 3000, 14000, -99, -99, -99, -99, 99)
 	let highlCmdTitle = printf("highlight Title guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6) 
-	let adj1 = Rgb2b((-todaysec+86400)/338/4+160, todaysec, 50000, 12000, 22000, 220, 140, -300)
-	let adj2 = Rgb2b((-todaysec+86400)/338/4+160, todaysec, 50000, 12000, 22000, 220, 140, -300)
-	let adj3 = Rgb2b((-todaysec+86400)/338/4+160, todaysec, 50000, 12000, 22000, 220, 140, -300)
-	let adj4 = Rgb4(adjBG1,	todaysec, 50000, 12000, 22000, -8, -18, 0, 0, -3)
-	let adj5 = Rgb4(adjBG1A, todaysec, 50000, 12000, 22000, -8, -18, 0, 0, -3)
-	let adj6 = Rgb4(adjBG2,	todaysec, 50000, 12000, 22000, -8, -18, 0, 0, -3)
-	let highlCmdComment = printf("highlight Comment guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
+	let adj1 = Rgb2b((-todaysec+86400)/280/4+140, todaysec, 50000, 12000, 22000, 220, 140, -300)
+	let adj2 = Rgb2b((-todaysec+86400)/280/4+140, todaysec, 50000, 12000, 22000, 220, 140, -300)
+	let adj3 = Rgb2b((-todaysec+86400)/280/4+140, todaysec, 50000, 12000, 22000, 220, 140, -300)
+	let highlCmdComment = printf("highlight Comment guifg=#%02x%02x%02x", adj1, adj2, adj3)
 	let highlCmdhtmlComment = printf("highlight htmlComment guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
 	let highlCmdhtmlCommentPart = printf("highlight htmlCommentPart guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
 	let adj1 = Rgb6(todaysec/338+70)
