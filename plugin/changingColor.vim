@@ -9,6 +9,11 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
+" | TUE  24TH FEB 2015:  20.4                                                   |
+" |                      Gave Constant and Identifier a bit of a tweak at high  |
+" |                      brightness background.  The green of Identifier also   |
+" |                      looks nice and flouro at low light backgrounds.  You   |
+" |                      can actually see the green still at light backgrounds. |
 " | WED  11TH FEB 2015:  20.3                                                   |
 " |                      I forgot the vital tags files, only really useful if   |
 " |                      you wanna see help on it.  This does not affect the    |
@@ -578,7 +583,7 @@ function SetHighLight(forceUpdate)
 	let highlCmdLineNr2 = printf("highlight LineNr guifg=#%02x%02x%02x", adj1, adj2, adj3)  
 	let highlCmdFoldColumn2 = printf("highlight FoldColumn guifg=#%02x%02x%02x", adj1, adj2, adj3)  
 	let highlCmdFolded2 = printf("highlight Folded guifg=#%02x%02x%02x", adj1, adj2, adj3)  
-	let adj1 = Rgb2a((-todaysec+86400)/400/2+27, todaysec, 57000, 22000, 14500, -140, -45, 0, 25)
+	let adj1 = Rgb2a((-todaysec+86400)/400/2+27, todaysec, 57000, 22000, 29399, -140, -45, 0, 25)
 	let adj2 = Rgb2a((-todaysec+86400)/400/2+110, todaysec, 57000, 22000, 14500, -140, -45, 0, 25)
 	let adj4 = Rgb4a(adjBG1, todaysec, 57000, 22000, 14500, -26, -28, -3, -2, 8, 2, 25, -20, -4, -13)
 	let adj5 = Rgb4a(adjBG1A, todaysec, 57000, 22000, 14500, -26, -28, -3, -2, 8, 2, 25, -20, -4, -13)
@@ -606,12 +611,12 @@ function SetHighLight(forceUpdate)
 	let adj5 = Rgb2(adjBG1A+15, todaysec, 86399, 6000, 1, 30)
 	let adj6 = Rgb2(adjBG2+10, todaysec, 86399, 6000, 1, 30)
 	let highlCmdVisual = printf("highlight Visual guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6)
-	let adj1 = Rgb2a((-todaysec+86400)/365/2+66, todaysec, 57000, 10000, 23000, -168, -30, -6, 33)
-	let adj2 = Rgb2a((-todaysec+86400)/365/2+97, todaysec, 57000, 10000, 23000, -168, -30, -6, 33)
-	let adj3 = Rgb2a((-todaysec+86400)/365/2, todaysec, 57000, 10000, 23000, -168, -30, -6, 33)
-	let adj4 = Rgb4a(adjBG1, todaysec, 57000, 10000, 15000, -8, -12, 5, 0, 7,3,6,-8,-2,-2)
-	let adj5 = Rgb4a(adjBG1A, todaysec,57000,10000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
-	let adj6 = Rgb4a(adjBG2, todaysec,57000,10000,15000,-8,-12,5,0,7,3,6,-8,-2,-2)
+	let adj1 = Rgb2a((-todaysec+86400)/338/4+0, todaysec, 57000, 10000, 29399, -168, -60, -6, 33)
+	let adj2 = Rgb2a((-todaysec+86400)/338/4+216, todaysec, 57000, 10000, 29399, -168, -60, -6, 33)
+	let adj3 = Rgb2a((-todaysec+86400)/338/4, todaysec, 57000, 10000, 29399, -168, -60, -6, 33)
+	let adj4 = Rgb4a(adjBG1, todaysec, 57000, 22000, 14500, -26, -28, -3, -2, 8, 2, 25, -20, -4, -13)
+	let adj5 = Rgb4a(adjBG1A, todaysec, 57000, 22000, 14500, -26, -28, -3, -2, 8, 2, 25, -20, -4, -13)
+	let adj6 = Rgb4a(adjBG2, todaysec, 57000, 22000, 14500, -26, -28, -3, -2, 8, 2, 25, -20, -4, -13)
 	let highlCmdIdentifier = printf("highlight Identifier guifg=#%02x%02x%02x guibg=#%02x%02x%02x", adj1, adj2, adj3, adj4, adj5, adj6) 
 	let adj1 = Rgb2a((-todaysec+86400)/355/2+97, todaysec, 43000, 2000, 19000, -130, -75, 0, 30)
 	let adj2 = Rgb2a((-todaysec+86400)/355/2+0, todaysec, 43000, 2000, 19000, -130, -75, 0, 30)

@@ -1,5 +1,6 @@
 General_Rgb2a	changingColorHelp.txt	/| General Explanation of Rgb2a |
 Rgb2a	changingColor.vim	/function Rgb2a
+Rgb4a	changingColor.vim	/function Rgb4a
 ScaleToRange	changingColorHelp.txt	/| ScaleToRange |
 actBgr	changingColorHelp.txt	/| actBgr |
 adjVal	changingColorHelp.txt	/| adjVal |
