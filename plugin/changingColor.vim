@@ -9,6 +9,9 @@
 " +-----------------------------------------------------------------------------+
 " | START                                                                       |
 " +-----------------------------------------------------------------------------+
+" | WED  25TH FEB 2015:  20.7                                                   |
+" |                      Slight improvements to Constant esp. at high light     |
+" |                      settings.                                              |
 " | TUE  24TH FEB 2015:  20.6                                                   |
 " |                      Further gave tweaks to Comment because there were      |
 " |                      effects that were making it worse.  Cleaned it up.     |
@@ -589,8 +592,8 @@ function SetHighLight(forceUpdate)
 	let highlCmdLineNr2 = printf("highlight LineNr guifg=#%02x%02x%02x", adj1, adj2, adj3)  
 	let highlCmdFoldColumn2 = printf("highlight FoldColumn guifg=#%02x%02x%02x", adj1, adj2, adj3)  
 	let highlCmdFolded2 = printf("highlight Folded guifg=#%02x%02x%02x", adj1, adj2, adj3)  
-	let adj1 = Rgb2a((-todaysec+86400)/400/2+27, todaysec, 57000, 22000, 29399, -140, -45, 0, 25)
-	let adj2 = Rgb2a((-todaysec+86400)/400/2+110, todaysec, 57000, 22000, 14500, -140, -45, 0, 25)
+	let adj1 = Rgb2a((-todaysec+86400)/220/2+27, todaysec, 52000, 17000, 5000, -140, -45, 0, 25)
+	let adj2 = Rgb2a((-todaysec+86400)/220/2+110, todaysec, 52000, 17000, 5000, -140, -45, 0, 25)
 	let adj4 = Rgb4a(adjBG1, todaysec, 57000, 22000, 14500, -26, -28, -3, -2, 8, 2, 25, -20, -4, -13)
 	let adj5 = Rgb4a(adjBG1A, todaysec, 57000, 22000, 14500, -26, -28, -3, -2, 8, 2, 25, -20, -4, -13)
 	let adj6 = Rgb4a(adjBG2, todaysec, 57000, 22000, 14500, -26, -28, -3, -2, 8, 2, 25, -20, -4, -13)
